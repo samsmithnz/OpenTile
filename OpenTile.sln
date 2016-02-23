@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTile.Win", "OpenTile.Win\OpenTile.Win.csproj", "{CEF954AF-A66E-4566-8E08-AC768548A2D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTile", "OpenTile\OpenTile.csproj", "{F9BE5962-6EEA-4C12-8F34-36178A53CCFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTile.Tests", "OpenTile.Tests\OpenTile.Tests.csproj", "{B7236B59-BA60-486D-8A77-A11492E05C8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEF954AF-A66E-4566-8E08-AC768548A2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEF954AF-A66E-4566-8E08-AC768548A2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEF954AF-A66E-4566-8E08-AC768548A2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEF954AF-A66E-4566-8E08-AC768548A2D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BE5962-6EEA-4C12-8F34-36178A53CCFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BE5962-6EEA-4C12-8F34-36178A53CCFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BE5962-6EEA-4C12-8F34-36178A53CCFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BE5962-6EEA-4C12-8F34-36178A53CCFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7236B59-BA60-486D-8A77-A11492E05C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7236B59-BA60-486D-8A77-A11492E05C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7236B59-BA60-486D-8A77-A11492E05C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7236B59-BA60-486D-8A77-A11492E05C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
