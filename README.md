@@ -1,4 +1,4 @@
-# OpenTile(https://github.com/samsmithnz/OpenTile)
+# [OpenTile](https://github.com/samsmithnz/OpenTile)
 
 An open source solution to build and navigate tile based games 
 
