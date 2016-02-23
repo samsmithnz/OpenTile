@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
+//Initial implementation from: http://blog.two-cats.com/2014/06/a-star-example/
+
 namespace OpenTile
 {
     /// <summary>

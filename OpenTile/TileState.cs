@@ -1,4 +1,7 @@
-﻿namespace OpenTile
+﻿//Initial implementation from: http://blog.two-cats.com/2014/06/a-star-example/
+
+
+namespace OpenTile
 {
     /// <summary>
     /// Represents the search state of a Node
