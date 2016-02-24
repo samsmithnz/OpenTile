@@ -13,8 +13,7 @@ namespace OpenTile.Tests
         private bool[,] map;
         private SearchParameters searchParameters;
 
-        [TestInitialize]
-        public void Initialize()
+        private void InitializeMap(int xMax, int zMax, Point startLocation, Point endLocation)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -22,17 +21,23 @@ namespace OpenTile.Tests
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
 
-            this.map = new bool[7, 5];
-            for (int y = 0; y < 5; y++)
+            this.map = new bool[xMax, zMax];
+            for (int z = 0; z < zMax; z++)
             {
-                for (int x = 0; x < 7; x++)
+                for (int x = 0; x < xMax; x++)
                 {
-                    map[x, y] = true;
+                    map[x, z] = true;
                 }
             }
 
-            var startLocation = new Point(1, 2);
-            var endLocation = new Point(5, 2);
+            if (startLocation == Point.Empty)
+            {
+                startLocation = new Point(1, 2);
+            }
+            if (endLocation == Point.Empty)
+            {
+                endLocation = new Point(5, 2);
+            }
             this.searchParameters = new SearchParameters(startLocation, endLocation, map);
         }
 
@@ -48,7 +53,7 @@ namespace OpenTile.Tests
             //  □ □ □ □ □ □ □
 
             // Path: 1,2 ; 2,1 ; 3,0 ; 4,0 ; 5,1 ; 5,2
-
+            InitializeMap(7, 5, Point.Empty, Point.Empty);
             this.map[3, 4] = false;
             this.map[3, 3] = false;
             this.map[3, 2] = false;
@@ -68,7 +73,7 @@ namespace OpenTile.Tests
             //  □ □ □ ■ □ □ □
 
             // No path
-
+            InitializeMap(7, 5, Point.Empty, Point.Empty);
             this.map[3, 4] = false;
             this.map[3, 3] = false;
             this.map[3, 2] = false;
@@ -76,11 +81,41 @@ namespace OpenTile.Tests
             this.map[3, 0] = false;
         }
 
+        private void AddWallWithMaze()
+        {
+            //  S ■ ■ □ ■ ■ F
+            //  □ ■ □ ■ □ ■ □
+            //  □ ■ □ ■ □ ■ □
+            //  □ ■ □ ■ □ ■ □
+            //  ■ □ ■ ■ ■ □ ■
+
+            // No path
+            InitializeMap(7, 5, new Point(0,4), new Point(6,4));
+            this.map[0, 0] = false;
+            this.map[1, 4] = false;
+            this.map[1, 3] = false;
+            this.map[1, 2] = false;
+            this.map[1, 1] = false;
+            this.map[2, 4] = false;
+            this.map[2, 0] = false;
+            this.map[3, 3] = false;
+            this.map[3, 2] = false;
+            this.map[3, 1] = false;
+            this.map[3, 0] = false;
+            this.map[4, 4] = false;
+            this.map[4, 0] = false;
+            this.map[5, 4] = false;
+            this.map[5, 3] = false;
+            this.map[5, 2] = false;
+            this.map[5, 1] = false;
+            this.map[6, 0] = false;
+        }
+
         [TestMethod]
         public void Test_WithoutWalls_CanFindPath()
         {
             // Arrange
-            PathFinding  pathFinder = new PathFinding(searchParameters);
+            PathFinding pathFinder = new PathFinding(searchParameters);
 
             // Act
             List<Point> path = pathFinder.FindPath();
@@ -120,6 +155,23 @@ namespace OpenTile.Tests
             // Assert
             Assert.IsNotNull(path);
             Assert.IsFalse(path.Any());
+        }
+
+
+        [TestMethod]
+        public void Test_WithMazeWall()
+        {
+            // Arrange
+            AddWallWithMaze();
+            PathFinding pathFinder = new PathFinding(searchParameters);
+
+            // Act
+            List<Point> path = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(path);
+            Assert.IsTrue(path.Any());
+            Assert.AreEqual(16, path.Count);
         }
     }
 }
