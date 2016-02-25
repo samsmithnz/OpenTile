@@ -40,6 +40,7 @@
             this.optBaseExample = new System.Windows.Forms.RadioButton();
             this.txtMap = new System.Windows.Forms.TextBox();
             this.btnGenerateMap = new System.Windows.Forms.Button();
+            this.btnDebugPrint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label4
@@ -154,11 +155,22 @@
             this.btnGenerateMap.UseVisualStyleBackColor = true;
             this.btnGenerateMap.Click += new System.EventHandler(this.btnGenerateMap_Click);
             // 
+            // btnDebugPrint
+            // 
+            this.btnDebugPrint.Location = new System.Drawing.Point(708, 12);
+            this.btnDebugPrint.Name = "btnDebugPrint";
+            this.btnDebugPrint.Size = new System.Drawing.Size(72, 23);
+            this.btnDebugPrint.TabIndex = 24;
+            this.btnDebugPrint.Text = "Debug";
+            this.btnDebugPrint.UseVisualStyleBackColor = true;
+            this.btnDebugPrint.Click += new System.EventHandler(this.btnDebugPrint_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 694);
+            this.Controls.Add(this.btnDebugPrint);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtFinishZ);
             this.Controls.Add(this.label3);
@@ -193,6 +205,7 @@
         private System.Windows.Forms.RadioButton optBaseExample;
         private System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.Button btnGenerateMap;
+        private System.Windows.Forms.Button btnDebugPrint;
     }
 }
 
