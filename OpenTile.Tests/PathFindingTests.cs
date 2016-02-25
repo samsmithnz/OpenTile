@@ -89,7 +89,7 @@ namespace OpenTile.Tests
             //  □ ■ □ ■ □ ■ □
             //  ■ □ ■ ■ ■ □ ■
 
-            // No path
+            // long path
             InitializeMap(7, 5, new Point(0,4), new Point(6,4));
             this.map[0, 0] = false;
             this.map[1, 4] = false;
