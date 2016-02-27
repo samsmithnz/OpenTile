@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FieldOfView.cs" />
     <Compile Include="PathFinding.cs" />
     <Compile Include="SearchParameters.cs" />
     <Compile Include="Tile.cs" />
