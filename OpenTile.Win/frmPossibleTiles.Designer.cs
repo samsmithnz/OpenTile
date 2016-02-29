@@ -1,6 +1,6 @@
 ﻿namespace OpenTile.Win
 {
-    partial class frmMain
+    partial class frmPossibleTiles
     {
         /// <summary>
         /// Required designer variable.

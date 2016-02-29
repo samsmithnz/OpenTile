@@ -11,9 +11,9 @@ using OpenTile;
 
 namespace OpenTile.Win
 {
-    public partial class frmMain : Form
+    public partial class frmPathFinding : Form
     {
-        public frmMain()
+        public frmPathFinding()
         {
             InitializeComponent();
         }
