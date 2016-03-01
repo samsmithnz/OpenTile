@@ -55,6 +55,12 @@
     <Compile Include="frmFOV.Designer.cs">
       <DependentUpon>frmFOV.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCover.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCover.Designer.cs">
+      <DependentUpon>frmCover.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPossibleTiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmFOV.resx">
       <DependentUpon>frmFOV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCover.resx">
+      <DependentUpon>frmCover.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPossibleTiles.resx">
       <DependentUpon>frmPossibleTiles.cs</DependentUpon>

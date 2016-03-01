@@ -52,7 +52,10 @@ namespace OpenTile
                 for (int x = xMin; x < xMax; x++)
                 {
                     System.Diagnostics.Debug.WriteLine("X: " + y + ",Y:" + y);
-                    result.AddRange(FindAdjacentPoints(new Point(x, y), width, height, visitedTiles));
+                    if (visitedTiles[x, y] == true)
+                    {
+                        result.AddRange(FindAdjacentPoints(new Point(x, y), width, height, visitedTiles));
+                    }
                 }
             }
             //result = FindAdjacentPoints(startLocation, visitedTles);
@@ -84,6 +87,7 @@ namespace OpenTile
                 xMax = width - 1;
             }
 
+            //Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
             if (visitedTiles[currentLocation.X, yMax] == true)
             {
                 result.Add(new Point(currentLocation.X, yMax));
