@@ -9,6 +9,10 @@ namespace OpenTile
 {
     public class Cover
     {
+        /// <summary>
+        /// Calculate if the player is in cover. 
+        /// </summary>
+        /// <returns>True if the player is in cover</returns>
         public static bool CalculateCover(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> enemyLocations)
         {
             List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
@@ -20,6 +24,7 @@ namespace OpenTile
                 }
                 else
                 {
+                    //Note that this result should be inversed
                     return !CalculateIfPlayerIsFlanked(currentPosition, width, height, validTiles, coverTiles, enemyLocations);
                 }
             }
@@ -29,6 +34,10 @@ namespace OpenTile
             }
         }
 
+        /// <summary>
+        /// Calculate if the player is flanked - a sub function as part of the cover
+        /// </summary>
+        /// <returns>False indicates the player is safely in cover, true indicates the player is flanked.</returns>
         private static bool CalculateIfPlayerIsFlanked(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> coverTiles, List<Point> enemyLocations)
         {
             bool currentLocationIsFlanked = false;
@@ -96,6 +105,10 @@ namespace OpenTile
             }            
         }
 
+        /// <summary>
+        /// Look at adjacent squares for cover
+        /// </summary>
+        /// <returns>A List of Point objects for each item of cover</returns>
         private static List<Point> FindAdjacentCover(Point currentLocation, int width, int height, bool[,] validTiles)
         {
             List<Point> result = new List<Point>();
