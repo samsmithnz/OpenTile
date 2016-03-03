@@ -112,6 +112,7 @@ namespace OpenTile
         private static List<Point> FindAdjacentCover(Point currentLocation, int width, int height, bool[,] validTiles)
         {
             List<Point> result = new List<Point>();
+            //Make adjustments to ensure that the search doesn't go off the edges of the map
             int yMin = currentLocation.Y - 1;
             if (yMin < 0)
             {
