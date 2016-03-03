@@ -9,17 +9,91 @@ namespace OpenTile
 {
     public class Cover
     {
-        public static bool CalculateCover(Point currentPosition, int width, int height, bool[,] validTiles)
+        public static bool CalculateCover(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> enemyLocations)
         {
             List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
             if (coverTiles.Count > 0)
             {
-                return true;
+                if (enemyLocations == null || enemyLocations.Count == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return !CalculateIfPlayerIsFlanked(currentPosition, width, height, validTiles, coverTiles, enemyLocations);
+                }
             }
             else
             {
                 return false;
             }
+        }
+
+        private static bool CalculateIfPlayerIsFlanked(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> coverTiles, List<Point> enemyLocations)
+        {
+            bool currentLocationIsFlanked = false;
+            if (coverTiles == null || coverTiles.Count == 0)
+            {
+                return currentLocationIsFlanked;
+            }
+            else if (enemyLocations == null || enemyLocations.Count == 0)
+            {
+                return currentLocationIsFlanked;
+            }
+            else
+            {
+                // Work out where the cover is relative to the player
+                bool coverIsNorth = false;
+                bool coverIsEast = false;
+                bool coverIsSouth = false;
+                bool coverIsWest = false;
+                foreach (Point coverTileItem in coverTiles)
+                {
+                    if (currentPosition.Y < coverTileItem.Y)
+                    {
+                        coverIsNorth = true;
+                    }
+                    if (currentPosition.Y > coverTileItem.Y)
+                    {
+                        coverIsSouth = true;
+                    }
+                    if (currentPosition.X < coverTileItem.X)
+                    {
+                        coverIsEast = true;
+                    }
+                    if (currentPosition.X > coverTileItem.X)
+                    {
+                        coverIsWest = true;
+                    }
+                }
+
+                //Work out where the enemy is relative to the cover
+                foreach (Point enemyItem in enemyLocations)
+                {
+                    if (coverIsNorth == true && currentPosition.Y >= enemyItem.Y - 1)
+                    {
+                        currentLocationIsFlanked = true;
+                        break;
+                    }
+                    else if (coverIsSouth == true && currentPosition.Y <= enemyItem.Y + 1)
+                    {
+                        currentLocationIsFlanked = true;
+                        break;
+                    }
+                    else if (coverIsEast == true && currentPosition.X >= enemyItem.X - 1)
+                    {
+                        currentLocationIsFlanked = true;
+                        break;
+                    }
+                    else if (coverIsWest == true && currentPosition.X <= enemyItem.X + 1)
+                    {
+                        currentLocationIsFlanked = true;
+                        break;
+                    }
+                }
+
+                return currentLocationIsFlanked;
+            }            
         }
 
         private static List<Point> FindAdjacentCover(Point currentLocation, int width, int height, bool[,] validTiles)
