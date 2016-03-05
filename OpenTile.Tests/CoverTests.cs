@@ -378,7 +378,7 @@ namespace OpenTile.Tests
             // Arrange
             //  Flanked
             //  □ □ □ □
-            //  E □ ■ □  
+            //  E ■ □ □  
             //  □ S ■ □
             //  □ □ E □             
             Point startingLocation = new Point(1, 1);
@@ -398,6 +398,40 @@ namespace OpenTile.Tests
             // Assert
             Assert.IsTrue(unitIsInCover == false);
         }
+
+        [TestMethod]
+        public void Test_WithFourCovers_FourEnemysNotInCover_PlayerInCover()
+        {
+            // Arrange
+            // In Cover
+            // 4 □ □ E □ □
+            // 3 □ □ ■ □ □  
+            // 2 E ■ S ■ E
+            // 1 □ □ ■ □ □
+            // 0 □ □ E □ □ 
+            //   0 1 2 3 4            
+            Point startingLocation = new Point(2, 2);
+            int width = 5;
+            int height =5;
+            List<Point> coverLocations = new List<Point>();
+            coverLocations.Add(new Point(2, 3));
+            coverLocations.Add(new Point(3, 2));
+            coverLocations.Add(new Point(2, 1));
+            coverLocations.Add(new Point(1, 2));
+            List<Point> enemyLocations = new List<Point>();
+            enemyLocations.Add(new Point(2, 0));
+            enemyLocations.Add(new Point(0, 2));
+            enemyLocations.Add(new Point(2, 4));
+            enemyLocations.Add(new Point(4, 2));
+
+            // Act
+            InitializeMap(width, height, new Point(1, 1), coverLocations);
+            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+
+            // Assert
+            Assert.IsTrue(unitIsInCover == true);
+        }
+
 
     }
 }
