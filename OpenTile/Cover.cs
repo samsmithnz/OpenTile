@@ -84,142 +84,128 @@ namespace OpenTile
                     }
                 }
 
-
                 //Work out where the enemy is relative to the cover
                 foreach (Point enemyItem in enemyLocations)
                 {
-                    if (coverTiles.Count == 1)
+                    //  In Cover
+                    //  □ E □ □
+                    //  □ ■ □ □ 
+                    //  □ S ■ E 
+                    //  □ □ □ □  
+
+                    //Check to see if Enemy is right on top of the player, neutralizing each others cover and causing a flank
+                    int xPosition = currentPosition.X - enemyItem.X;
+                    if (xPosition < 0)
                     {
-                        if (coverIsNorth == true && currentPosition.Y >= enemyItem.Y - 1)
+                        xPosition = xPosition * -1;
+                    }
+                    int yPosition = currentPosition.Y - enemyItem.Y;
+                    if (yPosition < 0)
+                    {
+                        yPosition = yPosition * -1;
+                    }
+                    if (xPosition == 1 && yPosition == 1)
+                    {
+                        currentLocationIsFlanked = true;
+                        break;
+                    }
+
+                    //Now check over the multiple levels of cover
+                    if (enemyItem.Y >= currentPosition.Y && enemyItem.X >= currentPosition.X)
+                    {
+                        //Enemy is located NorthEast
+                        if (coverIsNorth == false && coverIsEast == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (coverIsSouth == true && currentPosition.Y <= enemyItem.Y + 1)
+                        else if (coverIsNorth == true && enemyItem.Y <= coverLineNorth && coverIsEast == true && enemyItem.X <= coverLineEast)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (coverIsEast == true && currentPosition.X >= enemyItem.X - 1)
+                        else if (coverIsNorth == true && enemyItem.Y <= coverLineNorth && coverIsEast == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (coverIsWest == true && currentPosition.X <= enemyItem.X + 1)
+                        else if (coverIsEast == true && enemyItem.X <= coverLineEast && coverIsNorth == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
                     }
-                    else //OK, here comes a temporary, massive hack
+                    if (enemyItem.Y >= currentPosition.Y && enemyItem.X <= currentPosition.X)
                     {
-                        //  In Cover
-                        //  □ E □ □
-                        //  □ ■ □ □ 
-                        //  □ S ■ E 
-                        //  □ □ □ □  
-
-                        //Check to see if Enemy is right on top of the player, neutralizing each others cover and causing a flank
-                        int xPosition = currentPosition.X - enemyItem.X;
-                        if (xPosition < 0)
-                        {
-                            xPosition = xPosition * -1;
-                        }
-                        int yPosition = currentPosition.Y - enemyItem.Y;
-                        if (yPosition < 0)
-                        {
-                            yPosition = yPosition * -1;
-                        }
-                        if (xPosition == 1 && yPosition == 1)
+                        //Enemy is located NorthWest
+                        if (coverIsNorth == false && coverIsWest == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-
-                        //  In Cover
-                        //  □ E □ □
-                        //  □ ■ □ □ 
-                        //  □ S ■ E 
-                        //  □ □ □ □ 
-                        if (enemyItem.Y >= currentPosition.Y && enemyItem.X >= currentPosition.X)
+                        else if (coverIsNorth == true && enemyItem.Y <= coverLineNorth && coverIsWest == true && enemyItem.X >= coverLineWest)
                         {
-                            //Enemy is located NorthEast
+                            currentLocationIsFlanked = true;
+                            break;
                         }
-                        if (enemyItem.Y >= currentPosition.Y && enemyItem.X <= currentPosition.X)
+                        else if (coverIsNorth == true && enemyItem.Y <= coverLineNorth && coverIsWest == false)
                         {
-                            //Enemy is located NorthWest
+                            currentLocationIsFlanked = true;
+                            break;
                         }
-                        if (enemyItem.Y <= currentPosition.Y && enemyItem.X >= currentPosition.X)
+                        else if (coverIsWest == true && enemyItem.X >= coverLineWest && coverIsNorth == false)
                         {
-                            //Enemy is located SouthEast
+                            currentLocationIsFlanked = true;
+                            break;
                         }
-                        if (enemyItem.Y <= currentPosition.Y && enemyItem.X <= currentPosition.X)
+                    }
+                    if (enemyItem.Y <= currentPosition.Y && enemyItem.X >= currentPosition.X)
+                    {
+                        //Enemy is located SouthEast
+                        if (coverIsSouth == false && coverIsEast == false)
                         {
-                            //Enemy is located SouthWest
+                            currentLocationIsFlanked = true;
+                            break;
                         }
-
-                        int coverLineNorth = -1;
-                        int coverLineEast = -1;
-                        int coverLineSouth = -1;
-                        int coverLineWest = -1;
-
-
-                        ////  In Cover
-                        ////  □ E □ □
-                        ////  □ ■ □ □ 
-                        ////  □ S ■ E 
-                        ////  □ □ □ □ 
-                        //foreach (Point coverItem in coverTiles)
-                        //{
-                        //    if (coverIsEast == true && coverItem.X > currentPosition.X && currentPosition.X == enemyItem.X && coverItem.X == currentPosition.X)
-                        //    {
-                        //        //We can ignore this, as the cover is between the player and enemy - the player is definitely in cover.
-                        //    }
-                        //    else if (coverIsWest == true && coverItem.X < currentPosition.X && currentPosition.X == enemyItem.X && coverItem.X == currentPosition.X)
-                        //    {
-                        //        //We can ignore this, as the cover is between the player and enemy - the player is definitely in cover.
-                        //    }
-                        //    else if (coverIsNorth == true && coverItem.Y > currentPosition.Y && currentPosition.Y == enemyItem.Y && coverItem.Y == currentPosition.Y)
-                        //    {
-                        //        //We can ignore this, as the cover is between the player and enemy - the player is definitely in cover.
-                        //    }
-                        //    else if (coverIsSouth == true && coverItem.Y < currentPosition.Y && currentPosition.Y == enemyItem.Y && coverItem.Y == currentPosition.Y)
-                        //    {
-                        //        //We can ignore this, as the cover is between the player and enemy - the player is definitely in cover.
-                        //    }
-                        //    else
-                        //    {
-                        //        //currentLocationIsFlanked = true;
-
-                        //    }
-
-                        //    //if (coverItem.X > currentPosition.X && coverItem.X > enemyItem.X)
-                        //    //{
-
-                        //    //}
-                        //}
-
-                        //if (coverIsNorth == true && currentPosition.Y >= enemyItem.Y - 1)
-                        //{
-                        //    currentLocationIsFlanked = true;
-                        //    break;
-                        //}
-                        //else if (coverIsSouth == true && currentPosition.Y <= enemyItem.Y + 1)
-                        //{
-                        //    currentLocationIsFlanked = true;
-                        //    break;
-                        //}
-                        //else if (coverIsEast == true && currentPosition.X >= enemyItem.X - 1)
-                        //{
-                        //    currentLocationIsFlanked = true;
-                        //    break;
-                        //}
-                        //else if (coverIsWest == true && currentPosition.X <= enemyItem.X + 1)
-                        //{
-                        //    currentLocationIsFlanked = true;
-                        //    break;
-                        //}
-
+                        else if (coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsEast == true && enemyItem.X <= coverLineEast)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
+                        else if (coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsEast == false)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
+                        else if (coverIsEast == true && enemyItem.X <= coverLineEast && coverIsSouth == false)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
+                    }
+                    if (enemyItem.Y <= currentPosition.Y && enemyItem.X <= currentPosition.X)
+                    {
+                        //Enemy is located SouthWest
+                        if (coverIsSouth == false && coverIsWest == false)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
+                        else if (coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsWest == true && enemyItem.X >= coverLineWest)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
+                        else if (coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsWest == false)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
+                        else if (coverIsWest == true && enemyItem.X >= coverLineWest && coverIsSouth == false)
+                        {
+                            currentLocationIsFlanked = true;
+                            break;
+                        }
                     }
                 }
 
