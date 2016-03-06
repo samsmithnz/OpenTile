@@ -13,7 +13,7 @@ namespace OpenTile.Tests
         private bool[,] map;
         private SearchParameters searchParameters;
 
-        private void InitializeMap(int xMax, int zMax, Point startLocation, Point endLocation, bool locationsNotSet = true)
+        private void InitializeMap(int xMax, int zMax, Point startingLocation, Point endLocation, bool locationsNotSet = true)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -32,16 +32,16 @@ namespace OpenTile.Tests
 
             if (locationsNotSet == true)
             {
-                if (startLocation == Point.Empty)
+                if (startingLocation == Point.Empty)
                 {
-                    startLocation = new Point(1, 2);
+                    startingLocation = new Point(1, 2);
                 }
                 if (endLocation == Point.Empty)
                 {
                     endLocation = new Point(5, 2);
                 }
             }
-            this.searchParameters = new SearchParameters(startLocation, endLocation, map);
+            this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
 
         /// <summary>

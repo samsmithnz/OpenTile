@@ -14,15 +14,15 @@ namespace OpenTile
     /// </summary>
     public class SearchParameters
     {
-        public Point StartLocation { get; set; }
+        public Point startingLocation { get; set; }
 
         public Point EndLocation { get; set; }
 
         public bool[,] Map { get; set; }
 
-        public SearchParameters(Point startLocation, Point endLocation, bool[,] map)
+        public SearchParameters(Point startingLocation, Point endLocation, bool[,] map)
         {
-            this.StartLocation = startLocation;
+            this.startingLocation = startingLocation;
             this.EndLocation = endLocation;
             this.Map = map;
         }

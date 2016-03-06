@@ -10,39 +10,26 @@ namespace OpenTile
     public class PossibleTiles
     {
 
-        public static List<Point> FindTiles(Point startLocation, int range, int width, int height, bool[,] visitedTiles)
+        public static List<Point> FindTiles(Point startingLocation, int range, int width, int height, bool[,] map)
         {
-            //bool[,] validTiles;
-            //Array.Copy(visitedTles, validTiles, visitedTles.GetUpperBound(1));
 
-            //validTiles = new bool[visitedTles.Length];
-            //sourceArray.CopyTo(targetArray, 0);
-
-            //bool[,] validTiles = new bool[height, width];
-            //for (int x = 0; x < width; x++)
-            //{
-            //    for (int y = 0; y < height; y++)
-            //    {
-            //        validTiles[y, x] = (x >= width) || (y >= height) ? Rectangle.Empty : tiles[y, x];
-            //    }
-            //}
-            List<Point> result = new List<Point>();
-            int yMin = startLocation.Y - range;
+            List<Point> possibleTiles = new List<Point>();
+            int yMin = startingLocation.Y - range;
             if (yMin < 0)
             {
                 yMin = 0;
             }
-            int yMax = startLocation.Y + range;
+            int yMax = startingLocation.Y + range;
             if (yMax > height - 1)
             {
                 yMax = height - 1;
             }
-            int xMin = startLocation.X - range;
+            int xMin = startingLocation.X - range;
             if (xMin < 0)
             {
                 xMin = 0;
             }
-            int xMax = startLocation.X + range;
+            int xMax = startingLocation.X + range;
             if (xMax > width - 1)
             {
                 xMax = width - 1;
@@ -51,21 +38,20 @@ namespace OpenTile
             {
                 for (int x = xMin; x < xMax; x++)
                 {
-                    System.Diagnostics.Debug.WriteLine("X: " + y + ",Y:" + y);
-                    if (visitedTiles[x, y] == true)
+                    System.Diagnostics.Debug.WriteLine("X: " + x + ",Y:" + y);
+                    if (map[x, y] == true && possibleTiles.Contains(new Point(x, y)) == false)
                     {
-                        result.AddRange(FindAdjacentPoints(new Point(x, y), width, height, visitedTiles));
+                        possibleTiles.AddRange(FindAdjacentPoints(new Point(x, y), width, height, map, possibleTiles));
                     }
                 }
             }
-            //result = FindAdjacentPoints(startLocation, visitedTles);
-            return result;
+            return possibleTiles;
         }
 
 
-        private static List<Point> FindAdjacentPoints(Point currentLocation, int width, int height, bool[,] visitedTiles)
+        private static List<Point> FindAdjacentPoints(Point currentLocation, int width, int height, bool[,] visitedTiles, List<Point> currentPossibleTiles)
         {
-            List<Point> result = new List<Point>();
+            List<Point> adjacentTiles = new List<Point>();
             int yMin = currentLocation.Y - 1;
             if (yMin < 0)
             {
@@ -88,39 +74,39 @@ namespace OpenTile
             }
 
             //Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
-            if (visitedTiles[currentLocation.X, yMax] == true)
+            if (visitedTiles[currentLocation.X, yMax] == true && currentPossibleTiles.Contains(new Point(currentLocation.X, yMax)) == false)
             {
-                result.Add(new Point(currentLocation.X, yMax));
+                adjacentTiles.Add(new Point(currentLocation.X, yMax));
             }
-            if (visitedTiles[xMax, yMax] == true)
+            if (visitedTiles[xMax, yMax] == true && currentPossibleTiles.Contains(new Point(xMax, yMax)) == false)
             {
-                result.Add(new Point(xMax, yMax));
+                adjacentTiles.Add(new Point(xMax, yMax));
             }
-            if (visitedTiles[xMax, currentLocation.Y] == true)
+            if (visitedTiles[xMax, currentLocation.Y] == true && currentPossibleTiles.Contains(new Point(xMax, currentLocation.Y)) == false)
             {
-                result.Add(new Point(xMax, currentLocation.Y));
+                adjacentTiles.Add(new Point(xMax, currentLocation.Y));
             }
-            if (visitedTiles[xMax, yMin] == true)
+            if (visitedTiles[xMax, yMin] == true && currentPossibleTiles.Contains(new Point(xMax, yMin)) == false)
             {
-                result.Add(new Point(xMax, yMin));
+                adjacentTiles.Add(new Point(xMax, yMin));
             }
-            if (visitedTiles[currentLocation.X, yMin] == true)
+            if (visitedTiles[currentLocation.X, yMin] == true && currentPossibleTiles.Contains(new Point(currentLocation.X, yMin)) == false)
             {
-                result.Add(new Point(currentLocation.X, yMin));
+                adjacentTiles.Add(new Point(currentLocation.X, yMin));
             }
-            if (visitedTiles[xMin, yMin] == true)
+            if (visitedTiles[xMin, yMin] == true && currentPossibleTiles.Contains(new Point(xMin, yMin)) == false)
             {
-                result.Add(new Point(xMin, yMin));
+                adjacentTiles.Add(new Point(xMin, yMin));
             }
-            if (visitedTiles[xMin, currentLocation.Y] == true)
+            if (visitedTiles[xMin, currentLocation.Y] == true && currentPossibleTiles.Contains(new Point(xMin, currentLocation.Y)) == false)
             {
-                result.Add(new Point(xMin, currentLocation.Y));
+                adjacentTiles.Add(new Point(xMin, currentLocation.Y));
             }
-            if (visitedTiles[xMin, yMax] == true)
+            if (visitedTiles[xMin, yMax] == true && currentPossibleTiles.Contains(new Point(xMin, yMax)) == false)
             {
-                result.Add(new Point(xMin, yMax));
+                adjacentTiles.Add(new Point(xMin, yMax));
             }
-            return result;
+            return adjacentTiles;
         }
     }
 }

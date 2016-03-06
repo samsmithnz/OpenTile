@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PossibleTilesTests.cs" />
     <Compile Include="CoverTests.cs" />
     <Compile Include="PathFindingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

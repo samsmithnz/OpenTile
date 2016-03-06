@@ -12,7 +12,7 @@ namespace OpenTile.Tests
     {
         private bool[,] map;
 
-        private void InitializeMap(int xMax, int zMax, Point startLocation, List<Point> coverLocations)
+        private void InitializeMap(int xMax, int zMax, Point startingLocation, List<Point> coverLocations)
         {
             //  □ □ □ 
             //  □ S □ 
@@ -107,9 +107,10 @@ namespace OpenTile.Tests
         {
             // Arrange
             //  In Cover
-            //  □ □ □ □ 
-            //  □ S ■ E 
-            //  □ □ □ □
+            // 2 □ □ □ □ 
+            // 1 □ S ■ E 
+            // 0 □ □ □ □
+            //   0 1 2 3
             Point startingLocation = new Point(1, 1);
             int width = 4;
             int height = 3;
@@ -349,10 +350,11 @@ namespace OpenTile.Tests
         {
             // Arrange
             //  In Cover
-            //  □ E □ □
-            //  □ ■ □ □ 
-            //  □ S ■ E 
-            //  □ □ □ □             
+            // 3 □ E □ □
+            // 2 □ ■ □ □ 
+            // 1 □ S ■ E 
+            // 0 □ □ □ □
+            //   0 1 2 3          
             Point startingLocation = new Point(1, 1);
             int width = 4;
             int height = 4;

@@ -93,7 +93,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < this.map.GetLength(0); x++)
                 {
-                    if (this.searchParameters.StartLocation.Equals(new Point(x, y)))
+                    if (this.searchParameters.startingLocation.Equals(new Point(x, y)))
                     {
                         // Show the start position
                         route.Append('S');
@@ -127,7 +127,7 @@ namespace OpenTile.Win
         /// <summary>
         /// Creates a clear map with a start and end point and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startLocation, Point endLocation, bool locationsNotSet)
+        private void InitializeMap(int xMax, int zMax, Point startingLocation, Point endLocation, bool locationsNotSet)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -146,10 +146,10 @@ namespace OpenTile.Win
 
             if (locationsNotSet == true)
             {
-                startLocation = new Point(1, 2);
+                startingLocation = new Point(1, 2);
                 endLocation = new Point(5, 2);
             }
-            this.searchParameters = new SearchParameters(startLocation, endLocation, map);
+            this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
 
         /// <summary>

@@ -35,14 +35,14 @@ namespace OpenTile.Win
             //txtMap.Text += Environment.NewLine;
 
             // Now add an obstacle
-            Point startLocation = new Point(1, 2);
+            Point startingLocation = new Point(1, 2);
             int range = 3;
-            InitializeMap(width, height, startLocation);
+            InitializeMap(width, height, startingLocation);
             AddWallWithGap();
-            path = PossibleTiles.FindTiles(startLocation, range, width, height, this.map);
+            path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
-            txtMap.Text += ShowRoute("The algorithm should find a possible tiles, ignoring the obstacle:", startLocation, path);
+            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring the obstacle:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
 
             //// Create a barrier between the start and end points
@@ -89,7 +89,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowRoute(string title, Point startLocation, IEnumerable<Point> path)
+        private string ShowPossibleTiles(string title, Point startingLocation, IEnumerable<Point> path)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -97,7 +97,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < this.map.GetLength(0); x++)
                 {
-                    if (startLocation.Equals(new Point(x, y)))
+                    if (startingLocation.Equals(new Point(x, y)))
                     {
                         // Show the start position
                         route.Append('S');
@@ -126,7 +126,7 @@ namespace OpenTile.Win
         /// <summary>
         /// Creates a clear map with a start and end point and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startLocation)
+        private void InitializeMap(int xMax, int zMax, Point startingLocation)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -143,7 +143,7 @@ namespace OpenTile.Win
                 }
             }
 
-            //this.searchParameters = new SearchParameters(startLocation, endLocation, map);
+            //this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
 
         /// <summary>
