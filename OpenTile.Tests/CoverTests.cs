@@ -324,9 +324,10 @@ namespace OpenTile.Tests
         {
             // Arrange
             //  Flanked
-            //  □ □ E □ 
-            //  □ S ■ □ 
-            //  □ □ □ □             
+            // 2 □ □ E □ 
+            // 1 □ S ■ □ 
+            // 0 □ □ □ □   
+            //   0 1 2 3          
             Point startingLocation = new Point(1, 1);
             int width = 4;
             int height = 3;

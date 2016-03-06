@@ -65,22 +65,22 @@ namespace OpenTile
                     if (currentPosition.Y < coverTileItem.Y)
                     {
                         coverIsNorth = true;
-                        coverLineNorth = coverTileItem.Y - 1;
+                        coverLineNorth = coverTileItem.Y - 0;
                     }
                     if (currentPosition.Y > coverTileItem.Y)
                     {
                         coverIsSouth = true;
-                        coverLineSouth = coverTileItem.Y + 1;
+                        coverLineSouth = coverTileItem.Y + 0;
                     }
                     if (currentPosition.X < coverTileItem.X)
                     {
                         coverIsEast = true;
-                        coverLineEast = coverTileItem.X - 1;
+                        coverLineEast = coverTileItem.X - 0;
                     }
                     if (currentPosition.X > coverTileItem.X)
                     {
                         coverIsWest = true;
-                        coverLineWest = coverTileItem.X + 1;
+                        coverLineWest = coverTileItem.X + 0;
                     }
                 }
 
@@ -122,7 +122,7 @@ namespace OpenTile
                                 currentLocationIsFlanked = true;
                                 break;
                             }
-                            else if (coverIsNorth == true && enemyItem.Y <= coverLineNorth && coverIsEast == true && enemyItem.X <= coverLineEast)
+                            else if (coverIsNorth != true && enemyItem.Y <= coverLineNorth && coverIsEast != true && enemyItem.X <= coverLineEast)
                             {
                                 currentLocationIsFlanked = true;
                                 break;
@@ -146,7 +146,7 @@ namespace OpenTile
                                 currentLocationIsFlanked = true;
                                 break;
                             }
-                            else if (coverIsNorth == true && enemyItem.Y <= coverLineNorth && coverIsWest == true && enemyItem.X >= coverLineWest)
+                            else if (coverIsNorth != true && enemyItem.Y <= coverLineNorth && coverIsWest != true && enemyItem.X >= coverLineWest)
                             {
                                 currentLocationIsFlanked = true;
                                 break;
@@ -175,11 +175,16 @@ namespace OpenTile
                                 currentLocationIsFlanked = true;
                                 break;
                             }
-                            else if (currentPosition.X - enemyItem.X == -1 && currentPosition.Y - enemyItem.Y == 1 && coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsEast == true && enemyItem.X <= coverLineEast)
+                            else if (coverIsSouth != true && enemyItem.Y >= coverLineSouth && coverIsEast != true && enemyItem.X <= coverLineEast)
                             {
                                 currentLocationIsFlanked = true;
                                 break;
                             }
+                            //else if (currentPosition.X - enemyItem.X == -1 && currentPosition.Y - enemyItem.Y == 1 && coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsEast == true && enemyItem.X <= coverLineEast)
+                            //{
+                            //    currentLocationIsFlanked = true;
+                            //    break;
+                            //}
                             else if (coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsEast == false)
                             {
                                 currentLocationIsFlanked = true;
@@ -199,11 +204,11 @@ namespace OpenTile
                                 currentLocationIsFlanked = true;
                                 break;
                             }
-                            else if (coverIsSouth == true && coverIsWest == true && enemyItem.Y == currentPosition.Y - 1)
-                            {
-                                //It's ok, player is not flanked
-                            }
-                            else if (coverIsSouth == true && enemyItem.Y >= coverLineSouth && coverIsWest == true && enemyItem.X >= coverLineWest)
+                            //else if (coverIsSouth == true && coverIsWest == true && enemyItem.Y == currentPosition.Y - 1)
+                            //{
+                            //    //It's ok, player is not flanked
+                            //}
+                            else if (coverIsSouth != true && enemyItem.Y >= coverLineSouth && coverIsWest != true && enemyItem.X >= coverLineWest)
                             {
                                 currentLocationIsFlanked = true;
                                 break;
