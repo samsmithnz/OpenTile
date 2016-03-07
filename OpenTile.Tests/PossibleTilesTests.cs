@@ -58,12 +58,56 @@ namespace OpenTile.Tests
             Assert.IsTrue(path.Count == 8);
         }
 
+        [TestMethod]
+        public void Test_PossibleTiles_NoWalls_RangeOf1()
+        {
+            // Arrange
+            Point startingLocation = new Point(2, 2);
+            int height = 5;
+            int width = 5;
+            int range = 1;
+            InitializeMap(width, height, startingLocation);
+            //  □ □ □ □ □ 
+            //  □ □ □ □ □ 
+            //  □ □ S □ □ 
+            //  □ □ □ □ □ 
+            //  □ □ □ □ □ 
+
+            // Act
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+
+            // Assert
+            Assert.IsTrue(path.Count == 8);
+        }
+
+        [TestMethod]
+        public void Test_PossibleTiles_NoWalls_RangeOf2()
+        {
+            // Arrange
+            Point startingLocation = new Point(2, 2);
+            int height = 5;
+            int width = 5;
+            int range = 2;
+            InitializeMap(width, height, startingLocation);
+            //  □ □ □ □ □ 
+            //  □ □ □ □ □ 
+            //  □ □ S □ □ 
+            //  □ □ □ □ □ 
+            //  □ □ □ □ □ 
+
+            // Act
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+
+            // Assert
+            Assert.IsTrue(path.Count == 24);
+        }
+
 
         [TestMethod]
         public void Test_PossibleTiles_EWall_RangeOf1()
         {
             // Arrange
-            Point startingLocation = new Point(1, 12);
+            Point startingLocation = new Point(1, 1);
             int height = 3;
             int width = 3;
             int range = 1;
@@ -71,7 +115,7 @@ namespace OpenTile.Tests
             //  □ □ □ 
             //  □ S ■ 
             //  □ □ □ 
-            //this.map[2, 1] = false;
+            this.map[2, 1] = false;
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);

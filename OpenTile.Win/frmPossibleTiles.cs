@@ -24,64 +24,29 @@ namespace OpenTile.Win
         private void btnGenerateMap_Click(object sender, EventArgs e)
         {
             txtMap.Text = "";
+            
+            //CRITERIA
+            Point startingLocation = new Point(1, 2);
             int height = 5;
             int width = 7;
-
-            // Start with a clear map (don't add any obstacles)
-            InitializeMap(width, height, Point.Empty);
-            //PathFinding pathFinder = new PathFinding(searchParameters);
-            List<Point> path = new List<Point>();// pathFinder.FindPath();
-            //txtMap.Text += ShowRoute("The algorithm should find a direct path without obstacles:", path);
-            //txtMap.Text += Environment.NewLine;
-
-            // Now add an obstacle
-            Point startingLocation = new Point(1, 2);
             int range = 3;
             InitializeMap(width, height, startingLocation);
-            AddWallWithGap();
-            path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
-            //pathFinder = new PathFinding(searchParameters);
-            //path = pathFinder.FindPath();
+            //  * * * ■ □ □ □
+            //  * * * ■ □ □ □
+            //  * S * ■ □ F □
+            //  * * * ■ ■ □ □
+            //  * * * * □ □ □
+            this.map[3, 4] = false;
+            this.map[3, 3] = false;
+            this.map[3, 2] = false;
+            this.map[3, 1] = false;
+            this.map[4, 1] = false;
+
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
             txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring the obstacle:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
+            txtMap.Text += "Path length is: " + path.Count;
 
-            //// Create a barrier between the start and end points
-            //InitializeMap(7, 5, Point.Empty, Point.Empty);
-            //AddWallWithoutGap();
-            //pathFinder = new PathFinding(searchParameters);
-            //path = pathFinder.FindPath();
-            //txtMap.Text += ShowRoute("The algorithm should not be able to find a route around the barrier:", path);
-            //txtMap.Text += Environment.NewLine;
-
-
-            //// Create a maze with custom start and end points
-            //InitializeMap(7, 5, new Point(0, 4), new Point(6, 4));
-            //AddWallWithMaze();
-            //pathFinder = new PathFinding(searchParameters);
-            //path = pathFinder.FindPath();
-            //txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the barrier:", path);
-            //txtMap.Text += Environment.NewLine;
-
-
-            //// Create a maze with custom start and end points
-            //InitializeMap(7, 5, new Point(0, 4), new Point(4, 2));
-            //AddWallWithSpinningMaze();
-            //pathFinder = new PathFinding(searchParameters);
-            //path = pathFinder.FindPath();
-            //txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the barrier:", path);
-            //txtMap.Text += Environment.NewLine;
-
-
-            // Create a larger maze with custom start and end points
-            //InitializeMap(70, 40, new Point(0, 0), new Point(69, 39), false);
-            //AddRandomItems(70, 40, 40);            
-            //pathFinder = new PathFinding(searchParameters);
-            //path = pathFinder.FindPath();
-            //txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", path);
-            //txtMap.Text += Environment.NewLine;
-
-            //Console.WriteLine("Press any key to exit...");
-            //Console.ReadKey();
         }
 
         /// <summary>

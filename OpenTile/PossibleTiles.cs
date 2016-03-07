@@ -12,8 +12,9 @@ namespace OpenTile
 
         public static List<Point> FindTiles(Point startingLocation, int range, int width, int height, bool[,] map)
         {
-
             List<Point> possibleTiles = new List<Point>();
+
+//Ensure that we don't search off the side of the map
             int yMin = startingLocation.Y - range;
             if (yMin < 0)
             {
@@ -34,78 +35,128 @@ namespace OpenTile
             {
                 xMax = width - 1;
             }
+
+//Start the search, looking in adjacent nodes
             for (int y = yMin; y < yMax; y++)
             {
                 for (int x = xMin; x < xMax; x++)
                 {
                     System.Diagnostics.Debug.WriteLine("X: " + x + ",Y:" + y);
-                    if (map[x, y] == true && possibleTiles.Contains(new Point(x, y)) == false)
+                    if (map[x, y] == true)
                     {
-                        possibleTiles.AddRange(FindAdjacentPoints(new Point(x, y), width, height, map, possibleTiles));
+                        possibleTiles.AddRange(FindAdjacentPoints(startingLocation, new Point(x, y), width, height, xMin, xMax, yMin, yMax, map, possibleTiles));
                     }
                 }
             }
             return possibleTiles;
         }
 
-
-        private static List<Point> FindAdjacentPoints(Point currentLocation, int width, int height, bool[,] visitedTiles, List<Point> currentPossibleTiles)
+        //Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
+        private static List<Point> FindAdjacentPoints(Point originalStartLocation, Point currentLocation, int width, int height, int xMapMin, int xMapMax, int yMapMin, int yMapMax, bool[,] map, List<Point> currentPossibleTiles)
         {
             List<Point> adjacentTiles = new List<Point>();
+            //Based on our current position, ensure we still stay on the map
             int yMin = currentLocation.Y - 1;
-            if (yMin < 0)
+            if (yMin < yMapMin)
             {
-                yMin = 0;
+                yMin = yMapMin;
             }
             int yMax = currentLocation.Y + 1;
-            if (yMax > height - 1)
+            if (yMax > yMapMax)
             {
-                yMax = height - 1;
+                yMax = yMapMax;
             }
             int xMin = currentLocation.X - 1;
-            if (xMin < 0)
+            if (xMin < xMapMin)
             {
-                xMin = 0;
+                xMin = xMapMin;
             }
             int xMax = currentLocation.X + 1;
-            if (xMax > width - 1)
+            if (xMax > xMapMax)
             {
-                xMax = width - 1;
+                xMax = xMapMax;
             }
 
-            //Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
-            if (visitedTiles[currentLocation.X, yMax] == true && currentPossibleTiles.Contains(new Point(currentLocation.X, yMax)) == false)
+            //Off the current position, check each point around it 
+            for (int y = yMin; y <= yMax; y++)
             {
-                adjacentTiles.Add(new Point(currentLocation.X, yMax));
+                for (int x = xMin; x <= xMax; x++)
+                {
+                    if (map[x, y] == true && currentPossibleTiles.Contains(new Point(x, y)) == false && originalStartLocation != new Point(x, y))
+                    {
+                        adjacentTiles.Add(new Point(x, y));
+                        //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+                        //{
+                        //    Console.WriteLine("Here");
+                        //}
+                    }
+                }
             }
-            if (visitedTiles[xMax, yMax] == true && currentPossibleTiles.Contains(new Point(xMax, yMax)) == false)
-            {
-                adjacentTiles.Add(new Point(xMax, yMax));
-            }
-            if (visitedTiles[xMax, currentLocation.Y] == true && currentPossibleTiles.Contains(new Point(xMax, currentLocation.Y)) == false)
-            {
-                adjacentTiles.Add(new Point(xMax, currentLocation.Y));
-            }
-            if (visitedTiles[xMax, yMin] == true && currentPossibleTiles.Contains(new Point(xMax, yMin)) == false)
-            {
-                adjacentTiles.Add(new Point(xMax, yMin));
-            }
-            if (visitedTiles[currentLocation.X, yMin] == true && currentPossibleTiles.Contains(new Point(currentLocation.X, yMin)) == false)
-            {
-                adjacentTiles.Add(new Point(currentLocation.X, yMin));
-            }
-            if (visitedTiles[xMin, yMin] == true && currentPossibleTiles.Contains(new Point(xMin, yMin)) == false)
-            {
-                adjacentTiles.Add(new Point(xMin, yMin));
-            }
-            if (visitedTiles[xMin, currentLocation.Y] == true && currentPossibleTiles.Contains(new Point(xMin, currentLocation.Y)) == false)
-            {
-                adjacentTiles.Add(new Point(xMin, currentLocation.Y));
-            }
-            if (visitedTiles[xMin, yMax] == true && currentPossibleTiles.Contains(new Point(xMin, yMax)) == false)
-            {
-                adjacentTiles.Add(new Point(xMin, yMax));
-            }
+
+            //if (map[currentLocation.X, yMax] == true && currentPossibleTiles.Contains(new Point(currentLocation.X, yMax)) == false && originalStartLocation != new Point(currentLocation.X, yMax))
+            //{
+            //    adjacentTiles.Add(new Point(currentLocation.X, yMax));
+            //    //if (adjacentTiles[adjacentTiles.Count-1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y ==2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[xMax, yMax] == true && currentPossibleTiles.Contains(new Point(xMax, yMax)) == false && adjacentTiles.Contains(new Point(xMax, yMax)) == false && originalStartLocation != new Point(xMax, yMax))
+            //{
+            //    adjacentTiles.Add(new Point(xMax, yMax));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[xMax, currentLocation.Y] == true && currentPossibleTiles.Contains(new Point(xMax, currentLocation.Y)) == false && adjacentTiles.Contains(new Point(xMax, currentLocation.Y)) == false && originalStartLocation != new Point(xMax, currentLocation.Y))
+            //{
+            //    adjacentTiles.Add(new Point(xMax, currentLocation.Y));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[xMax, yMin] == true && currentPossibleTiles.Contains(new Point(xMax, yMin)) == false && adjacentTiles.Contains(new Point(xMax, yMin)) == false && originalStartLocation != new Point(xMax, yMin))
+            //{
+            //    adjacentTiles.Add(new Point(xMax, yMin));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[currentLocation.X, yMin] == true && currentPossibleTiles.Contains(new Point(currentLocation.X, yMin)) == false && adjacentTiles.Contains(new Point(currentLocation.X, yMin)) == false && originalStartLocation != new Point(currentLocation.X, yMin))
+            //{
+            //    adjacentTiles.Add(new Point(currentLocation.X, yMin));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[xMin, yMin] == true && currentPossibleTiles.Contains(new Point(xMin, yMin)) == false && adjacentTiles.Contains(new Point(xMin, yMin)) == false && originalStartLocation != new Point(xMin, yMin))
+            //{
+            //    adjacentTiles.Add(new Point(xMin, yMin));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[xMin, currentLocation.Y] == true && currentPossibleTiles.Contains(new Point(xMin, currentLocation.Y)) == false && adjacentTiles.Contains(new Point(xMin, currentLocation.Y)) == false && originalStartLocation != new Point(xMin, currentLocation.Y))
+            //{
+            //    adjacentTiles.Add(new Point(xMin, currentLocation.Y));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
+            //if (map[xMin, yMax] == true && currentPossibleTiles.Contains(new Point(xMin, yMax)) == false && adjacentTiles.Contains(new Point(xMin, yMax)) == false && originalStartLocation != new Point(xMin, yMax))
+            //{
+            //    adjacentTiles.Add(new Point(xMin, yMax));
+            //    //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+            //    //{
+            //    //    Console.WriteLine("Here");
+            //    //}
+            //}
             return adjacentTiles;
         }
     }
