@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 //Initial implementation from: http://blog.two-cats.com/2014/06/a-star-example/
 
