@@ -100,7 +100,9 @@ namespace OpenTile
                 {
                     // If not, check the next set of tiles
                     if (Search(nextTile)) // Note: Recurses back into Search(Tile)
+                    {
                         return true;
+                    }
                 }
             }
 
@@ -125,16 +127,22 @@ namespace OpenTile
 
                 // Stay within the grid's boundaries
                 if (x < 0 || x >= this.width || y < 0 || y >= this.height)
+                {
                     continue;
+                }
 
                 Tile tile = this.tiles[x, y];
                 // Ignore non-walkable tiles
                 if (!tile.IsWalkable)
+                {
                     continue;
+                }
 
                 // Ignore already-closed tiles
                 if (tile.State == TileState.Closed)
+                {
                     continue;
+                }
 
                 // Already-open tiles are only added to the list if their G-value is lower going via this route.
                 if (tile.State == TileState.Open)
@@ -168,14 +176,14 @@ namespace OpenTile
         {
             return new Point[]
             {
-                new Point(fromLocation.X-1, fromLocation.Y-1),
-                new Point(fromLocation.X-1, fromLocation.Y  ),
-                new Point(fromLocation.X-1, fromLocation.Y+1),
-                new Point(fromLocation.X,   fromLocation.Y+1),
-                new Point(fromLocation.X+1, fromLocation.Y+1),
-                new Point(fromLocation.X+1, fromLocation.Y  ),
-                new Point(fromLocation.X+1, fromLocation.Y-1),
-                new Point(fromLocation.X,   fromLocation.Y-1)
+                new Point(fromLocation.X - 1, fromLocation.Y - 1),
+                new Point(fromLocation.X - 1, fromLocation.Y  ),
+                new Point(fromLocation.X - 1, fromLocation.Y + 1),
+                new Point(fromLocation.X,   fromLocation.Y + 1),
+                new Point(fromLocation.X + 1, fromLocation.Y + 1),
+                new Point(fromLocation.X + 1, fromLocation.Y  ),
+                new Point(fromLocation.X + 1, fromLocation.Y - 1),
+                new Point(fromLocation.X,   fromLocation.Y - 1)
             };
         }
     }

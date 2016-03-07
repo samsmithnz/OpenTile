@@ -26,21 +26,19 @@ namespace OpenTile.Win
             txtMap.Text = "";
             
             //CRITERIA
-            Point startingLocation = new Point(1, 2);
+            Point startingLocation = new Point(2, 2);
             int height = 5;
-            int width = 7;
-            int range = 3;
+            int width = 5;
+            int range = 2;
             InitializeMap(width, height, startingLocation);
-            //  * * * ■ □ □ □
-            //  * * * ■ □ □ □
-            //  * S * ■ □ F □
-            //  * * * ■ ■ □ □
-            //  * * * * □ □ □
-            this.map[3, 4] = false;
+            //  □ □ □ □ □ 
+            //  □ □ □ ■ □ 
+            //  □ □ S ■ □ 
+            //  □ □ □ ■ □ 
+            //  □ □ □ □ □ 
             this.map[3, 3] = false;
             this.map[3, 2] = false;
             this.map[3, 1] = false;
-            this.map[4, 1] = false;
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
             txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring the obstacle:", startingLocation, path);

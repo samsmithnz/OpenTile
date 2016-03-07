@@ -15,9 +15,7 @@ namespace OpenTile
     public class SearchParameters
     {
         public Point startingLocation { get; set; }
-
         public Point EndLocation { get; set; }
-
         public bool[,] Map { get; set; }
 
         public SearchParameters(Point startingLocation, Point endLocation, bool[,] map)
