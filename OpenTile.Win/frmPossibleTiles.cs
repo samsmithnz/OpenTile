@@ -24,26 +24,32 @@ namespace OpenTile.Win
         private void btnGenerateMap_Click(object sender, EventArgs e)
         {
             txtMap.Text = "";
+            int range = 1;
+            if (txtRange.Text != "")
+            {
+                range = int.Parse(txtRange.Text);
+            }
             
             //CRITERIA
-            Point startingLocation = new Point(2, 2);
-            int height = 5;
-            int width = 5;
-            int range = 2;
+            Point startingLocation = new Point(35, 20);
+            int width = 70;
+            int height = 40;
+            //int range = 2;
             InitializeMap(width, height, startingLocation);
             //  □ □ □ □ □ 
             //  □ □ □ ■ □ 
             //  □ □ S ■ □ 
             //  □ □ □ ■ □ 
             //  □ □ □ □ □ 
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
+            //this.map[3, 3] = false;
+            //this.map[3, 2] = false;
+            //this.map[3, 1] = false;
+            AddRandomItems(70, 40, 40);
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
-            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring the obstacle:", startingLocation, path);
+            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
-            txtMap.Text += "Path length is: " + path.Count;
+            txtMap.Text += "Possible tile count is: " + path.Count;
 
         }
 

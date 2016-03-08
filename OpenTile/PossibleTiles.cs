@@ -40,7 +40,7 @@ namespace OpenTile
             {
                 for (int x = xMin; x <= xMax; x++)
                 {
-                    System.Diagnostics.Debug.WriteLine("X: " + x + ",Y:" + y);
+                    //System.Diagnostics.Debug.WriteLine("X: " + x + ",Y:" + y);
                     if (map[x, y] == true)
                     {
                         possibleTiles.AddRange(FindAdjacentPoints(startingLocation, new Point(x, y), width, height, xMin, xMax, yMin, yMax, map, possibleTiles));
@@ -76,7 +76,7 @@ namespace OpenTile
                 xMax = xMapMax;
             }
 
-            //Off the current position, check each point around it 
+            //Check each point around the current position
             for (int y = yMin; y <= yMax; y++)
             {
                 for (int x = xMin; x <= xMax; x++)
