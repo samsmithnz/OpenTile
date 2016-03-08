@@ -61,6 +61,12 @@
     <Compile Include="frmCover.Designer.cs">
       <DependentUpon>frmCover.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDemo.Designer.cs">
+      <DependentUpon>frmDemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPossibleTiles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCover.resx">
       <DependentUpon>frmCover.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDemo.resx">
+      <DependentUpon>frmDemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPossibleTiles.resx">
       <DependentUpon>frmPossibleTiles.cs</DependentUpon>

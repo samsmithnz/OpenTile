@@ -11,45 +11,36 @@ using OpenTile;
 
 namespace OpenTile.Win
 {
-    public partial class frmPossibleTiles : Form
+    public partial class frmDemo : Form
     {
-        public frmPossibleTiles()
+        public frmDemo()
         {
             InitializeComponent();
         }
 
         private bool[,] map;
-        //private SearchParameters searchParameters;
+        private SearchParameters searchParameters;
 
         private void btnGenerateMap_Click(object sender, EventArgs e)
         {
             txtMap.Text = "";
-            int range = 1; //USE txtRange.Text !!
-            if (txtRange.Text != "")
-            {
-                range = int.Parse(txtRange.Text);
-            }
-            
-            //CRITERIA
-            Point startingLocation = new Point(35, 20);
-            int width = 70;
-            int height = 40;
-            //int range = 2;
-            InitializeMap(width, height, startingLocation);
-            //  □ □ □ □ □ 
-            //  □ □ □ ■ □ 
-            //  □ □ S ■ □ 
-            //  □ □ □ ■ □ 
-            //  □ □ □ □ □ 
-            //this.map[3, 3] = false;
-            //this.map[3, 2] = false;
-            //this.map[3, 1] = false;
-            AddRandomItems(70, 40, 40);
+            int width = int.Parse(txtWidth.Text);
+            int height = int.Parse(txtHeight.Text);
+            int range = int.Parse(txtRange.Text);
+            int startingWidth = 3;
+            int startingHeight = 3;
 
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
-            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);
+            // Create a larger maze with custom start and end points
+            InitializeMap(width, height, new Point(0, 0), new Point(width - 1, height - 1), false);
+            AddRandomItems(width, height, 40);
+            //pathFinder = new PathFinding(searchParameters);
+            //path = pathFinder.FindPath();
+
+            PathFinding pathFinder = new PathFinding(searchParameters);
+            List<Point> path = pathFinder.FindPath();
+            path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, width, height, this.map));
+            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", path, startingWidth, startingHeight);
             txtMap.Text += Environment.NewLine;
-            txtMap.Text += "Possible tile count is: " + path.Count;
 
         }
 
@@ -58,7 +49,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowPossibleTiles(string title, Point startingLocation, IEnumerable<Point> path)
+        private string ShowRoute(string title, IEnumerable<Point> path, int startingWidth, int startingHeight)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -66,17 +57,22 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < this.map.GetLength(0); x++)
                 {
-                    if (startingLocation.Equals(new Point(x, y)))
+                    if (this.searchParameters.startingLocation.Equals(new Point(x, y)) || (x < startingWidth && y < startingHeight))
                     {
                         // Show the start position
                         route.Append('S');
+                    }
+                    else if (this.searchParameters.EndLocation.Equals(new Point(x, y)))
+                    {
+                        // Show the end position
+                        route.Append('F');
                     }
                     else if (this.map[x, y] == false)
                     {
                         // Show any barriers
                         route.Append('░');
                     }
-                    else if (path.Where(p => p.X == x && p.Y == y).Any())
+                    else if (path != null && path.Where(p => p.X == x && p.Y == y).Any())
                     {
                         // Show the path in between
                         route.Append('*');
@@ -95,11 +91,11 @@ namespace OpenTile.Win
         /// <summary>
         /// Creates a clear map with a start and end point and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startingLocation)
+        private void InitializeMap(int xMax, int zMax, Point startingLocation, Point endLocation, bool locationsNotSet)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
-            //  □ S □ □ □ □ □
+            //  □ S □ □ □ F □
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
 
@@ -112,7 +108,12 @@ namespace OpenTile.Win
                 }
             }
 
-            //this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
+            if (locationsNotSet == true)
+            {
+                startingLocation = new Point(1, 2);
+                endLocation = new Point(5, 2);
+            }
+            this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
 
         /// <summary>
