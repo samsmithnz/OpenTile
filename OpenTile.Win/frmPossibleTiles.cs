@@ -44,7 +44,7 @@ namespace OpenTile.Win
             //this.map[3, 3] = false;
             //this.map[3, 2] = false;
             //this.map[3, 1] = false;
-            AddRandomItems(70, 40, 40);
+            //AddRandomItems(width, height, 40);
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
             txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);

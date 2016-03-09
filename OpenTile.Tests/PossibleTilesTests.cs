@@ -99,7 +99,7 @@ namespace OpenTile.Tests
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
             // Assert
-            Assert.IsTrue(path.Count == 24);
+            Assert.IsTrue(path.Count == 20);
         }
 
         [TestMethod]
@@ -124,7 +124,7 @@ namespace OpenTile.Tests
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
             // Assert
-            Assert.IsTrue(path.Count == 21);
+            Assert.IsTrue(path.Count == 17);
         }
 
 
@@ -162,7 +162,7 @@ namespace OpenTile.Tests
             //  * * * ■ □ □ □
             //  * S * ■ □ F □
             //  * * * ■ ■ □ □
-            //  * * * * □ □ □
+            //  * * * □ □ □ □
             this.map[3, 4] = false;
             this.map[3, 3] = false;
             this.map[3, 2] = false;
@@ -173,7 +173,7 @@ namespace OpenTile.Tests
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
             // Assert
-            Assert.IsTrue(path.Count == 15);
+            Assert.IsTrue(path.Count == 14);
         }
 
 

@@ -49,7 +49,7 @@
             this.txtRange.Name = "txtRange";
             this.txtRange.Size = new System.Drawing.Size(27, 20);
             this.txtRange.TabIndex = 16;
-            this.txtRange.Text = "7";
+            this.txtRange.Text = "2";
             // 
             // txtMap
             // 

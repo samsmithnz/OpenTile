@@ -41,9 +41,23 @@ namespace OpenTile
                 for (int x = xMin; x <= xMax; x++)
                 {
                     //System.Diagnostics.Debug.WriteLine("X: " + x + ",Y:" + y);
-                    if (map[x, y] == true)
+                    if (map[x, y] == true && startingLocation != new Point(x, y))
                     {
-                        possibleTiles.AddRange(FindAdjacentPoints(startingLocation, new Point(x, y), width, height, xMin, xMax, yMin, yMax, map, possibleTiles));
+                        int yIndex = startingLocation.Y - y;
+                        if (yIndex < 0)
+                        {
+                            yIndex = yIndex * -1;
+                        }
+                        int xIndex = startingLocation.X - x;
+                        if (xIndex < 0)
+                        {
+                            xIndex = xIndex * -1;
+                        }
+                        if (Math.Round(Math.Sqrt((xIndex) * (xIndex) + (yIndex) * (yIndex)), 0) <= range)
+                        {
+                            possibleTiles.Add(new Point(x, y));
+                        }
+                        //possibleTiles.AddRange(FindAdjacentPoints(startingLocation, new Point(x, y), width, height, xMin, xMax, yMin, yMax, map, possibleTiles));
                     }
                 }
             }
