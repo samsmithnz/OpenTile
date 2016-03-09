@@ -23,33 +23,70 @@ namespace OpenTile.Win
 
         private void btnGenerateMap_Click(object sender, EventArgs e)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             txtMap.Text = "";
             int range = 1; //USE txtRange.Text !!
             if (txtRange.Text != "")
             {
                 range = int.Parse(txtRange.Text);
             }
-            
+
             //CRITERIA
+            // Point startingLocation = new Point(20, 20);
+            // int height = 40;
+            // int width = 70;
+            //// range = 15;
+            // InitializeMap(width, height, startingLocation);
+            // //  □ □ □ □ □ □ □ 
+            // //  □ □ □ □ □ □ □ 
+            // //  □ □ □ □ ■ ■ ■ 
+            // //  □ □ □ S ■ □ ■ 
+            // //  □ □ □ □ ■ ■ ■
+            // //  □ □ □ □ □ □ □
+            // //  □ □ □ □ □ □ □ 
+            // this.map[15, 15] = false;
+            // this.map[15, 14] = false;
+            // this.map[15, 13] = false;
+            // this.map[14, 15] = false;
+            // this.map[14, 13] = false;
+            // this.map[13, 15] = false;
+            // this.map[13, 14] = false;
+            // this.map[13, 13] = false;
+            // this.map[25, 15] = false;
+            // this.map[25, 14] = false;
+            // this.map[25, 13] = false;
+            // this.map[24, 15] = false;
+            // this.map[24, 13] = false;
+            // this.map[23, 15] = false;
+            // this.map[23, 14] = false;
+            // this.map[23, 13] = false;
+            // this.map[15, 25] = false;
+            // this.map[15, 24] = false;
+            // this.map[15, 23] = false;
+            // this.map[14, 25] = false;
+            // this.map[14, 23] = false;
+            // this.map[13, 25] = false;
+            // this.map[13, 24] = false;
+            // this.map[13, 23] = false;
+
+
+
             Point startingLocation = new Point(35, 20);
             int width = 70;
             int height = 40;
             //int range = 2;
             InitializeMap(width, height, startingLocation);
-            //  □ □ □ □ □ 
-            //  □ □ □ ■ □ 
-            //  □ □ S ■ □ 
-            //  □ □ □ ■ □ 
-            //  □ □ □ □ □ 
-            //this.map[3, 3] = false;
-            //this.map[3, 2] = false;
-            //this.map[3, 1] = false;
             AddRandomItems(width, height, 40);
+
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
             txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
             txtMap.Text += "Possible tile count is: " + path.Count;
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            txtMap.Text += Environment.NewLine;
+            txtMap.Text += "Time elapsed is: " + elapsedMs + "ms";
 
         }
 
