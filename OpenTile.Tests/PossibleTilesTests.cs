@@ -124,7 +124,7 @@ namespace OpenTile.Tests
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
             // Assert
-            Assert.IsTrue(path.Count == 17);
+            Assert.IsTrue(path.Count == 14);
         }
 
 

@@ -53,10 +53,23 @@ namespace OpenTile
                         {
                             xIndex = xIndex * -1;
                         }
-                        if (Math.Round(Math.Sqrt((xIndex) * (xIndex) + (yIndex) * (yIndex)), 0) <= range)
+                        int costOfMovement = Convert.ToInt32(Math.Round(Math.Sqrt((xIndex) * (xIndex) + (yIndex) * (yIndex)), 0));
+                        if (costOfMovement < range)
                         {
                             possibleTiles.Add(new Point(x, y));
                         }
+                        else if (costOfMovement == range)
+                        {
+                            //Check that we can get a path to the point
+                            SearchParameters searchParameters = new SearchParameters(startingLocation, new Point(x, y), map);
+                            PathFinding pathFinder = new PathFinding(searchParameters);
+                            List<Point> path = pathFinder.FindPath();
+                            if (path.Count > 0 && path.Count <= range)
+                            {
+                                possibleTiles.Add(new Point(x, y));
+                            }
+                        }
+
                         //possibleTiles.AddRange(FindAdjacentPoints(startingLocation, new Point(x, y), width, height, xMin, xMax, yMin, yMax, map, possibleTiles));
                     }
                 }
