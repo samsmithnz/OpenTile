@@ -54,11 +54,13 @@ namespace OpenTile
                             xIndex = xIndex * -1;
                         }
                         int costOfMovement = Convert.ToInt32(Math.Round(Math.Sqrt((xIndex) * (xIndex) + (yIndex) * (yIndex)), 0));
-                        if (costOfMovement < range)
-                        {
-                            possibleTiles.Add(new Point(x, y));
-                        }
-                        else if (costOfMovement == range)
+                        //if (costOfMovement < range)
+                        //{
+                        //    //TODO: Need to u
+                        //    possibleTiles.Add(new Point(x, y));
+                        //}
+                        //else 
+                        if (costOfMovement <= range)
                         {
                             //Check that we can get a path to the point
                             SearchParameters searchParameters = new SearchParameters(startingLocation, new Point(x, y), map);
@@ -77,49 +79,49 @@ namespace OpenTile
             return possibleTiles;
         }
 
-        //Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
-        private static List<Point> FindAdjacentPoints(Point originalStartLocation, Point currentLocation, int width, int height, int xMapMin, int xMapMax, int yMapMin, int yMapMax, bool[,] map, List<Point> currentPossibleTiles)
-        {
-            List<Point> adjacentTiles = new List<Point>();
-            //Based on our current position, ensure we still stay on the map
-            int yMin = currentLocation.Y - 1;
-            if (yMin < yMapMin)
-            {
-                yMin = yMapMin;
-            }
-            int yMax = currentLocation.Y + 1;
-            if (yMax > yMapMax)
-            {
-                yMax = yMapMax;
-            }
-            int xMin = currentLocation.X - 1;
-            if (xMin < xMapMin)
-            {
-                xMin = xMapMin;
-            }
-            int xMax = currentLocation.X + 1;
-            if (xMax > xMapMax)
-            {
-                xMax = xMapMax;
-            }
+        ////Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
+        //private static List<Point> FindAdjacentPoints(Point originalStartLocation, Point currentLocation, int width, int height, int xMapMin, int xMapMax, int yMapMin, int yMapMax, bool[,] map, List<Point> currentPossibleTiles)
+        //{
+        //    List<Point> adjacentTiles = new List<Point>();
+        //    //Based on our current position, ensure we still stay on the map
+        //    int yMin = currentLocation.Y - 1;
+        //    if (yMin < yMapMin)
+        //    {
+        //        yMin = yMapMin;
+        //    }
+        //    int yMax = currentLocation.Y + 1;
+        //    if (yMax > yMapMax)
+        //    {
+        //        yMax = yMapMax;
+        //    }
+        //    int xMin = currentLocation.X - 1;
+        //    if (xMin < xMapMin)
+        //    {
+        //        xMin = xMapMin;
+        //    }
+        //    int xMax = currentLocation.X + 1;
+        //    if (xMax > xMapMax)
+        //    {
+        //        xMax = xMapMax;
+        //    }
 
-            //Check each point around the current position
-            for (int y = yMin; y <= yMax; y++)
-            {
-                for (int x = xMin; x <= xMax; x++)
-                {
-                    if (map[x, y] == true && currentPossibleTiles.Contains(new Point(x, y)) == false && originalStartLocation != new Point(x, y))
-                    {
-                        adjacentTiles.Add(new Point(x, y));
-                        //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
-                        //{
-                        //    Console.WriteLine("Here");
-                        //}
-                    }
-                }
-            }
+        //    //Check each point around the current position
+        //    for (int y = yMin; y <= yMax; y++)
+        //    {
+        //        for (int x = xMin; x <= xMax; x++)
+        //        {
+        //            if (map[x, y] == true && currentPossibleTiles.Contains(new Point(x, y)) == false && originalStartLocation != new Point(x, y))
+        //            {
+        //                adjacentTiles.Add(new Point(x, y));
+        //                //if (adjacentTiles[adjacentTiles.Count - 1].X == 1 && adjacentTiles[adjacentTiles.Count - 1].Y == 2)
+        //                //{
+        //                //    Console.WriteLine("Here");
+        //                //}
+        //            }
+        //        }
+        //    }
 
-            return adjacentTiles;
-        }
+        //    return adjacentTiles;
+        //}
     }
 }
