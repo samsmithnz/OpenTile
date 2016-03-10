@@ -65,8 +65,8 @@ namespace OpenTile
                             //Check that we can get a path to the point
                             SearchParameters searchParameters = new SearchParameters(startingLocation, new Point(x, y), map);
                             PathFinding pathFinder = new PathFinding(searchParameters);
-                            List<Point> path = pathFinder.FindPath();
-                            if (path.Count > 0 && path.Count <= range)
+                            PathFindingResult pathResult = pathFinder.FindPath();
+                            if (pathResult != null && pathResult.Path.Count > 0 && pathResult.Path.Count <= range)
                             {
                                 possibleTiles.Add(new Point(x, y));
                             }

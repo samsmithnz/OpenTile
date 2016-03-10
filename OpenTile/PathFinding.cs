@@ -35,10 +35,10 @@ namespace OpenTile
         /// Attempts to find a path from the start location to the end location based on the supplied SearchParameters
         /// </summary>
         /// <returns>A List of Points representing the path. If no path was found, the returned list is empty.</returns>
-        public List<Point> FindPath()
+        public PathFindingResult FindPath()
         {
             // The start tile is the first entry in the 'open' list
-            List<Point> path = new List<Point>();
+            PathFindingResult result = new PathFindingResult();
             bool success = Search(startTile);
             if (success)
             {
@@ -46,15 +46,17 @@ namespace OpenTile
                 Tile tile = this.endTile;
                 while (tile.ParentTile != null)
                 {
-                    path.Add(tile.Location);
+                    result.Tiles.Add(tile);
+                    result.Path.Add(tile.Location);
                     tile = tile.ParentTile;
                 }
 
                 // Reverse the list so it's in the correct order when returned
-                path.Reverse();
+                result.Path.Reverse();
+                result.Tiles.Reverse();
             }
 
-            return path;
+            return result;
         }
 
         /// <summary>

@@ -37,11 +37,10 @@ namespace OpenTile.Win
             //path = pathFinder.FindPath();
 
             PathFinding pathFinder = new PathFinding(searchParameters);
-            List<Point> path = pathFinder.FindPath();
-            path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, width, height, this.map));
-            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", path, startingWidth, startingHeight);
+            PathFindingResult pathResult = pathFinder.FindPath();
+            pathResult.Path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, width, height, this.map));
+            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path, startingWidth, startingHeight);
             txtMap.Text += Environment.NewLine;
-
         }
 
         /// <summary>

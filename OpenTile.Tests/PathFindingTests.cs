@@ -13,6 +13,150 @@ namespace OpenTile.Tests
         private bool[,] map;
         private SearchParameters searchParameters;
 
+        [TestMethod]
+        public void Test_WithoutWalls_CanFindPath()
+        {
+            // Arrange
+            InitializeMap(7, 5, Point.Empty, Point.Empty);
+            PathFinding pathFinder = new PathFinding(searchParameters);
+
+            // Act
+            PathFindingResult pathResult = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(pathResult);
+            Assert.IsNotNull(pathResult.Path);
+            Assert.IsTrue(pathResult.Path.Any());
+            Assert.AreEqual(4, pathResult.Path.Count);
+        }
+
+        [TestMethod]
+        public void Test_WithOpenWall_CanFindPathAroundWall()
+        {
+            // Arrange
+            //  □ □ □ ■ □ □ □
+            //  □ □ □ ■ □ □ □
+            //  □ S □ ■ □ F □
+            //  □ □ * ■ ■ * □
+            //  □ □ □ * * □ □
+
+            // Path: 1,2 ; 2,1 ; 3,0 ; 4,0 ; 5,1 ; 5,2
+            InitializeMap(7, 5, Point.Empty, Point.Empty);
+            this.map[3, 4] = false;
+            this.map[3, 3] = false;
+            this.map[3, 2] = false;
+            this.map[3, 1] = false;
+            this.map[4, 1] = false;
+            PathFinding pathFinder = new PathFinding(searchParameters);
+
+            // Act
+            PathFindingResult pathResult = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(pathResult);
+            Assert.IsNotNull(pathResult.Path);
+            Assert.IsTrue(pathResult.Path.Any());
+            Assert.IsTrue(pathResult.LastTile.TraversalCost == 6);
+            Assert.IsTrue(pathResult.Path.Count == 5);
+        }
+
+        [TestMethod]
+        public void Test_WithClosedWall_CannotFindPath()
+        {
+            // Arrange
+            //  □ □ □ ■ □ □ □
+            //  □ □ □ ■ □ □ □
+            //  □ S □ ■ □ F □
+            //  □ □ □ ■ □ □ □
+            //  □ □ □ ■ □ □ □
+
+            // No path
+            InitializeMap(7, 5, Point.Empty, Point.Empty);
+            this.map[3, 4] = false;
+            this.map[3, 3] = false;
+            this.map[3, 2] = false;
+            this.map[3, 1] = false;
+            this.map[3, 0] = false;
+
+            PathFinding pathFinder = new PathFinding(searchParameters);
+
+            // Act
+            PathFindingResult pathResult = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(pathResult);
+            Assert.IsNotNull(pathResult.Path);
+            Assert.IsFalse(pathResult.Path.Any());
+            Assert.IsFalse(pathResult.Tiles.Any());
+        }
+
+
+        [TestMethod]
+        public void Test_WithMazeWall()
+        {
+            // Arrange
+            //  S ■ ■ □ ■ ■ F
+            //  * ■ □ ■ □ ■ □
+            //  * ■ □ ■ □ ■ □
+            //  * ■ □ ■ □ ■ □
+            //  ■ □ ■ ■ ■ □ ■
+
+            // long path
+            InitializeMap(7, 5, new Point(0, 4), new Point(6, 4));
+            this.map[0, 0] = false;
+            this.map[1, 4] = false;
+            this.map[1, 3] = false;
+            this.map[1, 2] = false;
+            this.map[1, 1] = false;
+            this.map[2, 4] = false;
+            this.map[2, 0] = false;
+            this.map[3, 3] = false;
+            this.map[3, 2] = false;
+            this.map[3, 1] = false;
+            this.map[3, 0] = false;
+            this.map[4, 4] = false;
+            this.map[4, 0] = false;
+            this.map[5, 4] = false;
+            this.map[5, 3] = false;
+            this.map[5, 2] = false;
+            this.map[5, 1] = false;
+            this.map[6, 0] = false;
+
+            PathFinding pathFinder = new PathFinding(searchParameters);
+
+            // Act
+            PathFindingResult pathResult = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(pathResult);
+            Assert.IsNotNull(pathResult.Path);
+            Assert.IsTrue(pathResult.Path.Any());
+            Assert.IsTrue(pathResult.LastTile.TraversalCost == 18);
+            Assert.AreEqual(16, pathResult.Path.Count);
+        }
+
+
+        [TestMethod]
+        public void Test_GiantRandomMap_WithInefficentPath()
+        {
+            // Arrange
+            AddGiantRandomWalls();
+            PathFinding pathFinder = new PathFinding(searchParameters);
+
+            // Act
+            PathFindingResult pathResult = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(pathResult);
+            Assert.IsNotNull(pathResult.Path);
+            Assert.IsTrue(pathResult.Path.Any());
+            Assert.AreEqual(97, pathResult.Path.Count);
+            CreateDebugPictureOfMapAndRoute(70, 40, pathResult.Path);
+        }
+
+
+        #region "private helper functions"
+
         private void InitializeMap(int xMax, int zMax, Point startingLocation, Point endLocation, bool locationsNotSet = true)
         {
             //  □ □ □ □ □ □ □
@@ -43,158 +187,7 @@ namespace OpenTile.Tests
             }
             this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
-
-        /// <summary>
-        /// Create an L-shaped wall between S and F
-        /// </summary>
-        private void AddWallWithGap()
-        {
-            //  □ □ □ ■ □ □ □
-            //  □ □ □ ■ □ □ □
-            //  □ S □ ■ □ F □
-            //  □ □ □ ■ ■ □ □
-            //  □ □ □ □ □ □ □
-
-            // Path: 1,2 ; 2,1 ; 3,0 ; 4,0 ; 5,1 ; 5,2
-            InitializeMap(7, 5, Point.Empty, Point.Empty);
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[4, 1] = false;
-        }
-
-        /// <summary>
-        /// Create a closed barrier between S and F
-        /// </summary>
-        private void AddWallWithoutGap()
-        {
-            //  □ □ □ ■ □ □ □
-            //  □ □ □ ■ □ □ □
-            //  □ S □ ■ □ F □
-            //  □ □ □ ■ □ □ □
-            //  □ □ □ ■ □ □ □
-
-            // No path
-            InitializeMap(7, 5, Point.Empty, Point.Empty);
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[3, 0] = false;
-        }
-
-        private void AddWallWithMaze()
-        {
-            //  S ■ ■ □ ■ ■ F
-            //  □ ■ □ ■ □ ■ □
-            //  □ ■ □ ■ □ ■ □
-            //  □ ■ □ ■ □ ■ □
-            //  ■ □ ■ ■ ■ □ ■
-
-            // long path
-            InitializeMap(7, 5, new Point(0, 4), new Point(6, 4));
-            this.map[0, 0] = false;
-            this.map[1, 4] = false;
-            this.map[1, 3] = false;
-            this.map[1, 2] = false;
-            this.map[1, 1] = false;
-            this.map[2, 4] = false;
-            this.map[2, 0] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[3, 0] = false;
-            this.map[4, 4] = false;
-            this.map[4, 0] = false;
-            this.map[5, 4] = false;
-            this.map[5, 3] = false;
-            this.map[5, 2] = false;
-            this.map[5, 1] = false;
-            this.map[6, 0] = false;
-        }
-
-        [TestMethod]
-        public void Test_WithoutWalls_CanFindPath()
-        {
-            // Arrange
-            InitializeMap(7, 5, Point.Empty, Point.Empty);
-            PathFinding pathFinder = new PathFinding(searchParameters);
-
-            // Act
-            List<Point> path = pathFinder.FindPath();
-
-            // Assert
-            Assert.IsNotNull(path);
-            Assert.IsTrue(path.Any());
-            Assert.AreEqual(4, path.Count);
-        }
-
-        [TestMethod]
-        public void Test_WithOpenWall_CanFindPathAroundWall()
-        {
-            // Arrange
-            AddWallWithGap();
-            PathFinding pathFinder = new PathFinding(searchParameters);
-
-            // Act
-            List<Point> path = pathFinder.FindPath();
-
-            // Assert
-            Assert.IsNotNull(path);
-            Assert.IsTrue(path.Any());
-            Assert.AreEqual(5, path.Count);
-        }
-
-        [TestMethod]
-        public void Test_WithClosedWall_CannotFindPath()
-        {
-            // Arrange
-            AddWallWithoutGap();
-            PathFinding pathFinder = new PathFinding(searchParameters);
-
-            // Act
-            List<Point> path = pathFinder.FindPath();
-
-            // Assert
-            Assert.IsNotNull(path);
-            Assert.IsFalse(path.Any());
-        }
-
-
-        [TestMethod]
-        public void Test_WithMazeWall()
-        {
-            // Arrange
-            AddWallWithMaze();
-            PathFinding pathFinder = new PathFinding(searchParameters);
-
-            // Act
-            List<Point> path = pathFinder.FindPath();
-
-            // Assert
-            Assert.IsNotNull(path);
-            Assert.IsTrue(path.Any());
-            Assert.AreEqual(16, path.Count);
-        }
-
-
-        [TestMethod]
-        public void Test_GiantRandomMap_WithInefficentPath()
-        {
-            // Arrange
-            AddGiantRandomWalls();
-            PathFinding pathFinder = new PathFinding(searchParameters);
-
-            // Act
-            List<Point> path = pathFinder.FindPath();
-
-            // Assert
-            Assert.IsNotNull(path);
-            Assert.IsTrue(path.Any());
-            Assert.AreEqual(97, path.Count);
-            CreateDebugPictureOfMapAndRoute(70, 40, path);
-        }
+        
 
         private void CreateDebugPictureOfMapAndRoute(int xMax, int zMax, List<Point> path)
         {
@@ -245,6 +238,9 @@ namespace OpenTile.Tests
             }
 
         }
+
+
+        #region "Crazy long working for huge random map"
 
         private void AddGiantRandomWalls()
         {
@@ -1392,5 +1388,9 @@ namespace OpenTile.Tests
             this.map[65, 39] = false;
 
         }
+        #endregion
+
+        #endregion
+
     }
 }

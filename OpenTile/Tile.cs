@@ -45,6 +45,11 @@ namespace OpenTile
             get { return this.G + this.H; }
         }
 
+        public int TraversalCost
+        {
+            get { return Convert.ToInt32(F); }
+        }
+
         /// <summary>
         /// Gets or sets the parent node. The start node's parent is always null.
         /// </summary>

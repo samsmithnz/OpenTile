@@ -28,7 +28,7 @@ namespace OpenTile.Win
             // Start with a clear map (don't add any obstacles)
             InitializeMap(7, 5, Point.Empty, Point.Empty, true);
             PathFinding pathFinder = new PathFinding(searchParameters);
-            List<Point> path = pathFinder.FindPath();
+            PathFindingResult pathResult = pathFinder.FindPath();
             //txtMap.Text += ShowRoute("The algorithm should find a direct path without obstacles:", path);
             //txtMap.Text += Environment.NewLine;
 
@@ -70,10 +70,10 @@ namespace OpenTile.Win
 
             // Create a larger maze with custom start and end points
             InitializeMap(70, 40, new Point(0, 0), new Point(69, 39), false);
-            AddRandomItems(70, 40, 40);            
+            AddRandomItems(70, 40, 40);
             pathFinder = new PathFinding(searchParameters);
-            path = pathFinder.FindPath();
-            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", path);
+            pathResult = pathFinder.FindPath();
+            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path);
             txtMap.Text += Environment.NewLine;
 
             //Console.WriteLine("Press any key to exit...");
