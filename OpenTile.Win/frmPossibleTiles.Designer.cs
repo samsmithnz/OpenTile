@@ -32,6 +32,7 @@
             this.txtRange = new System.Windows.Forms.TextBox();
             this.txtMap = new System.Windows.Forms.TextBox();
             this.btnGenerateMap = new System.Windows.Forms.Button();
+            this.btnDebugPrint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +50,7 @@
             this.txtRange.Name = "txtRange";
             this.txtRange.Size = new System.Drawing.Size(27, 20);
             this.txtRange.TabIndex = 16;
-            this.txtRange.Text = "2";
+            this.txtRange.Text = "4";
             // 
             // txtMap
             // 
@@ -73,11 +74,22 @@
             this.btnGenerateMap.UseVisualStyleBackColor = true;
             this.btnGenerateMap.Click += new System.EventHandler(this.btnGenerateMap_Click);
             // 
+            // btnDebugPrint
+            // 
+            this.btnDebugPrint.Location = new System.Drawing.Point(708, 13);
+            this.btnDebugPrint.Name = "btnDebugPrint";
+            this.btnDebugPrint.Size = new System.Drawing.Size(72, 23);
+            this.btnDebugPrint.TabIndex = 25;
+            this.btnDebugPrint.Text = "Debug";
+            this.btnDebugPrint.UseVisualStyleBackColor = true;
+            this.btnDebugPrint.Click += new System.EventHandler(this.btnDebugPrint_Click);
+            // 
             // frmPossibleTiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(793, 694);
+            this.Controls.Add(this.btnDebugPrint);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtRange);
             this.Controls.Add(this.txtMap);
@@ -95,6 +107,7 @@
         private System.Windows.Forms.TextBox txtRange;
         private System.Windows.Forms.TextBox txtMap;
         private System.Windows.Forms.Button btnGenerateMap;
+        private System.Windows.Forms.Button btnDebugPrint;
     }
 }
 

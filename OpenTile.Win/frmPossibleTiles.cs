@@ -71,12 +71,69 @@ namespace OpenTile.Win
 
 
 
-            Point startingLocation = new Point(35, 20);
-            int width = 70;
-            int height = 40;
+            Point startingLocation = new Point(5, 5);
+            int width = 11;
+            int height = 11;
             //int range = 2;
             InitializeMap(width, height, startingLocation);
-            AddRandomItems(width, height, 40);
+            //AddRandomItems(width, height, 40);
+            this.map[0, 0] = false;
+            this.map[5, 0] = false;
+            this.map[6, 0] = false;
+            this.map[8, 0] = false;
+            this.map[1, 1] = false;
+            this.map[3, 1] = false;
+            this.map[4, 1] = false;
+            this.map[5, 1] = false;
+            this.map[7, 1] = false;
+            this.map[8, 1] = false;
+            this.map[1, 2] = false;
+            this.map[2, 2] = false;
+            this.map[3, 2] = false;
+            this.map[4, 2] = false;
+            this.map[5, 2] = false;
+            this.map[8, 2] = false;
+            this.map[9, 2] = false;
+            this.map[10, 2] = false;
+            this.map[4, 3] = false;
+            this.map[5, 3] = false;
+            this.map[6, 3] = false;
+            this.map[7, 3] = false;
+            this.map[8, 3] = false;
+            this.map[9, 3] = false;
+            this.map[1, 4] = false;
+            this.map[2, 4] = false;
+            this.map[3, 4] = false;
+            this.map[4, 4] = false;
+            this.map[5, 4] = false;
+            this.map[6, 4] = false;
+            this.map[0, 5] = false;
+            this.map[1, 5] = false;
+            this.map[2, 5] = false;
+            this.map[3, 5] = false;
+            this.map[5, 5] = false;
+            this.map[9, 5] = false;
+            this.map[1, 6] = false;
+            this.map[2, 6] = false;
+            this.map[4, 6] = false;
+            this.map[7, 6] = false;
+            this.map[3, 7] = false;
+            this.map[4, 7] = false;
+            this.map[5, 7] = false;
+            this.map[6, 7] = false;
+            this.map[0, 8] = false;
+            this.map[1, 8] = false;
+            this.map[2, 8] = false;
+            this.map[4, 8] = false;
+            this.map[5, 8] = false;
+            this.map[7, 8] = false;
+            this.map[10, 8] = false;
+            this.map[0, 9] = false;
+            this.map[5, 9] = false;
+            this.map[9, 9] = false;
+            this.map[10, 9] = false;
+            this.map[6, 10] = false;
+            this.map[8, 10] = false;
 
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -275,8 +332,9 @@ namespace OpenTile.Win
 
         private void btnDebugPrint_Click(object sender, EventArgs e)
         {
-            DebugPrintOutMap(70, 40);
+            DebugPrintOutMap(11, 11);
         }
+
     }
 
 
