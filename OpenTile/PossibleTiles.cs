@@ -60,6 +60,7 @@ namespace OpenTile
                         //    possibleTiles.Add(new Point(x, y));
                         //}
                         //else 
+
                         if (costOfMovement <= range)
                         {
                             //Check that we can get a path to the point
