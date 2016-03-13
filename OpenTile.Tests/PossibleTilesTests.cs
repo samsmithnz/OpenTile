@@ -334,7 +334,94 @@ namespace OpenTile.Tests
             Assert.IsTrue(path.Count == 14);
         }
 
+        [TestMethod]
+        public void Test_PossibleTiles_Diag_RangeOf7()
+        {
+            // Arrange
+            Point startingLocation = new Point(0, 6);
+            int height = 7;
+            int width = 7;
+            int range = 7;
+            InitializeMap(width, height, startingLocation);
+            // 6 S ■ ■ □ □ □ □
+            // 5 ■ □ ■ ■ □ □ □
+            // 4 ■ ■ □ ■ ■ □ □
+            // 3 □ ■ ■ □ ■ ■ □
+            // 2 □ □ ■ ■ □ ■ ■
+            // 1 □ □ □ ■ ■ □ ■
+            // 0 □ □ □ □ ■ ■ □
+            //   0 1 2 3 4 5 6
+            this.map[0, 4] = false;
+            this.map[0, 5] = false;
+            this.map[1, 3] = false;
+            this.map[1, 4] = false;
+            this.map[1, 6] = false;
+            this.map[2, 2] = false;
+            this.map[2, 3] = false;
+            this.map[2, 5] = false;
+            this.map[2, 6] = false;
+            this.map[3, 1] = false;
+            this.map[3, 2] = false;
+            this.map[3, 4] = false;
+            this.map[3, 5] = false;
+            this.map[4, 0] = false;
+            this.map[4, 1] = false;
+            this.map[4, 3] = false;
+            this.map[4, 4] = false;
+            this.map[5, 0] = false;
+            this.map[5, 2] = false;
+            this.map[5, 3] = false;
+            this.map[6, 1] = false;
+            this.map[6, 2] = false;
+            // Act
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
+            // Assert
+            Assert.IsTrue(path.Count == 5);
+        }
+
+        [TestMethod]
+        public void Test_PossibleTiles_StraightEast_RangeOf7()
+        {
+            // Arrange
+            Point startingLocation = new Point(0, 1);
+            int height = 9;
+            int width = 9;
+            int range = 7;
+            InitializeMap(width, height, startingLocation);
+            // 8 □ □ □ □ □ □ □ □ □
+            // 7 □ □ □ □ □ □ □ □ □
+            // 6 □ □ □ □ □ □ □ □ □
+            // 5 □ □ □ □ □ □ □ □ □
+            // 4 □ □ □ □ □ □ □ □ □
+            // 3 □ □ □ □ □ □ □ □ □
+            // 2 ■ ■ ■ ■ ■ ■ ■ ■ ■
+            // 1 S □ □ □ □ □ □ □ □
+            // 0 ■ ■ ■ ■ ■ ■ ■ ■ ■
+            //   0 1 2 3 4 5 6 7 8
+            this.map[0, 0] = false;
+            this.map[0, 2] = false;
+            this.map[1, 0] = false;
+            this.map[1, 2] = false;
+            this.map[2, 0] = false;
+            this.map[2, 2] = false;
+            this.map[3, 0] = false;
+            this.map[3, 2] = false;
+            this.map[4, 0] = false;
+            this.map[4, 2] = false;
+            this.map[5, 0] = false;
+            this.map[5, 2] = false;
+            this.map[6, 0] = false;
+            this.map[6, 2] = false;
+            this.map[7, 0] = false;
+            this.map[7, 2] = false;
+            this.map[8, 0] = false;
+            this.map[8, 2] = false;
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+
+            // Assert
+            Assert.IsTrue(path.Count == 7);
+        }
 
     }
 }

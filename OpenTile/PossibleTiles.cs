@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace OpenTile
 {
@@ -69,6 +70,10 @@ namespace OpenTile
                             PathFindingResult pathResult = pathFinder.FindPath();
                             if (pathResult != null && pathResult.Path.Count > 0 && pathResult.Path.Count <= range)
                             {
+                                foreach (Tile item in pathResult.Tiles)
+                                {
+                                    Debug.WriteLine("F:" + item.F + ",X:" + item.Location.X + ",Y:" + item.Location.Y + ",TraversalCost:" + item.TraversalCost);
+                                }
                                 possibleTiles.Add(new Point(x, y));
                             }
                         }
