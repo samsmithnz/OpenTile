@@ -423,5 +423,34 @@ namespace OpenTile.Tests
             Assert.IsTrue(path.Count == 7);
         }
 
+        [TestMethod]
+        public void Test_PossibleTiles_Contained_RangeOf1_NoPath()
+        {
+            // Arrange
+            Point startingLocation = new Point(2, 2);
+            int height = 5;
+            int width = 5;
+            int range = 3;
+            InitializeMap(width, height, startingLocation);
+            // 4 □ □ □ □ □ 
+            // 3 □ ■ ■ ■ □ 
+            // 2 □ ■ S ■ □ 
+            // 1 □ ■ ■ ■ □ 
+            // 0 □ □ □ □ □ 
+            //   0 1 2 3 4 
+            this.map[1, 1] = false;
+            this.map[1, 2] = false;
+            this.map[1, 3] = false;
+            this.map[2, 1] = false;
+            this.map[2, 3] = false;
+            this.map[3, 1] = false;
+            this.map[3, 2] = false;
+            this.map[3, 3] = false;     
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+
+            // Assert
+            Assert.IsTrue(path.Count == 0);
+        }
+
     }
 }
