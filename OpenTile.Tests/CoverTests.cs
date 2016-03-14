@@ -41,7 +41,7 @@ namespace OpenTile.Tests
 
         #endregion
 
-        #region " Initial pathfinding tests"
+        #region " Initial Cover tests"
 
         [TestMethod]
         public void Test_WithoutCover_NoEnemy()
@@ -62,6 +62,25 @@ namespace OpenTile.Tests
             // Assert
             Assert.IsTrue(unitIsInCover == false);
         }
+
+        [TestMethod]
+        public void Test_WithoutCover_NoEnemy_TinyMap()
+        {
+            // Arrange
+            //  S 
+            Point startingLocation = new Point(0, 0);
+            int width = 1;
+            int height = 1;
+            List<Point> enemyLocations = null;
+
+            // Act
+            InitializeMap(width, height, startingLocation, null);
+            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+
+            // Assert
+            Assert.IsTrue(unitIsInCover == false);
+        }
+
 
         [TestMethod]
         public void Test_WithEastCover_NoEnemy()
@@ -478,9 +497,9 @@ namespace OpenTile.Tests
             int width = 4;
             int height = 3;
             List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(0, 0));
+            coverLocations.Add(new Point(3, 1));
             List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 1));
+            enemyLocations.Add(new Point(0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);

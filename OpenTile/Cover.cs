@@ -15,22 +15,8 @@ namespace OpenTile
         public static bool CalculateCover(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> enemyLocations)
         {
             List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
-            if (coverTiles.Count > 0)
-            {
-                if (enemyLocations == null || enemyLocations.Count == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    //Note that this result should be inversed
-                    return !CalculateIfPlayerIsFlanked(currentPosition, width, height, validTiles, coverTiles, enemyLocations);
-                }
-            }
-            else
-            {
-                return false;
-            }
+            //Note that this result should be inversed
+            return !CalculateIfPlayerIsFlanked(currentPosition, width, height, validTiles, coverTiles, enemyLocations);
         }
 
         /// <summary>
@@ -40,9 +26,9 @@ namespace OpenTile
         private static bool CalculateIfPlayerIsFlanked(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> coverTiles, List<Point> enemyLocations)
         {
             bool currentLocationIsFlanked = false;
-            if (coverTiles == null || coverTiles.Count == 0)
+            if (coverTiles.Count == 0)
             {
-                return currentLocationIsFlanked;
+                return true;
             }
             else if (enemyLocations == null || enemyLocations.Count == 0)
             {

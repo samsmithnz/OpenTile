@@ -159,7 +159,7 @@ namespace OpenTile.Tests
         {
             // Arrange
             Point startingLocation = new Point(2, 2);
-            Point endingLocation = new Point(4, 4);
+            Point endingLocation = new Point(2, 4);
             int height = 5;
             int width = 5;
             InitializeMap(width, height, startingLocation, endingLocation, false);
@@ -185,7 +185,42 @@ namespace OpenTile.Tests
             Assert.IsNotNull(pathResult.Path);
             Assert.IsTrue(pathResult.Path.Count == 2);
             Assert.IsTrue(pathResult.Tiles.Count == 2);
-            //Assert.IsTrue(pathResult.LastTile == null);
+            Assert.IsTrue(pathResult.LastTile != null);
+            Assert.IsTrue(pathResult.LastTile.TraversalCost == 2);
+        }
+
+        [TestMethod]
+        public void Test_Contained_RangeOf1_StartIsSameAsFinish()
+        {
+            // Arrange
+            Point startingLocation = new Point(2, 2);
+            Point endingLocation = new Point(2, 2);
+            int height = 5;
+            int width = 5;
+            InitializeMap(width, height, startingLocation, endingLocation, false);
+            PathFinding pathFinder = new PathFinding(searchParameters);
+            // 4 □ □ □ □ □ 
+            // 3 □ ■ ■ ■ □ 
+            // 2 □ ■ S ■ □ 
+            // 1 □ ■ ■ ■ □ 
+            // 0 □ □ □ □ □ 
+            //   0 1 2 3 4 
+            this.map[1, 1] = false;
+            this.map[1, 2] = false;
+            this.map[1, 3] = false;
+            this.map[2, 1] = false;
+            this.map[2, 3] = false;
+            this.map[3, 1] = false;
+            this.map[3, 2] = false;
+            this.map[3, 3] = false;
+            PathFindingResult pathResult = pathFinder.FindPath();
+
+            // Assert
+            Assert.IsNotNull(pathResult);
+            Assert.IsNotNull(pathResult.Path);
+            Assert.IsTrue(pathResult.Path.Count == 0);
+            Assert.IsTrue(pathResult.Tiles.Count == 0);
+            Assert.IsTrue(pathResult.LastTile == null);
         }
 
         #region "private helper functions"
