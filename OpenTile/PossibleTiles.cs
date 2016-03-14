@@ -72,7 +72,7 @@ namespace OpenTile
                             {
                                 foreach (Tile item in pathResult.Tiles)
                                 {
-                                    Debug.WriteLine("F:" + item.F + ",X:" + item.Location.X + ",Y:" + item.Location.Y + ",TraversalCost:" + item.TraversalCost);
+                                    Debug.WriteLine("F:" + item.F + "," + item.ToString() + ",TraversalCost:" + item.TraversalCost);
                                 }
                                 possibleTiles.Add(new Point(x, y));
                             }

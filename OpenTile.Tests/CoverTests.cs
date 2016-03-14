@@ -519,9 +519,10 @@ namespace OpenTile.Tests
         {
             // Arrange
             //  Flanked
-            //  E □ □ □ 
-            //  □ S ■ □ 
-            //  □ □ □ □               
+            // 2 E □ □ □ 
+            // 1 □ S ■ □ 
+            // 0 □ □ □ □     
+            //   0 1 2 3          
             Point startingLocation = new Point(1, 1);
             int width = 4;
             int height = 3;
@@ -1092,33 +1093,9 @@ namespace OpenTile.Tests
 
         #region " Advanced cover scenario tests"
 
-        [TestMethod]
-        public void Test_WithTwoCover_SouthEnemy()
-        {
-            // Arrange
-            //  Flanked
-            //  □ □ □ □ 
-            //  □ S ■ □ 
-            //  □ ■ E □
-            Point startingLocation = new Point(1, 1);
-            int width = 4;
-            int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
-
-            // Act
-            InitializeMap(width, height, startingLocation, coverLocations);
-            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
-
-            // Assert
-            Assert.IsTrue(unitIsInCover == false);
-        }
 
         [TestMethod]
-        public void Test_WithTwoCovers_TwoEnemysInCover_PlayerStillInCover()
+        public void Test_WithNortheastCovers_TwoEnemysInCover_PlayerStillInCover()
         {
             // Arrange
             //  In Cover
@@ -1146,7 +1123,7 @@ namespace OpenTile.Tests
         }
 
         [TestMethod]
-        public void Test_WithTwoCovers_TwoEnemysNotInCover_PlayerStillInCover()
+        public void Test_WithNortheastCovers_TwoEnemysNotInCover_PlayerStillInCover()
         {
             // Arrange
             //  In Cover
@@ -1173,7 +1150,7 @@ namespace OpenTile.Tests
         }
 
         [TestMethod]
-        public void Test_WithTwoCovers_TwoEnemysNotInCover_PlayerFlanked()
+        public void Test_WithNortheastCovers_TwoEnemysNotInCover_PlayerFlanked()
         {
             // Arrange
             //  Flanked
@@ -1190,6 +1167,115 @@ namespace OpenTile.Tests
             List<Point> enemyLocations = new List<Point>();
             enemyLocations.Add(new Point(2, 0));
             enemyLocations.Add(new Point(0, 2));
+
+            // Act
+            InitializeMap(width, height, startingLocation, coverLocations);
+            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+
+            // Assert
+            Assert.IsTrue(unitIsInCover == false);
+        }
+
+
+        [TestMethod]
+        public void Test_WithNorthwestCovers_TwoEnemysInCover_PlayerStillInCover()
+        {
+            // Arrange
+            //  In Cover
+            // 3 □ □ E □
+            // 2 □ □ ■ □ 
+            // 1 E ■ S □ 
+            // 0 □ □ □ □
+            //   0 1 2 3          
+            Point startingLocation = new Point(2, 1);
+            int width = 4;
+            int height = 4;
+            List<Point> coverLocations = new List<Point>();
+            coverLocations.Add(new Point(1, 1));
+            coverLocations.Add(new Point(2, 2));
+            List<Point> enemyLocations = new List<Point>();
+            enemyLocations.Add(new Point(0, 1));
+            enemyLocations.Add(new Point(2, 3));
+
+            // Act
+            InitializeMap(width, height, startingLocation, coverLocations);
+            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+
+            // Assert
+            Assert.IsTrue(unitIsInCover == true);
+        }
+
+        [TestMethod]
+        public void Test_WithNorthwestCovers_TwoEnemysNotInCover_PlayerStillInCover()
+        {
+            // Arrange
+            //  In Cover
+            //  □ □ □ E
+            //  □ □ ■ □ 
+            //  □ ■ S □
+            //  E □ □ □            
+            Point startingLocation = new Point(2, 1);
+            int width = 4;
+            int height = 4;
+            List<Point> coverLocations = new List<Point>();
+            coverLocations.Add(new Point(1, 1));
+            coverLocations.Add(new Point(2, 2));
+            List<Point> enemyLocations = new List<Point>();
+            enemyLocations.Add(new Point(0, 0));
+            enemyLocations.Add(new Point(3, 3));
+
+            // Act
+            InitializeMap(width, height, startingLocation, coverLocations);
+            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+
+            // Assert
+            Assert.IsTrue(unitIsInCover == true);
+        }
+
+        [TestMethod]
+        public void Test_WithNorthwestCovers_TwoEnemysNotInCover_PlayerFlanked()
+        {
+            // Arrange
+            //  Flanked
+            //  □ □ □ □
+            //  □ □ ■ E 
+            //  □ ■ S □
+            //  □ E □ □            
+            Point startingLocation = new Point(2, 1);
+            int width = 4;
+            int height = 4;
+            List<Point> coverLocations = new List<Point>();
+            coverLocations.Add(new Point(1, 1));
+            coverLocations.Add(new Point(2, 2));
+            List<Point> enemyLocations = new List<Point>();
+            enemyLocations.Add(new Point(1, 0));
+            enemyLocations.Add(new Point(3, 2));
+
+            // Act
+            InitializeMap(width, height, startingLocation, coverLocations);
+            bool unitIsInCover = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+
+            // Assert
+            Assert.IsTrue(unitIsInCover == false);
+        }
+
+
+        [TestMethod]
+        public void Test_WithTwoCover_SouthEnemy()
+        {
+            // Arrange
+            //  Flanked
+            //  □ □ □ □ 
+            //  □ S ■ □ 
+            //  □ ■ E □
+            Point startingLocation = new Point(1, 1);
+            int width = 4;
+            int height = 3;
+            List<Point> coverLocations = new List<Point>();
+            coverLocations.Add(new Point(2, 1));
+            coverLocations.Add(new Point(1, 2));
+            List<Point> enemyLocations = new List<Point>();
+            enemyLocations.Add(new Point(2, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
