@@ -45,7 +45,6 @@ namespace OpenTile.Tests
             List<Point> enemyList = new List<Point>();
             enemyList.Add(enemy1);
             enemyList.Add(enemy2);
-            //here    
 
             // Act
             Point result = Utility.FindNearestTile(startingLocation, enemyList);
