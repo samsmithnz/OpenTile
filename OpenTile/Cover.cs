@@ -164,7 +164,7 @@ namespace OpenTile
                         else if (coverIsEast == true && enemyItem.X <= coverLineEast && coverIsSouth == false)
                         {
                             currentLocationIsFlanked = true;
-                            break;
+                            break; 
                         }
                     }
 
