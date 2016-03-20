@@ -56,7 +56,8 @@ namespace OpenTile.Tests
             Assert.IsNotNull(pathResult);
             Assert.IsNotNull(pathResult.Path);
             Assert.IsTrue(pathResult.Path.Any());
-            Assert.IsTrue(pathResult.LastTile.TraversalCost == 6);
+            Assert.IsTrue(pathResult.GetLastTile() != null);
+            Assert.IsTrue(pathResult.GetLastTile().TraversalCost == 6);
             Assert.IsTrue(pathResult.Path.Count == 5);
         }
 
@@ -131,7 +132,8 @@ namespace OpenTile.Tests
             Assert.IsNotNull(pathResult);
             Assert.IsNotNull(pathResult.Path);
             Assert.IsTrue(pathResult.Path.Any());
-            Assert.IsTrue(pathResult.LastTile.TraversalCost == 18);
+            Assert.IsTrue(pathResult.GetLastTile() != null);
+            Assert.IsTrue(pathResult.GetLastTile().TraversalCost == 18);
             Assert.AreEqual(16, pathResult.Path.Count);
         }
 
@@ -185,8 +187,8 @@ namespace OpenTile.Tests
             Assert.IsNotNull(pathResult.Path);
             Assert.IsTrue(pathResult.Path.Count == 2);
             Assert.IsTrue(pathResult.Tiles.Count == 2);
-            Assert.IsTrue(pathResult.LastTile != null);
-            Assert.IsTrue(pathResult.LastTile.TraversalCost == 2);
+            Assert.IsTrue(pathResult.GetLastTile() != null);
+            Assert.IsTrue(pathResult.GetLastTile().TraversalCost == 2);
         }
 
         [TestMethod]
@@ -220,7 +222,7 @@ namespace OpenTile.Tests
             Assert.IsNotNull(pathResult.Path);
             Assert.IsTrue(pathResult.Path.Count == 0);
             Assert.IsTrue(pathResult.Tiles.Count == 0);
-            Assert.IsTrue(pathResult.LastTile == null);
+            Assert.IsTrue(pathResult.GetLastTile() == null);
         }
 
         #region "private helper functions"

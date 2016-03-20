@@ -12,25 +12,23 @@ namespace OpenTile
 
         public List<Tile> Tiles;
         public List<Point> Path;
-        public Tile LastTile
+
+        public Tile GetLastTile()
         {
-            get
+            if (this.Tiles != null && this.Tiles.Count > 0)
             {
-                if (Tiles != null && Tiles.Count > 0)
-                {
-                    return Tiles[Tiles.Count - 1];
-                }
-                else
-                {
-                    return null;
-                }
+                return this.Tiles[this.Tiles.Count - 1];
+            }
+            else
+            {
+                return null;
             }
         }
 
         public PathFindingResult()
         {
-            Tiles = new List<Tile>();
-            Path = new List<Point>();
+            this.Tiles = new List<Tile>();
+            this.Path = new List<Point>();
         }
     }
 }
