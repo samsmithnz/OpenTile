@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cover.cs" />
+    <Compile Include="CoverState.cs" />
     <Compile Include="PathFindingResult.cs" />
     <Compile Include="PossibleTiles.cs" />
     <Compile Include="FieldOfView.cs" />
