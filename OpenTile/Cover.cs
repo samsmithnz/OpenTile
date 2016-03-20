@@ -14,32 +14,27 @@ namespace OpenTile
         /// <returns>True if the player is in cover</returns>
         public static CoverState CalculateCover(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> enemyLocations)
         {
-            CoverState result = new CoverState();            
+            CoverState result = new CoverState();
             List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
-
+            int coverLineNorth = -1;
+            int coverLineEast = -1;
+            int coverLineSouth = -1;
+            int coverLineWest = -1;
             bool currentLocationIsFlanked = false;
+
             if (coverTiles.Count == 0)
             {
                 result.IsInCover = false;
                 return result;
             }
-            else if (enemyLocations == null || enemyLocations.Count == 0)
-            {
-                result.IsInCover = true;
-                return result;
-            }
             else
             {
                 // Work out where the cover is relative to the player
-                int coverLineNorth = -1;
-                int coverLineEast = -1;
-                int coverLineSouth = -1;
-                int coverLineWest = -1;
                 foreach (Point coverTileItem in coverTiles)
                 {
                     if (currentPosition.Y < coverTileItem.Y)
                     {
-                        result.InNorthCover= true;
+                        result.InNorthCover = true;
                         coverLineNorth = coverTileItem.Y - 0;
                     }
                     if (currentPosition.Y > coverTileItem.Y)
@@ -58,7 +53,15 @@ namespace OpenTile
                         coverLineWest = coverTileItem.X + 0;
                     }
                 }
+            }
 
+            if (enemyLocations == null || enemyLocations.Count == 0)
+            {
+                result.IsInCover = true;
+                return result;
+            }
+            else
+            {
                 //Work out where the enemy is relative to the cover
                 foreach (Point enemyItem in enemyLocations)
                 {
@@ -154,7 +157,7 @@ namespace OpenTile
                         else if (result.InEastCover == true && enemyItem.X <= coverLineEast && result.InSouthCover == false)
                         {
                             currentLocationIsFlanked = true;
-                            break; 
+                            break;
                         }
                     }
 
@@ -184,7 +187,7 @@ namespace OpenTile
                     }
 
                 }
-                
+
                 result.IsInCover = !currentLocationIsFlanked;
                 return result;
             }
