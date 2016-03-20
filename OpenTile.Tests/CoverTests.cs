@@ -1202,7 +1202,6 @@ namespace OpenTile.Tests
 
         #region " Advanced cover scenario tests"
 
-
         [TestMethod]
         public void Test_WithNortheastCovers_TwoEnemysInCover_PlayerStillInCover()
         {
@@ -1229,6 +1228,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == true);
+            Assert.IsTrue(coverResult.InSouthCover == false);
+            Assert.IsTrue(coverResult.InWestCover == false);
         }
 
         [TestMethod]
@@ -1256,6 +1259,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == true);
+            Assert.IsTrue(coverResult.InSouthCover == false);
+            Assert.IsTrue(coverResult.InWestCover == false);
         }
 
         [TestMethod]
@@ -1283,6 +1290,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == true);
+            Assert.IsTrue(coverResult.InSouthCover == false);
+            Assert.IsTrue(coverResult.InWestCover == false);
         }
 
 
@@ -1312,6 +1323,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == false);
+            Assert.IsTrue(coverResult.InSouthCover == false);
+            Assert.IsTrue(coverResult.InWestCover == true);
         }
 
         [TestMethod]
@@ -1339,6 +1354,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == false);
+            Assert.IsTrue(coverResult.InSouthCover == false);
+            Assert.IsTrue(coverResult.InWestCover == true);
         }
 
         [TestMethod]
@@ -1366,6 +1385,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == false);
+            Assert.IsTrue(coverResult.InSouthCover == false);
+            Assert.IsTrue(coverResult.InWestCover == true);
         }
 
 
@@ -1373,7 +1396,7 @@ namespace OpenTile.Tests
         public void Test_WithTwoCover_SouthEnemy()
         {
             // Arrange
-            //  Flanked
+            //  In Cover
             //  □ □ □ □ 
             //  □ S ■ □ 
             //  □ ■ E □
@@ -1382,7 +1405,7 @@ namespace OpenTile.Tests
             int height = 3;
             List<Point> coverLocations = new List<Point>();
             coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
+            coverLocations.Add(new Point(1, 0));
             List<Point> enemyLocations = new List<Point>();
             enemyLocations.Add(new Point(2, 0));
 
@@ -1391,7 +1414,11 @@ namespace OpenTile.Tests
             CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
 
             // Assert
-            Assert.IsTrue(coverResult.IsInCover == false);
+            Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == false);
+            Assert.IsTrue(coverResult.InEastCover == true);
+            Assert.IsTrue(coverResult.InSouthCover == true);
+            Assert.IsTrue(coverResult.InWestCover == false);
         }
 
         [TestMethod]
@@ -1425,6 +1452,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == true);
+            Assert.IsTrue(coverResult.InSouthCover == true);
+            Assert.IsTrue(coverResult.InWestCover == true);
         }
 
         [TestMethod]
@@ -1458,6 +1489,10 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
+            Assert.IsTrue(coverResult.InNorthCover == true);
+            Assert.IsTrue(coverResult.InEastCover == true);
+            Assert.IsTrue(coverResult.InSouthCover == true);
+            Assert.IsTrue(coverResult.InWestCover == true);
         }
 
         #endregion

@@ -65,12 +65,6 @@ namespace OpenTile
                 //Work out where the enemy is relative to the cover
                 foreach (Point enemyItem in enemyLocations)
                 {
-                    //  In Cover
-                    //  □ E □ □
-                    //  □ ■ □ □ 
-                    //  □ S ■ E 
-                    //  □ □ □ □  
-
                     //NOTE: I don't think I need this now that I have cover lines
                     //Check to see if Enemy is right on top of the player, neutralizing each others cover and causing a flank
                     int xPosition = currentPosition.X - enemyItem.X;
