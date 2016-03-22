@@ -1,0 +1,7 @@
+﻿Generate Map, including random obstructions and start areas. Randomly place enemies too.
+Show movement options, including cover at destination and the path to destination
+Allow movement, when at destination location, show cover icons
+Switch between players, using up actions
+Switch between teams when all actions are complete
+
+When moving, calculate any (overwatch?) events
