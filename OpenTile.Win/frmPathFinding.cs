@@ -70,7 +70,7 @@ namespace OpenTile.Win
 
             // Create a larger maze with custom start and end points
             InitializeMap(70, 40, new Point(0, 0), new Point(69, 39), false);
-            AddRandomItems(70, 40, 40);
+            this.map = GenerateMap.GenerateRandomMap(this.map, 70, 40, 40);
             pathFinder = new PathFinding(searchParameters);
             pathResult = pathFinder.FindPath();
             txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path);
@@ -245,42 +245,10 @@ namespace OpenTile.Win
             this.map[5, 3] = false;
         }
 
-        private void AddRandomItems(int xMax, int zMax, int probOfMapBeingBlocked)
-        {
-            for (int z = 0; z < zMax; z++)
-            {
-                for (int x = 0; x < xMax; x++)
-                {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
-                    {
-                        this.map[x, z] = false;
-                    }
-                }
-            }
-        }
-
-        private void DebugPrintOutMap(int xMax, int zMax)
-        {
-            for (int z = 0; z < zMax; z++)
-            {
-                for (int x = 0; x < xMax; x++)
-                {
-                    if (this.map[x, z] == false)
-                    {
-                        Console.WriteLine(" this.map[" + x + ", " + z + "] = false;");
-                    }
-                }
-            }
-        }
-
         private void btnDebugPrint_Click(object sender, EventArgs e)
         {
-            DebugPrintOutMap(70, 40);
+            GenerateMap.DebugPrintOutMap(this.map, 70, 40);
         }
     }
 
-
-
 }
-
-
