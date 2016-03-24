@@ -17,7 +17,7 @@ namespace OpenTile.Win
             InitializeComponent();
         }
 
-        private bool[,] map;
+        private string[,] map;
 
         private void InitializeMap(int xMax, int zMax)
         {
@@ -27,12 +27,12 @@ namespace OpenTile.Win
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
 
-            this.map = new bool[xMax, zMax];
+            this.map = new string[xMax, zMax];
             for (int z = 0; z < zMax; z++)
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    map[x, z] = true;
+                    map[x, z] = "";
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace OpenTile.Win
                         // Show the end position
                         route.Append('F');
                     }
-                    else if (this.map[x, y] == false)
+                    else if (this.map[x, y] != "")
                     {
                         // Show any barriers
                         route.Append('░');
@@ -82,8 +82,8 @@ namespace OpenTile.Win
             Point endLocation = new Point(5, 2);
 
             InitializeMap(7, 5);
-            this.map[3, 1] = false;
-            this.map[3, 3] = false;
+            this.map[3, 1] = "W";
+            this.map[3, 3] = "W";
             ShowFOV("Testing", startingLocation, endLocation);
             txtMap.Text = "";
             txtMap.Text += ShowFOV("The algorithm should be able to show FOV on a blank map:", startingLocation, endLocation);

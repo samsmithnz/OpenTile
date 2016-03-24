@@ -20,7 +20,8 @@ namespace OpenTile
         /// <summary>
         /// True when the node may be traversed, otherwise false
         /// </summary>
-        public bool IsWalkable { get; set; }
+        /// //formerly IsWalkable
+        public string TileType { get; set; }
 
         /// <summary>
         /// Cost from start to here
@@ -71,11 +72,11 @@ namespace OpenTile
         /// <param name="y">The node's location along the Y axis</param>
         /// <param name="isWalkable">True if the node can be traversed, false if the node is a wall</param>
         /// <param name="endLocation">The location of the destination node</param>
-        public Tile(int x, int y, bool isWalkable, Point endLocation)
+        public Tile(int x, int y, string tileType, Point endLocation)
         {
             this.Location = new Point(x, y);
             this.State = TileState.Untested;
-            this.IsWalkable = isWalkable;
+            this.TileType = tileType;
             this.H = GetTraversalCost(this.Location, endLocation);
             this.G = 0;
         }

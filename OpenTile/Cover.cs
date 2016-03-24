@@ -12,7 +12,7 @@ namespace OpenTile
         /// Calculate if the player is in cover. 
         /// </summary>
         /// <returns>True if the player is in cover</returns>
-        public static CoverState CalculateCover(Point currentPosition, int width, int height, bool[,] validTiles, List<Point> enemyLocations)
+        public static CoverState CalculateCover(Point currentPosition, int width, int height, string[,] validTiles, List<Point> enemyLocations)
         {
             CoverState result = new CoverState();
             List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
@@ -191,7 +191,7 @@ namespace OpenTile
         /// Look at adjacent squares for cover
         /// </summary>
         /// <returns>A List of Point objects for each item of cover</returns>
-        private static List<Point> FindAdjacentCover(Point currentLocation, int width, int height, bool[,] validTiles)
+        private static List<Point> FindAdjacentCover(Point currentLocation, int width, int height, string[,] validTiles)
         {
             List<Point> result = new List<Point>();
             //Make adjustments to ensure that the search doesn't go off the edges of the map
@@ -217,19 +217,19 @@ namespace OpenTile
             }
 
             //Get possible tiles, within constraints of map, including only square titles from current position (not diagonally)
-            if (validTiles[currentLocation.X, yMax] == false)
+            if (validTiles[currentLocation.X, yMax] == "W")
             {
                 result.Add(new Point(currentLocation.X, yMax));
             }
-            if (validTiles[xMax, currentLocation.Y] == false)
+            if (validTiles[xMax, currentLocation.Y] == "W")
             {
                 result.Add(new Point(xMax, currentLocation.Y));
             }
-            if (validTiles[currentLocation.X, yMin] == false)
+            if (validTiles[currentLocation.X, yMin] == "W")
             {
                 result.Add(new Point(currentLocation.X, yMin));
             }
-            if (validTiles[xMin, currentLocation.Y] == false)
+            if (validTiles[xMin, currentLocation.Y] == "W")
             {
                 result.Add(new Point(xMin, currentLocation.Y));
             }

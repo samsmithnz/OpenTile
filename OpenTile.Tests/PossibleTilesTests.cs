@@ -10,7 +10,7 @@ namespace OpenTile.Tests
     [TestClass]
     public class PossibleTilesTests
     {
-        private bool[,] map;
+        private string[,] map;
 
         private void InitializeMap(int xMax, int zMax, Point startingLocation)
         {
@@ -20,12 +20,12 @@ namespace OpenTile.Tests
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
 
-            this.map = new bool[xMax, zMax];
+            this.map = new string[xMax, zMax];
             for (int z = 0; z < zMax; z++)
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    map[x, z] = true;
+                    map[x, z] = "";
                 }
             }
 
@@ -45,11 +45,11 @@ namespace OpenTile.Tests
             //  □ S □ ■ □ F □
             //  □ □ □ ■ ■ □ □
             //  □ □ □ □ □ □ □
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[4, 1] = false;
+            this.map[3, 4] = "W";
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
+            this.map[4, 1] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -116,9 +116,9 @@ namespace OpenTile.Tests
             //  □ □ S ■ □ 
             //  □ □ □ ■ □ 
             //  □ □ □ □ □ 
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -141,11 +141,11 @@ namespace OpenTile.Tests
             //  □ □ S ■ □ 
             //  □ □ □ ■ □ 
             //  □ □ □ ■ □ 
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[3, 0] = false;
+            this.map[3, 4] = "W";
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
+            this.map[3, 0] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -170,15 +170,15 @@ namespace OpenTile.Tests
             //  □ □ □ □ ■ ■ □
             //  □ □ □ □ □ ■ □
             //  □ □ □ □ □ ■ □ 
-            this.map[5, 6] = false;
-            this.map[5, 5] = false;
-            this.map[5, 4] = false;
-            this.map[4, 4] = false;
-            this.map[4, 3] = false;
-            this.map[4, 2] = false;
-            this.map[5, 2] = false;
-            this.map[5, 1] = false;
-            this.map[5, 0] = false;
+            this.map[5, 6] = "W";
+            this.map[5, 5] = "W";
+            this.map[5, 4] = "W";
+            this.map[4, 4] = "W";
+            this.map[4, 3] = "W";
+            this.map[4, 2] = "W";
+            this.map[5, 2] = "W";
+            this.map[5, 1] = "W";
+            this.map[5, 0] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -204,14 +204,14 @@ namespace OpenTile.Tests
             //  □ □ □ □ ■ ■ ■
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □ 
-            this.map[15, 15] = false;
-            this.map[15, 14] = false;
-            this.map[15, 13] = false;
-            this.map[14, 15] = false;
-            this.map[14, 13] = false;
-            this.map[13, 15] = false;
-            this.map[13, 14] = false;
-            this.map[13, 13] = false;
+            this.map[15, 15] = "W";
+            this.map[15, 14] = "W";
+            this.map[15, 13] = "W";
+            this.map[14, 15] = "W";
+            this.map[14, 13] = "W";
+            this.map[13, 15] = "W";
+            this.map[13, 14] = "W";
+            this.map[13, 13] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -236,14 +236,14 @@ namespace OpenTile.Tests
             //  □ □ □ □ ■ ■ ■
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □ 
-            this.map[15, 15] = false;
-            this.map[15, 14] = false;
-            this.map[15, 13] = false;
-            this.map[14, 15] = false;
-            this.map[14, 13] = false;
-            this.map[13, 15] = false;
-            this.map[13, 14] = false;
-            this.map[13, 13] = false;
+            this.map[15, 15] = "W";
+            this.map[15, 14] = "W";
+            this.map[15, 13] = "W";
+            this.map[14, 15] = "W";
+            this.map[14, 13] = "W";
+            this.map[13, 15] = "W";
+            this.map[13, 14] = "W";
+            this.map[13, 13] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -269,14 +269,14 @@ namespace OpenTile.Tests
             //  □ □ □ □ ■ ■ ■
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □ 
-            this.map[15, 15] = false;
-            this.map[15, 14] = false;
-            this.map[15, 13] = false;
-            this.map[14, 15] = false;
-            this.map[14, 13] = false;
-            this.map[13, 15] = false;
-            this.map[13, 14] = false;
-            this.map[13, 13] = false;
+            this.map[15, 15] = "W";
+            this.map[15, 14] = "W";
+            this.map[15, 13] = "W";
+            this.map[14, 15] = "W";
+            this.map[14, 13] = "W";
+            this.map[13, 15] = "W";
+            this.map[13, 14] = "W";
+            this.map[13, 13] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -298,7 +298,7 @@ namespace OpenTile.Tests
             //  □ □ □ 
             //  □ S ■ 
             //  □ □ □ 
-            this.map[2, 1] = false;
+            this.map[2, 1] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -321,11 +321,11 @@ namespace OpenTile.Tests
             //  * S * ■ □ F □
             //  * * * ■ ■ □ □
             //  * * * □ □ □ □
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[4, 1] = false;
+            this.map[3, 4] = "W";
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
+            this.map[4, 1] = "W";
 
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
@@ -351,28 +351,28 @@ namespace OpenTile.Tests
             // 1 □ □ □ ■ ■ □ ■
             // 0 □ □ □ □ ■ ■ □
             //   0 1 2 3 4 5 6
-            this.map[0, 4] = false;
-            this.map[0, 5] = false;
-            this.map[1, 3] = false;
-            this.map[1, 4] = false;
-            this.map[1, 6] = false;
-            this.map[2, 2] = false;
-            this.map[2, 3] = false;
-            this.map[2, 5] = false;
-            this.map[2, 6] = false;
-            this.map[3, 1] = false;
-            this.map[3, 2] = false;
-            this.map[3, 4] = false;
-            this.map[3, 5] = false;
-            this.map[4, 0] = false;
-            this.map[4, 1] = false;
-            this.map[4, 3] = false;
-            this.map[4, 4] = false;
-            this.map[5, 0] = false;
-            this.map[5, 2] = false;
-            this.map[5, 3] = false;
-            this.map[6, 1] = false;
-            this.map[6, 2] = false;
+            this.map[0, 4] = "W";
+            this.map[0, 5] = "W";
+            this.map[1, 3] = "W";
+            this.map[1, 4] = "W";
+            this.map[1, 6] = "W";
+            this.map[2, 2] = "W";
+            this.map[2, 3] = "W";
+            this.map[2, 5] = "W";
+            this.map[2, 6] = "W";
+            this.map[3, 1] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 4] = "W";
+            this.map[3, 5] = "W";
+            this.map[4, 0] = "W";
+            this.map[4, 1] = "W";
+            this.map[4, 3] = "W";
+            this.map[4, 4] = "W";
+            this.map[5, 0] = "W";
+            this.map[5, 2] = "W";
+            this.map[5, 3] = "W";
+            this.map[6, 1] = "W";
+            this.map[6, 2] = "W";
             // Act
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
@@ -399,24 +399,24 @@ namespace OpenTile.Tests
             // 1 S □ □ □ □ □ □ □ □
             // 0 ■ ■ ■ ■ ■ ■ ■ ■ ■
             //   0 1 2 3 4 5 6 7 8
-            this.map[0, 0] = false;
-            this.map[0, 2] = false;
-            this.map[1, 0] = false;
-            this.map[1, 2] = false;
-            this.map[2, 0] = false;
-            this.map[2, 2] = false;
-            this.map[3, 0] = false;
-            this.map[3, 2] = false;
-            this.map[4, 0] = false;
-            this.map[4, 2] = false;
-            this.map[5, 0] = false;
-            this.map[5, 2] = false;
-            this.map[6, 0] = false;
-            this.map[6, 2] = false;
-            this.map[7, 0] = false;
-            this.map[7, 2] = false;
-            this.map[8, 0] = false;
-            this.map[8, 2] = false;
+            this.map[0, 0] = "W";
+            this.map[0, 2] = "W";
+            this.map[1, 0] = "W";
+            this.map[1, 2] = "W";
+            this.map[2, 0] = "W";
+            this.map[2, 2] = "W";
+            this.map[3, 0] = "W";
+            this.map[3, 2] = "W";
+            this.map[4, 0] = "W";
+            this.map[4, 2] = "W";
+            this.map[5, 0] = "W";
+            this.map[5, 2] = "W";
+            this.map[6, 0] = "W";
+            this.map[6, 2] = "W";
+            this.map[7, 0] = "W";
+            this.map[7, 2] = "W";
+            this.map[8, 0] = "W";
+            this.map[8, 2] = "W";
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
             // Assert
@@ -438,14 +438,14 @@ namespace OpenTile.Tests
             // 1 □ ■ ■ ■ □ 
             // 0 □ □ □ □ □ 
             //   0 1 2 3 4 
-            this.map[1, 1] = false;
-            this.map[1, 2] = false;
-            this.map[1, 3] = false;
-            this.map[2, 1] = false;
-            this.map[2, 3] = false;
-            this.map[3, 1] = false;
-            this.map[3, 2] = false;
-            this.map[3, 3] = false;     
+            this.map[1, 1] = "W";
+            this.map[1, 2] = "W";
+            this.map[1, 3] = "W";
+            this.map[2, 1] = "W";
+            this.map[2, 3] = "W";
+            this.map[3, 1] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 3] = "W";     
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
 
             // Assert

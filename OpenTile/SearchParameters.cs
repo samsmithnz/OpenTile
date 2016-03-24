@@ -15,9 +15,9 @@ namespace OpenTile
     {
         public Point startingLocation { get; set; }
         public Point EndLocation { get; set; }
-        public bool[,] Map { get; set; }
+        public string[,] Map { get; set; }
 
-        public SearchParameters(Point startingLocation, Point endLocation, bool[,] map)
+        public SearchParameters(Point startingLocation, Point endLocation, string[,] map)
         {
             this.startingLocation = startingLocation;
             this.EndLocation = endLocation;

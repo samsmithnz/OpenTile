@@ -10,7 +10,7 @@ namespace OpenTile
     public class PossibleTiles
     {
 
-        public static List<Point> FindTiles(Point startingLocation, int range, int width, int height, bool[,] map)
+        public static List<Point> FindTiles(Point startingLocation, int range, int width, int height, string[,] map)
         {
             List<Point> possibleTiles = new List<Point>();
 
@@ -42,7 +42,7 @@ namespace OpenTile
                 for (int x = xMin; x <= xMax; x++)
                 {
                     //System.Diagnostics.Debug.WriteLine("X: " + x + ",Y:" + y);
-                    if (map[x, y] == true && startingLocation != new Point(x, y))
+                    if (map[x, y] == "" && startingLocation != new Point(x, y))
                     {
                         int yIndex = startingLocation.Y - y;
                         if (yIndex < 0)
@@ -86,7 +86,7 @@ namespace OpenTile
         }
 
         ////Get possible tiles, within constraints of map, including both square and diagonal tiles from current position
-        //private static List<Point> FindAdjacentPoints(Point originalStartLocation, Point currentLocation, int width, int height, int xMapMin, int xMapMax, int yMapMin, int yMapMax, bool[,] map, List<Point> currentPossibleTiles)
+        //private static List<Point> FindAdjacentPoints(Point originalStartLocation, Point currentLocation, int width, int height, int xMapMin, int xMapMax, int yMapMin, int yMapMax, string[,] map, List<Point> currentPossibleTiles)
         //{
         //    List<Point> adjacentTiles = new List<Point>();
         //    //Based on our current position, ensure we still stay on the map

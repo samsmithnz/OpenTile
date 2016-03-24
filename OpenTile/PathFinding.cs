@@ -63,7 +63,7 @@ namespace OpenTile
         /// Builds the tile grid from a simple grid of booleans indicating areas which are and aren't walkable
         /// </summary>
         /// <param name="map">A boolean representation of a grid in which true = walkable and false = not walkable</param>
-        private void InitializeTiles(bool[,] map)
+        private void InitializeTiles(string[,] map)
         {
             this.width = map.GetLength(0);
             this.height = map.GetLength(1);
@@ -134,7 +134,7 @@ namespace OpenTile
 
                 Tile tile = this.tiles[x, y];
                 // Ignore non-walkable tiles
-                if (!tile.IsWalkable)
+                if (tile.TileType != "")
                 {
                     continue;
                 }

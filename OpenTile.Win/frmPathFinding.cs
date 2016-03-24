@@ -18,7 +18,7 @@ namespace OpenTile.Win
             InitializeComponent();
         }
 
-        private bool[,] map;
+        private string[,] map;
         private SearchParameters searchParameters;
 
         private void btnGenerateMap_Click(object sender, EventArgs e)
@@ -103,7 +103,7 @@ namespace OpenTile.Win
                         // Show the end position
                         route.Append('F');
                     }
-                    else if (this.map[x, y] == false)
+                    else if (this.map[x, y] != "")
                     {
                         // Show any barriers
                         route.Append('░');
@@ -135,12 +135,12 @@ namespace OpenTile.Win
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
 
-            this.map = new bool[xMax, zMax];
+            this.map = new string[xMax, zMax];
             for (int z = 0; z < zMax; z++)
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    map[x, z] = true;
+                    map[x, z] = "";
                 }
             }
 
@@ -165,11 +165,11 @@ namespace OpenTile.Win
 
             // Path: 1,2 ; 2,1 ; 3,0 ; 4,0 ; 5,1 ; 5,2
 
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[4, 1] = false;
+            this.map[3, 4] = "W";
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
+            this.map[4, 1] = "W";
         }
 
         /// <summary>
@@ -185,11 +185,11 @@ namespace OpenTile.Win
 
             // No path
 
-            this.map[3, 4] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[3, 0] = false;
+            this.map[3, 4] = "W";
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
+            this.map[3, 0] = "W";
         }
 
         private void AddWallWithMaze()
@@ -201,24 +201,24 @@ namespace OpenTile.Win
             //  ■ □ ■ ■ ■ □ ■
 
             // long path
-            this.map[0, 0] = false;
-            this.map[1, 4] = false;
-            this.map[1, 3] = false;
-            this.map[1, 2] = false;
-            this.map[1, 1] = false;
-            this.map[2, 4] = false;
-            this.map[2, 0] = false;
-            this.map[3, 3] = false;
-            this.map[3, 2] = false;
-            this.map[3, 1] = false;
-            this.map[3, 0] = false;
-            this.map[4, 4] = false;
-            this.map[4, 0] = false;
-            this.map[5, 4] = false;
-            this.map[5, 3] = false;
-            this.map[5, 2] = false;
-            this.map[5, 1] = false;
-            this.map[6, 0] = false;
+            this.map[0, 0] = "W";
+            this.map[1, 4] = "W";
+            this.map[1, 3] = "W";
+            this.map[1, 2] = "W";
+            this.map[1, 1] = "W";
+            this.map[2, 4] = "W";
+            this.map[2, 0] = "W";
+            this.map[3, 3] = "W";
+            this.map[3, 2] = "W";
+            this.map[3, 1] = "W";
+            this.map[3, 0] = "W";
+            this.map[4, 4] = "W";
+            this.map[4, 0] = "W";
+            this.map[5, 4] = "W";
+            this.map[5, 3] = "W";
+            this.map[5, 2] = "W";
+            this.map[5, 1] = "W";
+            this.map[6, 0] = "W";
         }
 
         private void AddWallWithSpinningMaze()
@@ -231,18 +231,18 @@ namespace OpenTile.Win
             //    0 1 2 3 4 5 6
 
             // long path
-            this.map[1, 1] = false;
-            this.map[1, 2] = false;
-            this.map[1, 3] = false;
-            this.map[1, 4] = false;
-            this.map[2, 1] = false;
-            this.map[3, 1] = false;
-            this.map[3, 3] = false;
-            this.map[4, 1] = false;
-            this.map[4, 3] = false;
-            this.map[5, 1] = false;
-            this.map[5, 2] = false;
-            this.map[5, 3] = false;
+            this.map[1, 1] = "W";
+            this.map[1, 2] = "W";
+            this.map[1, 3] = "W";
+            this.map[1, 4] = "W";
+            this.map[2, 1] = "W";
+            this.map[3, 1] = "W";
+            this.map[3, 3] = "W";
+            this.map[4, 1] = "W";
+            this.map[4, 3] = "W";
+            this.map[5, 1] = "W";
+            this.map[5, 2] = "W";
+            this.map[5, 3] = "W";
         }
 
         private void btnDebugPrint_Click(object sender, EventArgs e)

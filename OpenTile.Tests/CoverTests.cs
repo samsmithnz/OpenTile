@@ -13,7 +13,7 @@ namespace OpenTile.Tests
 
         #region " Private setup functions"
 
-        private bool[,] map;
+        private string[,] map;
 
         private void InitializeMap(int xMax, int zMax, Point startingLocation, List<Point> coverLocations)
         {
@@ -21,12 +21,12 @@ namespace OpenTile.Tests
             //  □ S □ 
             //  □ □ □ 
 
-            this.map = new bool[xMax, zMax];
+            this.map = new string[xMax, zMax];
             for (int z = 0; z < zMax; z++)
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    map[x, z] = true;
+                    map[x, z] = "";
                 }
             }
 
@@ -34,7 +34,7 @@ namespace OpenTile.Tests
             {
                 foreach (Point item in coverLocations)
                 {
-                    this.map[item.X, item.Y] = false;
+                    this.map[item.X, item.Y] = "W";
                 }
             }
         }
