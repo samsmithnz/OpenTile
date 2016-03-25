@@ -33,14 +33,30 @@ namespace OpenTile.Win
             // Create a larger maze with custom start and end points
             InitializeMap(width, height, new Point(0, 0), new Point(width - 1, height - 1), false);
             AddRandomItems(width, height, 40);
+            AddStartingLocation(startingWidth, startingHeight);
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
 
             PathFinding pathFinder = new PathFinding(searchParameters);
             PathFindingResult pathResult = pathFinder.FindPath();
             pathResult.Path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, width, height, this.map));
-            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path, startingWidth, startingHeight);
+            txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path);
             txtMap.Text += Environment.NewLine;
+        }
+
+        private void AddStartingLocation(int startingWidth, int startingHeight)
+        {
+            for (int y = this.map.GetLength(1) - 1; y >= 0; y--) // Invert the Y-axis so that coordinate 0,0 is shown in the bottom-left
+            {
+                for (int x = 0; x < this.map.GetLength(0); x++)
+                {
+                    if (x < startingWidth && y < startingHeight)
+                    {
+                        // Show the start position
+                        this.map[x, y] = "";
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -48,7 +64,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowRoute(string title, IEnumerable<Point> path, int startingWidth, int startingHeight)
+        private string ShowRoute(string title, IEnumerable<Point> path)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -56,9 +72,9 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < this.map.GetLength(0); x++)
                 {
-                    if (this.searchParameters.startingLocation.Equals(new Point(x, y)) || (x < startingWidth && y < startingHeight))
+                    if (this.searchParameters.startingLocation.Equals(new Point(x, y)))
                     {
-                        // Show the start position
+                        // Show the end position
                         route.Append('S');
                     }
                     else if (this.searchParameters.EndLocation.Equals(new Point(x, y)))
@@ -66,7 +82,7 @@ namespace OpenTile.Win
                         // Show the end position
                         route.Append('F');
                     }
-                    else if (this.map[x, y] != "")
+                    else if (this.map[x, y] == "W")
                     {
                         // Show any barriers
                         route.Append('░');
