@@ -5,3 +5,7 @@ Switch between players, using up actions
 Switch between teams when all actions are complete
 
 When moving, calculate any (overwatch?) events
+Create Fire mechanic
+Build levels based on tiles having 4 walls and 3 heights (None, half, full)
+
+Assault game with 3 waves to destination
