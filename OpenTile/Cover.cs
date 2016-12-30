@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using UnityEngine;
 
 namespace OpenTile
 {
@@ -12,10 +12,10 @@ namespace OpenTile
         /// Calculate if the player is in cover. 
         /// </summary>
         /// <returns>True if the player is in cover</returns>
-        public static CoverState CalculateCover(Point currentPosition, int width, int height, string[,] validTiles, List<Point> enemyLocations)
+        public static CoverState CalculateCover(Vector3 currentPosition, int width, int height, string[,] validTiles, List<Vector3> enemyLocations)
         {
             CoverState result = new CoverState();
-            List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
+            List<Vector3> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
             int coverLineNorth = -1;
             int coverLineEast = -1;
             int coverLineSouth = -1;
@@ -30,27 +30,27 @@ namespace OpenTile
             else
             {
                 // Work out where the cover is relative to the player
-                foreach (Point coverTileItem in coverTiles)
+                foreach (Vector3 coverTileItem in coverTiles)
                 {
-                    if (currentPosition.Y < coverTileItem.Y)
-                    {
-                        result.InNorthCover = true;
-                        coverLineNorth = coverTileItem.Y - 0;
-                    }
-                    if (currentPosition.Y > coverTileItem.Y)
-                    {
-                        result.InSouthCover = true;
-                        coverLineSouth = coverTileItem.Y + 0;
-                    }
-                    if (currentPosition.X < coverTileItem.X)
+                    if (currentPosition.x < coverTileItem.x)
                     {
                         result.InEastCover = true;
-                        coverLineEast = coverTileItem.X - 0;
+                        coverLineEast = Convert.ToInt32(coverTileItem.x) - 0;
                     }
-                    if (currentPosition.X > coverTileItem.X)
+                    if (currentPosition.x > coverTileItem.x)
                     {
                         result.InWestCover = true;
-                        coverLineWest = coverTileItem.X + 0;
+                        coverLineWest = Convert.ToInt32(coverTileItem.x) + 0;
+                    }
+                    if (currentPosition.z < coverTileItem.z)
+                    {
+                        result.InNorthCover = true;
+                        coverLineNorth = Convert.ToInt32(coverTileItem.z) - 0;
+                    }
+                    if (currentPosition.z > coverTileItem.z)
+                    {
+                        result.InSouthCover = true;
+                        coverLineSouth = Convert.ToInt32(coverTileItem.z) + 0;
                     }
                 }
             }
@@ -63,25 +63,25 @@ namespace OpenTile
             else
             {
                 //Work out where the enemy is relative to the cover
-                foreach (Point enemyItem in enemyLocations)
+                foreach (Vector3 enemyItem in enemyLocations)
                 {
                     //NOTE: I don't think I need this now that I have cover lines
                     //Check to see if Enemy is right on top of the player, neutralizing each others cover and causing a flank
-                    int xPosition = currentPosition.X - enemyItem.X;
+                    int xPosition = Convert.ToInt32(currentPosition.x - enemyItem.x);
                     if (xPosition < 0)
                     {
                         xPosition = xPosition * -1;
                     }
-                    int yPosition = currentPosition.Y - enemyItem.Y;
-                    if (yPosition < 0)
+                    int zPosition = Convert.ToInt32(currentPosition.z - enemyItem.z);
+                    if (zPosition < 0)
                     {
-                        yPosition = yPosition * -1;
+                        zPosition = zPosition * -1;
                     }
 
                     //Now check over all of the levels of cover
 
                     //Enemy is located NorthEast
-                    if (enemyItem.Y >= currentPosition.Y && enemyItem.X >= currentPosition.X)
+                    if (enemyItem.z >= currentPosition.z && enemyItem.x >= currentPosition.x)
                     {
                         if (result.InNorthCover == false && result.InEastCover == false) //No cover in North or East = always flanked by Northeast Enenmy
                         {
@@ -93,12 +93,12 @@ namespace OpenTile
                         //    currentLocationIsFlanked = true;
                         //    break;
                         //}
-                        else if (result.InNorthCover == true && enemyItem.Y <= coverLineNorth && result.InEastCover == false) //There is cover in the North, but the enemy is past it + no East cover
+                        else if (result.InNorthCover == true && enemyItem.z <= coverLineNorth && result.InEastCover == false) //There is cover in the North, but the enemy is past it + no East cover
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (result.InEastCover == true && enemyItem.X <= coverLineEast && result.InNorthCover == false) //There is cover in the East, but the enemy is past it + no North cover
+                        else if (result.InEastCover == true && enemyItem.x <= coverLineEast && result.InNorthCover == false) //There is cover in the East, but the enemy is past it + no North cover
                         {
                             currentLocationIsFlanked = true;
                             break;
@@ -106,7 +106,7 @@ namespace OpenTile
                     }
 
                     //Enemy is located NorthWest
-                    if (enemyItem.Y >= currentPosition.Y && enemyItem.X <= currentPosition.X)
+                    if (enemyItem.z >= currentPosition.z && enemyItem.x <= currentPosition.x)
                     {
                         if (result.InNorthCover == false && result.InWestCover == false)
                         {
@@ -118,12 +118,12 @@ namespace OpenTile
                         //    currentLocationIsFlanked = true;
                         //    break;
                         //}
-                        else if (result.InNorthCover == true && enemyItem.Y <= coverLineNorth && result.InWestCover == false)
+                        else if (result.InNorthCover == true && enemyItem.z <= coverLineNorth && result.InWestCover == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (result.InWestCover == true && enemyItem.X >= coverLineWest && result.InNorthCover == false)
+                        else if (result.InWestCover == true && enemyItem.x >= coverLineWest && result.InNorthCover == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
@@ -131,7 +131,7 @@ namespace OpenTile
                     }
 
                     //Enemy is located SouthEast
-                    if (enemyItem.Y <= currentPosition.Y && enemyItem.X >= currentPosition.X)
+                    if (enemyItem.z <= currentPosition.z && enemyItem.x >= currentPosition.x)
                     {
                         if (result.InSouthCover == false && result.InEastCover == false)
                         {
@@ -143,12 +143,12 @@ namespace OpenTile
                         //    currentLocationIsFlanked = true;
                         //    break;
                         //}
-                        else if (result.InSouthCover == true && enemyItem.Y >= coverLineSouth && result.InEastCover == false)
+                        else if (result.InSouthCover == true && enemyItem.z >= coverLineSouth && result.InEastCover == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (result.InEastCover == true && enemyItem.X <= coverLineEast && result.InSouthCover == false)
+                        else if (result.InEastCover == true && enemyItem.x <= coverLineEast && result.InSouthCover == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
@@ -156,7 +156,7 @@ namespace OpenTile
                     }
 
                     //Enemy is located SouthWest
-                    if (enemyItem.Y <= currentPosition.Y && enemyItem.X <= currentPosition.X)
+                    if (enemyItem.z <= currentPosition.z && enemyItem.x <= currentPosition.x)
                     {
                         if (result.InSouthCover == false && result.InWestCover == false)
                         {
@@ -168,12 +168,12 @@ namespace OpenTile
                         //    currentLocationIsFlanked = true;
                         //    break;
                         //}
-                        else if (result.InSouthCover == true && enemyItem.Y >= coverLineSouth && result.InWestCover == false)
+                        else if (result.InSouthCover == true && enemyItem.z >= coverLineSouth && result.InWestCover == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
                         }
-                        else if (result.InWestCover == true && enemyItem.X >= coverLineWest && result.InSouthCover == false)
+                        else if (result.InWestCover == true && enemyItem.x >= coverLineWest && result.InSouthCover == false)
                         {
                             currentLocationIsFlanked = true;
                             break;
@@ -190,48 +190,48 @@ namespace OpenTile
         /// <summary>
         /// Look at adjacent squares for cover
         /// </summary>
-        /// <returns>A List of Point objects for each item of cover</returns>
-        private static List<Point> FindAdjacentCover(Point currentLocation, int width, int height, string[,] validTiles)
+        /// <returns>A List of Vector3 objects for each item of cover</returns>
+        private static List<Vector3> FindAdjacentCover(Vector3 currentLocation, int width, int height, string[,] validTiles)
         {
-            List<Point> result = new List<Point>();
+            List<Vector3> result = new List<Vector3>();
             //Make adjustments to ensure that the search doesn't go off the edges of the map
-            int yMin = currentLocation.Y - 1;
-            if (yMin < 0)
-            {
-                yMin = 0;
-            }
-            int yMax = currentLocation.Y + 1;
-            if (yMax > height - 1)
-            {
-                yMax = height - 1;
-            }
-            int xMin = currentLocation.X - 1;
+            int xMin = Convert.ToInt32(currentLocation.x) - 1;
             if (xMin < 0)
             {
                 xMin = 0;
             }
-            int xMax = currentLocation.X + 1;
+            int xMax = Convert.ToInt32(currentLocation.x) + 1;
             if (xMax > width - 1)
             {
                 xMax = width - 1;
             }
+            int zMin = Convert.ToInt32(currentLocation.z) - 1;
+            if (zMin < 0)
+            {
+                zMin = 0;
+            }
+            int zMax = Convert.ToInt32(currentLocation.z) + 1;
+            if (zMax > height - 1)
+            {
+                zMax = height - 1;
+            }
 
             //Get possible tiles, within constraints of map, including only square titles from current position (not diagonally)
-            if (validTiles[currentLocation.X, yMax] == "W")
+            if (validTiles[Convert.ToInt32(currentLocation.x), Convert.ToInt32(zMax)] == "W")
             {
-                result.Add(new Point(currentLocation.X, yMax));
+                result.Add(new Vector3(currentLocation.x, zMax));
             }
-            if (validTiles[xMax, currentLocation.Y] == "W")
+            if (validTiles[Convert.ToInt32(xMax), Convert.ToInt32(currentLocation.z)] == "W")
             {
-                result.Add(new Point(xMax, currentLocation.Y));
+                result.Add(new Vector3(xMax, currentLocation.z));
             }
-            if (validTiles[currentLocation.X, yMin] == "W")
+            if (validTiles[Convert.ToInt32(currentLocation.x), Convert.ToInt32(zMin)] == "W")
             {
-                result.Add(new Point(currentLocation.X, yMin));
+                result.Add(new Vector3(currentLocation.x, zMin));
             }
-            if (validTiles[xMin, currentLocation.Y] == "W")
+            if (validTiles[Convert.ToInt32(xMin), Convert.ToInt32(currentLocation.z)] == "W")
             {
-                result.Add(new Point(xMin, currentLocation.Y));
+                result.Add(new Vector3(xMin, currentLocation.z));
             }
             return result;
         }

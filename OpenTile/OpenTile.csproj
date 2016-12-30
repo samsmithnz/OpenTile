@@ -11,7 +11,7 @@
     <AssemblyName>OpenTile</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +57,51 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aaaTODO.txt" />
+    <Content Include="Library\UnityAssemblies\nunit.framework.dll" />
+    <Content Include="Library\UnityAssemblies\nunit.framework.xml" />
+    <Content Include="Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll" />
+    <Content Include="Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Advertisements.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Advertisements.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Analytics.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Analytics.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.EditorTestsRunner.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.EditorTestsRunner.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Graphs.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Graphs.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.HoloLens.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.HoloLens.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Networking.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.Networking.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.PlaymodeTestsRunner.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.PlaymodeTestsRunner.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.TreeEditor.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.TreeEditor.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.UI.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.UI.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.VR.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.VR.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEditor.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.Analytics.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.Analytics.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.HoloLens.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.HoloLens.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.Networking.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.Networking.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.PlaymodeTestsRunner.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.PlaymodeTestsRunner.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.UI.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.UI.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.VR.dll" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.VR.xml" />
+    <Content Include="Library\UnityAssemblies\UnityEngine.xml" />
+    <Content Include="Library\UnityAssemblies\version.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
