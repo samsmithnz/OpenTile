@@ -13,7 +13,7 @@ namespace OpenTile
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
+                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Common.GenerateRandomNumber(1, 100))
                     {
                         map[x, z] = "W";
                     }

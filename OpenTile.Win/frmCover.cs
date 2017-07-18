@@ -39,7 +39,7 @@ namespace OpenTile.Win
             int range = 3;
             InitializeMap(width, height, startingLocation);
             AddWallWithGap();
-            path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            path = PossibleTiles.FindTiles(startingLocation, range, this.map);
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
             txtMap.Text += ShowRoute("The algorithm should find a possible tiles, ignoring the obstacle:", startingLocation, path);
@@ -245,7 +245,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
+                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Common.GenerateRandomNumber(1, 100))
                     {
                         this.map[x, z] = "W";
                     }

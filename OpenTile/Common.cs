@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace OpenTile
 {
-    public static class Utility
+    public static class Common
     {
 
         /// <summary>

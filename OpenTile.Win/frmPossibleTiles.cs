@@ -149,27 +149,31 @@ namespace OpenTile.Win
             // 1 S □ □ □ □ □ □ □ □
             // 0 ■ ■ ■ ■ ■ ■ ■ ■ ■
             //   0 1 2 3 4 5 6 7 8
-            this.map[0, 0] = "W";
-            this.map[0, 2] = "W";
-            this.map[1, 0] = "W";
-            this.map[1, 2] = "W";
-            this.map[2, 0] = "W";
-            this.map[2, 2] = "W";
-            this.map[3, 0] = "W";
-            this.map[3, 2] = "W";
-            this.map[4, 0] = "W";
-            this.map[4, 2] = "W";
-            this.map[5, 0] = "W";
-            this.map[5, 2] = "W";
-            this.map[6, 0] = "W";
-            this.map[6, 2] = "W";
-            this.map[7, 0] = "W";
-            this.map[7, 2] = "W";
-            this.map[8, 0] = "W";
-            this.map[8, 2] = "W";
+            //this.map[0, 0] = "W";
+            //this.map[0, 2] = "W";
+            //this.map[1, 0] = "W";
+            //this.map[1, 2] = "W";
+            //this.map[2, 0] = "W";
+            //this.map[2, 2] = "W";
+            //this.map[3, 0] = "W";
+            //this.map[3, 2] = "W";
+            //this.map[4, 0] = "W";
+            //this.map[4, 2] = "W";
+            //this.map[5, 0] = "W";
+            //this.map[5, 2] = "W";
+            //this.map[6, 0] = "W";
+            //this.map[6, 2] = "W";
+            //this.map[7, 0] = "W";
+            //this.map[7, 2] = "W";
+            //this.map[8, 0] = "W";
+            //this.map[8, 2] = "W";
 
 
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+
+            AddRandomItems(width, height, 40);
+
+
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
             txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
             txtMap.Text += "Possible tile count is: " + path.Count;
@@ -341,7 +345,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
+                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Common.GenerateRandomNumber(1, 100))
                     {
                         this.map[x, z] = "W";
                     }

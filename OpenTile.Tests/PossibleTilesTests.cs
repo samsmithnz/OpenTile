@@ -52,7 +52,7 @@ namespace OpenTile.Tests
             this.map[4, 1] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 8);
@@ -74,7 +74,7 @@ namespace OpenTile.Tests
             //  □ □ □ □ □ 
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 8);
@@ -96,7 +96,7 @@ namespace OpenTile.Tests
             //  □ □ □ □ □ 
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 20);
@@ -121,7 +121,7 @@ namespace OpenTile.Tests
             this.map[3, 1] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 14);
@@ -148,7 +148,7 @@ namespace OpenTile.Tests
             this.map[3, 0] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 14);
@@ -181,7 +181,7 @@ namespace OpenTile.Tests
             this.map[5, 0] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 31);
@@ -214,7 +214,7 @@ namespace OpenTile.Tests
             this.map[13, 13] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 166);
@@ -246,7 +246,7 @@ namespace OpenTile.Tests
             this.map[13, 13] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 166);
@@ -279,7 +279,7 @@ namespace OpenTile.Tests
             this.map[13, 13] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 739);
@@ -301,7 +301,7 @@ namespace OpenTile.Tests
             this.map[2, 1] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 7);
@@ -328,7 +328,7 @@ namespace OpenTile.Tests
             this.map[4, 1] = "W";
 
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 14);
@@ -374,7 +374,7 @@ namespace OpenTile.Tests
             this.map[6, 1] = "W";
             this.map[6, 2] = "W";
             // Act
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 5);
@@ -417,7 +417,7 @@ namespace OpenTile.Tests
             this.map[7, 2] = "W";
             this.map[8, 0] = "W";
             this.map[8, 2] = "W";
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 7);
@@ -445,8 +445,8 @@ namespace OpenTile.Tests
             this.map[2, 3] = "W";
             this.map[3, 1] = "W";
             this.map[3, 2] = "W";
-            this.map[3, 3] = "W";     
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            this.map[3, 3] = "W";
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
 
             // Assert
             Assert.IsTrue(path.Count == 0);

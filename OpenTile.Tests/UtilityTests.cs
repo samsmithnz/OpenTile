@@ -22,7 +22,7 @@ namespace OpenTile.Tests
             // Act
             for (int i = lowerBound; i < upperBound; i++)
             {
-                int result = Utility.GenerateRandomNumber(lowerBound, upperBound);
+                int result = Common.GenerateRandomNumber(lowerBound, upperBound);
                 if (result <= randomPercent)
                 {
                     counterResult++;
@@ -47,7 +47,7 @@ namespace OpenTile.Tests
             enemyList.Add(enemy2);
 
             // Act
-            Point result = Utility.FindNearestTile(startingLocation, enemyList);
+            Point result = Common.FindNearestTile(startingLocation, enemyList);
 
             // Assert
             Assert.IsTrue(result != Point.Empty);
@@ -61,13 +61,13 @@ namespace OpenTile.Tests
             // Arrange
             Point startingLocation = new Point(1, 1);
             Point enemy1 = new Point(-5, -5);
-            Point enemy2 = new Point(-6 -6);
+            Point enemy2 = new Point(-6 - 6);
             List<Point> enemyList = new List<Point>();
             enemyList.Add(enemy1);
             enemyList.Add(enemy2);
 
             // Act
-            Point result = Utility.FindNearestTile(startingLocation, enemyList);
+            Point result = Common.FindNearestTile(startingLocation, enemyList);
 
             // Assert
             Assert.IsTrue(result != Point.Empty);
@@ -75,6 +75,88 @@ namespace OpenTile.Tests
             Assert.IsTrue(result != enemy2);
         }
 
+        [TestMethod]
+        public void HighCoverProbability()
+        {
+            // Arrange
+            int probOfHighCover = 10;
+            int probOfLowCover = 20;
+            int prob = 10;
+            bool isHighResult = false;
+            bool isLowResult = false;
 
+            // Act
+            if (probOfHighCover + probOfLowCover >= prob)
+            {
+                if (prob <= probOfHighCover)
+                {
+                    isHighResult = true;
+                }
+                else if (prob - probOfHighCover <= probOfLowCover)
+                {
+                    isLowResult = true;
+                }
+            }
+
+            // Assert
+            Assert.IsTrue(isHighResult == true);
+            Assert.IsTrue(isLowResult == false);
+        }
+
+
+        [TestMethod]
+        public void LowCoverProbability()
+        {
+            // Arrange
+            int probOfHighCover = 10;
+            int probOfLowCover = 20;
+            int prob = 30;
+            bool isHighResult = false;
+            bool isLowResult = false;
+
+            // Act
+            if (probOfHighCover + probOfLowCover >= prob)
+            {
+                if (prob <= probOfHighCover)
+                {
+                    isHighResult = true;
+                }
+                else if (prob - probOfHighCover <= probOfLowCover)
+                {
+                    isLowResult = true;
+                }
+            }
+
+            // Assert
+            Assert.IsTrue(isHighResult == false);
+            Assert.IsTrue(isLowResult == true);
+        }
+
+        public void NoCoverProbability()
+        {
+            // Arrange
+            int probOfHighCover = 10;
+            int probOfLowCover = 20;
+            int prob = 31;
+            bool isHighResult = false;
+            bool isLowResult = false;
+
+            // Act
+            if (probOfHighCover + probOfLowCover >= prob)
+            {
+                if (prob <= probOfHighCover)
+                {
+                    isHighResult = true;
+                }
+                else if (prob - probOfHighCover <= probOfLowCover)
+                {
+                    isLowResult = true;
+                }
+            }
+
+            // Assert
+            Assert.IsTrue(isHighResult == false);
+            Assert.IsTrue(isLowResult == false);
+        }
     }
 }

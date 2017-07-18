@@ -10,9 +10,11 @@ namespace OpenTile
     public class PossibleTiles
     {
 
-        public static List<Point> FindTiles(Point startingLocation, int range, int width, int height, string[,] map)
+        public static List<Point> FindTiles(Point startingLocation, int range, string[,] map)
         {
             List<Point> possibleTiles = new List<Point>();
+            int width = map.GetLength(0);
+            int height = map.GetLength(1);
 
             //Ensure that we don't search off the side of the map
             int yMin = startingLocation.Y - range;

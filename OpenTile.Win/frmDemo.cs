@@ -39,7 +39,7 @@ namespace OpenTile.Win
 
             PathFinding pathFinder = new PathFinding(searchParameters);
             PathFindingResult pathResult = pathFinder.FindPath();
-            pathResult.Path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, width, height, this.map));
+            pathResult.Path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, this.map));
             txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path);
             txtMap.Text += Environment.NewLine;
         }
@@ -230,7 +230,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
+                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Common.GenerateRandomNumber(1, 100))
                     {
                         this.map[x, z] = "W";
                     }
