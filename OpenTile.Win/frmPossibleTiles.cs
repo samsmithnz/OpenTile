@@ -25,158 +25,38 @@ namespace OpenTile.Win
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             txtMap.Text = "";
-            int range = 1; //USE txtRange.Text !!
+            int range = 0;
             if (txtRange.Text != "")
             {
                 range = int.Parse(txtRange.Text);
             }
-
-            //CRITERIA
-            // Point startingLocation = new Point(20, 20);
-            // int height = 40;
-            // int width = 70;
-            //// range = 15;
-            // InitializeMap(width, height, startingLocation);
-            // //  □ □ □ □ □ □ □ 
-            // //  □ □ □ □ □ □ □ 
-            // //  □ □ □ □ ■ ■ ■ 
-            // //  □ □ □ S ■ □ ■ 
-            // //  □ □ □ □ ■ ■ ■
-            // //  □ □ □ □ □ □ □
-            // //  □ □ □ □ □ □ □ 
-            // this.map[15, 15] = "W";
-            // this.map[15, 14] = "W";
-            // this.map[15, 13] = "W";
-            // this.map[14, 15] = "W";
-            // this.map[14, 13] = "W";
-            // this.map[13, 15] = "W";
-            // this.map[13, 14] = "W";
-            // this.map[13, 13] = "W";
-            // this.map[25, 15] = "W";
-            // this.map[25, 14] = "W";
-            // this.map[25, 13] = "W";
-            // this.map[24, 15] = "W";
-            // this.map[24, 13] = "W";
-            // this.map[23, 15] = "W";
-            // this.map[23, 14] = "W";
-            // this.map[23, 13] = "W";
-            // this.map[15, 25] = "W";
-            // this.map[15, 24] = "W";
-            // this.map[15, 23] = "W";
-            // this.map[14, 25] = "W";
-            // this.map[14, 23] = "W";
-            // this.map[13, 25] = "W";
-            // this.map[13, 24] = "W";
-            // this.map[13, 23] = "W";
-
-
-
-            //Point startingLocation = new Point(5, 5);
-            //int width = 11;
-            //int height = 11;
-            ////int range = 2;
-            //InitializeMap(width, height, startingLocation);
-            ////AddRandomItems(width, height, 40);
-            //this.map[0, 0] = "W";
-            //this.map[5, 0] = "W";
-            //this.map[6, 0] = "W";
-            //this.map[8, 0] = "W";
-            //this.map[1, 1] = "W";
-            //this.map[3, 1] = "W";
-            //this.map[4, 1] = "W";
-            //this.map[5, 1] = "W";
-            //this.map[7, 1] = "W";
-            //this.map[8, 1] = "W";
-            //this.map[1, 2] = "W";
-            //this.map[2, 2] = "W";
-            //this.map[3, 2] = "W";
-            //this.map[4, 2] = "W";
-            //this.map[5, 2] = "W";
-            //this.map[8, 2] = "W";
-            //this.map[9, 2] = "W";
-            //this.map[10, 2] = "W";
-            //this.map[4, 3] = "W";
-            //this.map[5, 3] = "W";
-            //this.map[6, 3] = "W";
-            //this.map[7, 3] = "W";
-            //this.map[8, 3] = "W";
-            //this.map[9, 3] = "W";
-            //this.map[1, 4] = "W";
-            //this.map[2, 4] = "W";
-            //this.map[3, 4] = "W";
-            //this.map[4, 4] = "W";
-            //this.map[5, 4] = "W";
-            //this.map[6, 4] = "W";
-            //this.map[0, 5] = "W";
-            //this.map[1, 5] = "W";
-            //this.map[2, 5] = "W";
-            //this.map[3, 5] = "W";
-            //this.map[5, 5] = "W";
-            //this.map[9, 5] = "W";
-            //this.map[1, 6] = "W";
-            //this.map[2, 6] = "W";
-            //this.map[4, 6] = "W";
-            //this.map[7, 6] = "W";
-            //this.map[3, 7] = "W";
-            //this.map[4, 7] = "W";
-            //this.map[5, 7] = "W";
-            //this.map[6, 7] = "W";
-            //this.map[0, 8] = "W";
-            //this.map[1, 8] = "W";
-            //this.map[2, 8] = "W";
-            //this.map[4, 8] = "W";
-            //this.map[5, 8] = "W";
-            //this.map[7, 8] = "W";
-            //this.map[10, 8] = "W";
-            //this.map[0, 9] = "W";
-            //this.map[5, 9] = "W";
-            //this.map[9, 9] = "W";
-            //this.map[10, 9] = "W";
-            //this.map[6, 10] = "W";
-            //this.map[8, 10] = "W";
-
-            Point startingLocation = new Point(0, 1);
-            int height = 9;
-            int width = 9;
-            InitializeMap(width, height, startingLocation);
-            // 8 □ □ □ □ □ □ □ □ □
-            // 7 □ □ □ □ □ □ □ □ □
-            // 6 □ □ □ □ □ □ □ □ □
-            // 5 □ □ □ □ □ □ □ □ □
-            // 4 □ □ □ □ □ □ □ □ □
-            // 3 □ □ □ □ □ □ □ □ □
-            // 2 ■ ■ ■ ■ ■ ■ ■ ■ ■
-            // 1 S □ □ □ □ □ □ □ □
-            // 0 ■ ■ ■ ■ ■ ■ ■ ■ ■
-            //   0 1 2 3 4 5 6 7 8
-            //this.map[0, 0] = "W";
-            //this.map[0, 2] = "W";
-            //this.map[1, 0] = "W";
-            //this.map[1, 2] = "W";
-            //this.map[2, 0] = "W";
-            //this.map[2, 2] = "W";
-            //this.map[3, 0] = "W";
-            //this.map[3, 2] = "W";
-            //this.map[4, 0] = "W";
-            //this.map[4, 2] = "W";
-            //this.map[5, 0] = "W";
-            //this.map[5, 2] = "W";
-            //this.map[6, 0] = "W";
-            //this.map[6, 2] = "W";
-            //this.map[7, 0] = "W";
-            //this.map[7, 2] = "W";
-            //this.map[8, 0] = "W";
-            //this.map[8, 2] = "W";
-
-
-
-            AddRandomItems(width, height, 40);
-
+            int actionPoints = 1;
+            if (txtActionPoints.Text != "")
+            {
+                actionPoints = int.Parse(txtActionPoints.Text);
+            }
+            Point startingLocation = new Point(0, 0);
+            //startingLocation = AddBasicTestMap();
+            //startingLocation = AddWallWithGap();
+            //startingLocation = AddWallWithSpinningMaze();
+            //startingLocation = AddRandomMap();
+            //startingLocation = AddDeadspotWallLargeMap();
+            startingLocation = AddMediumBlankMap();
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
-            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);
+            List<Point> path2 = null;
+            if (actionPoints == 2)
+            {
+                path2 = PossibleTiles.FindTiles(startingLocation, range * 2, this.map);
+            }
+            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path, path2);
             txtMap.Text += Environment.NewLine;
-            txtMap.Text += "Possible tile count is: " + path.Count;
+            int pathCount = path.Count;
+            if (path2 != null && path2.Count > path.Count)
+            {
+                pathCount += (path2.Count - path.Count);
+            }
+            txtMap.Text += "Possible tile count is: " + pathCount;
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             txtMap.Text += Environment.NewLine;
@@ -189,7 +69,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowPossibleTiles(string title, Point startingLocation, IEnumerable<Point> path)
+        private string ShowPossibleTiles(string title, Point startingLocation, IEnumerable<Point> path, IEnumerable<Point> path2)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -207,10 +87,17 @@ namespace OpenTile.Win
                         // Show any barriers
                         route.Append('░');
                     }
-                    else if (path.Where(p => p.X == x && p.Y == y).Any())
+                    else if (path.Where(p => p.X == x && p.Y == y).Any() || (path2 != null && path2.Where(p => p.X == x && p.Y == y).Any()))
                     {
                         // Show the path in between
-                        route.Append('*');
+                        if (path.Where(p => p.X == x && p.Y == y).Any() == true)
+                        {
+                            route.Append('■');
+                        }
+                        else if (path2.Where(p => p.X == x && p.Y == y).Any() == true)
+                        {
+                            route.Append('□');
+                        }
                     }
                     else
                     {
@@ -223,16 +110,56 @@ namespace OpenTile.Win
             return route.ToString();
         }
 
+        private Point AddBasicTestMap()
+        {
+            Point startingLocation = new Point(1, 1);
+            int height = 10;
+            int width = 10;
+            InitializeMap(width, height);
+            this.map[5, 5] = "W";
+            this.map[3, 5] = "W";
+            return startingLocation;
+        }
+
+        private Point AddDeadspotWallLargeMap()
+        {
+            // Arrange
+            Point startingLocation = new Point(3, 3);
+            int height = 10;
+            int width = 10;
+            InitializeMap(width, height);
+            // 6 □ □ □ □ □ □ □ 
+            // 5 □ □ □ □ □ □ □ 
+            // 4 □ □ □ □ ■ ■ ■ 
+            // 3 □ □ □ S ■ □ ■ 
+            // 2 □ □ □ □ ■ ■ ■
+            // 1 □ □ □ □ □ □ □
+            // 0 □ □ □ □ □ □ □ 
+            //   0 1 2 3 4 5 6 x
+
+            this.map[4, 2] = "W";
+            this.map[5, 2] = "W";
+            this.map[6, 2] = "W";
+            this.map[4, 3] = "W";
+            this.map[6, 3] = "W";
+            this.map[4, 4] = "W";
+            this.map[5, 4] = "W";
+            this.map[6, 4] = "W";
+            return startingLocation;
+        }
+
         /// <summary>
         /// Creates a clear map with a start and end point and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startingLocation)
+        private void InitializeMap(int xMax, int zMax)
         {
-            //  □ □ □ □ □ □ □
-            //  □ □ □ □ □ □ □
-            //  □ S □ □ □ □ □
-            //  □ □ □ □ □ □ □
-            //  □ □ □ □ □ □ □
+            // z/y
+            // 4 □ □ □ □ □ □ □
+            // 3 □ □ □ □ □ □ □
+            // 2 □ S □ □ □ □ □
+            // 1 □ □ □ □ □ □ □
+            // 0 □ □ □ □ □ □ □
+            //   0 1 2 3 4 5 6 x
 
             this.map = new string[xMax, zMax];
             for (int z = 0; z < zMax; z++)
@@ -242,59 +169,73 @@ namespace OpenTile.Win
                     map[x, z] = "";
                 }
             }
-
-            //this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
 
         /// <summary>
         /// Create an L-shaped wall between S and F
         /// </summary>
-        private void AddWallWithGap()
+        private Point AddWallWithGap()
         {
-            //  □ □ □ ■ □ □ □
-            //  □ □ □ ■ □ □ □
-            //  □ S □ ■ □ F □
-            //  □ □ □ ■ ■ □ □
-            //  □ □ □ □ □ □ □
-
-            // Path: 1,2 ; 2,1 ; 3,0 ; 4,0 ; 5,1 ; 5,2
-
+            // z/y
+            // 4 □ □ □ ■ □ □ □
+            // 3 □ □ □ ■ □ □ □
+            // 2 □ S □ ■ □ F □
+            // 1 □ □ □ ■ ■ □ □
+            // 0 □ □ □ □ □ □ □
+            //   0 1 2 3 4 5 6 x
+            Point startingLocation = new Point(1, 2);
+            int height = 5;
+            int width = 7;
+            InitializeMap(width, height);
             this.map[3, 4] = "W";
             this.map[3, 3] = "W";
             this.map[3, 2] = "W";
             this.map[3, 1] = "W";
             this.map[4, 1] = "W";
+            return startingLocation;
         }
 
         /// <summary>
         /// Create a closed barrier between S and F
         /// </summary>
-        private void AddWallWithoutGap()
+        private Point AddWallWithoutGap()
         {
-            //  □ □ □ ■ □ □ □
-            //  □ □ □ ■ □ □ □
-            //  □ S □ ■ □ F □
-            //  □ □ □ ■ □ □ □
-            //  □ □ □ ■ □ □ □
+            // z/y
+            // 4 □ □ □ ■ □ □ □
+            // 3 □ □ □ ■ □ □ □
+            // 2 □ S □ ■ □ F □
+            // 1 □ □ □ ■ □ □ □
+            // 0 □ □ □ ■ □ □ □
+            //   0 1 2 3 4 5 6 x
 
             // No path
-
+            Point startingLocation = new Point(1, 2);
+            int height = 5;
+            int width = 7;
+            InitializeMap(width, height);
             this.map[3, 4] = "W";
             this.map[3, 3] = "W";
             this.map[3, 2] = "W";
             this.map[3, 1] = "W";
             this.map[3, 0] = "W";
+            return startingLocation;
         }
 
-        private void AddWallWithMaze()
+        private Point AddWallWithMaze()
         {
-            //  S ■ ■ □ ■ ■ F
-            //  □ ■ □ ■ □ ■ □
-            //  □ ■ □ ■ □ ■ □
-            //  □ ■ □ ■ □ ■ □
-            //  ■ □ ■ ■ ■ □ ■
+            //  z/y
+            //  4 S ■ ■ □ ■ ■ F
+            //  3 □ ■ □ ■ □ ■ □
+            //  2 □ ■ □ ■ □ ■ □
+            //  1 □ ■ □ ■ □ ■ □
+            //  0 ■ □ ■ ■ ■ □ ■
+            //    0 1 2 3 4 5 6 x
 
             // long path
+            Point startingLocation = new Point(0, 4);
+            int height = 5;
+            int width = 7;
+            InitializeMap(width, height);
             this.map[0, 0] = "W";
             this.map[1, 4] = "W";
             this.map[1, 3] = "W";
@@ -313,18 +254,24 @@ namespace OpenTile.Win
             this.map[5, 2] = "W";
             this.map[5, 1] = "W";
             this.map[6, 0] = "W";
+            return startingLocation;
         }
 
-        private void AddWallWithSpinningMaze()
+        private Point AddWallWithSpinningMaze()
         {
+            // z/y
             //  4 S ■ □ □ □ □ □
             //  3 □ ■ □ ■ ■ ■ □
             //  2 □ ■ □ □ F ■ □
             //  1 □ ■ ■ ■ ■ ■ □
             //  0 □ □ □ □ □ □ □
-            //    0 1 2 3 4 5 6
+            //    0 1 2 3 4 5 6 x
 
             // long path
+            Point startingLocation = new Point(0, 4);
+            int height = 5;
+            int width = 7;
+            InitializeMap(width, height);
             this.map[1, 1] = "W";
             this.map[1, 2] = "W";
             this.map[1, 3] = "W";
@@ -337,6 +284,33 @@ namespace OpenTile.Win
             this.map[5, 1] = "W";
             this.map[5, 2] = "W";
             this.map[5, 3] = "W";
+            return startingLocation;
+        }
+
+        private Point AddMediumBlankMap()
+        {
+            // Arrange
+            Point startingLocation = new Point(10, 10);
+            int height = 20;
+            int width = 20;
+            InitializeMap(width, height);
+            //  □ □ □ □ □ 
+            //  □ □ □ □ □ 
+            //  □ □ S □ □ 
+            //  □ □ □ □ □ 
+            //  □ □ □ □ □ 
+
+            return startingLocation;
+        }
+
+        private Point AddRandomMap()
+        {
+            Point startingLocation = new Point(40, 20);
+            int height = 40;
+            int width = 80;
+            InitializeMap(width, height);
+            AddRandomItems(width, height, 40);
+            return startingLocation;
         }
 
         private void AddRandomItems(int xMax, int zMax, int probOfMapBeingBlocked)

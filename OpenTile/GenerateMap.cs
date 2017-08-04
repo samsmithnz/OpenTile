@@ -22,6 +22,25 @@ namespace OpenTile
             return map;
         }
 
+        public static string[,] GenerateTestMap(string[,] map, int xMax, int zMax)
+        {
+            for (int z = 0; z < zMax; z++)
+            {
+                for (int x = 0; x < xMax; x++)
+                {
+                    if (z == 5 && x == 5)
+                    {
+                        map[x, z] = "HW";
+                    }
+                    else if (z == 5 && x == 3)
+                    {
+                        map[x, z] = "LW";
+                    }
+                }
+            }
+            return map;
+        }
+
         public static void DebugPrintOutMap(string[,] map, int xMax, int zMax)
         {
             for (int z = 0; z < zMax; z++)
