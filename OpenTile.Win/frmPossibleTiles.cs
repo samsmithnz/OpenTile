@@ -36,12 +36,13 @@ namespace OpenTile.Win
                 actionPoints = int.Parse(txtActionPoints.Text);
             }
             Point startingLocation = new Point(0, 0);
-            //startingLocation = AddBasicTestMap();
+            startingLocation = AddBasicTestMap();
             //startingLocation = AddWallWithGap();
             //startingLocation = AddWallWithSpinningMaze();
             //startingLocation = AddRandomMap();
             //startingLocation = AddDeadspotWallLargeMap();
-            startingLocation = AddMediumBlankMap();
+            //startingLocation = AddMediumBlankMap();
+            //startingLocation = AddBasicTestMapStep2();
 
             List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
             List<Point> path2 = null;
@@ -62,6 +63,48 @@ namespace OpenTile.Win
             txtMap.Text += Environment.NewLine;
             txtMap.Text += "Time elapsed is: " + elapsedMs + "ms";
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            int range = 0;
+            if (txtRange.Text != "")
+            {
+                range = int.Parse(txtRange.Text);
+            }
+            int actionPoints = 1;
+            if (txtActionPoints.Text != "")
+            {
+                actionPoints = int.Parse(txtActionPoints.Text);
+            }
+            Point startingLocation = new Point(0, 0);
+            //startingLocation = AddBasicTestMap();
+            //startingLocation = AddWallWithGap();
+            //startingLocation = AddWallWithSpinningMaze();
+            //startingLocation = AddRandomMap();
+            //startingLocation = AddDeadspotWallLargeMap();
+            //startingLocation = AddMediumBlankMap();
+            startingLocation = AddBasicTestMapStep2();
+
+            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
+            List<Point> path2 = null;
+            if (actionPoints == 2)
+            {
+                path2 = PossibleTiles.FindTiles(startingLocation, range * 2, this.map);
+            }
+            txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path, path2);
+            txtMap.Text += Environment.NewLine;
+            int pathCount = path.Count;
+            if (path2 != null && path2.Count > path.Count)
+            {
+                pathCount += (path2.Count - path.Count);
+            }
+            txtMap.Text += "Possible tile count is: " + pathCount;
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            txtMap.Text += Environment.NewLine;
+            txtMap.Text += "Time elapsed is: " + elapsedMs + "ms";
         }
 
         /// <summary>
@@ -113,6 +156,17 @@ namespace OpenTile.Win
         private Point AddBasicTestMap()
         {
             Point startingLocation = new Point(1, 1);
+            int height = 10;
+            int width = 10;
+            InitializeMap(width, height);
+            this.map[5, 5] = "W";
+            this.map[3, 5] = "W";
+            return startingLocation;
+        }
+
+        private Point AddBasicTestMapStep2()
+        {
+            Point startingLocation = new Point(3, 1);
             int height = 10;
             int width = 10;
             InitializeMap(width, height);
@@ -345,7 +399,6 @@ namespace OpenTile.Win
         {
             DebugPrintOutMap(11, 11);
         }
-
     }
 
 

@@ -12,10 +12,13 @@ namespace OpenTile
         /// Calculate if the player is in cover. 
         /// </summary>
         /// <returns>True if the player is in cover</returns>
-        public static CoverState CalculateCover(Point currentPosition, int width, int height, string[,] validTiles, List<Point> enemyLocations)
+        public static CoverState CalculateCover(Point currentPosition, string[,] map, List<Point> enemyLocations)
         {
+            int width = map.GetLength(0);
+            int height = map.GetLength(1);
+
             CoverState result = new CoverState();
-            List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
+            List<Point> coverTiles = FindAdjacentCover(currentPosition, width, height, map);
             int coverLineNorth = -1;
             int coverLineEast = -1;
             int coverLineSouth = -1;

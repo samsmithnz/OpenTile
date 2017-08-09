@@ -57,7 +57,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, null);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -79,7 +79,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, null);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -106,7 +106,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -132,7 +132,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -158,7 +158,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -184,7 +184,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -217,7 +217,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -242,7 +242,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -267,7 +267,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -292,7 +292,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -317,7 +317,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -342,7 +342,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -367,7 +367,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -393,7 +393,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -418,7 +418,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -443,7 +443,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -472,7 +472,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -497,7 +497,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -521,7 +521,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -545,7 +545,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -569,7 +569,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -593,7 +593,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -617,7 +617,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -642,7 +642,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -666,7 +666,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -691,7 +691,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -720,7 +720,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -745,7 +745,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -770,7 +770,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -795,7 +795,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -820,7 +820,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -845,7 +845,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -870,7 +870,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -896,7 +896,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -921,7 +921,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -946,7 +946,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -974,7 +974,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -999,7 +999,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1023,7 +1023,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1047,7 +1047,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1071,7 +1071,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1095,7 +1095,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1119,7 +1119,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1143,7 +1143,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1167,7 +1167,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1192,7 +1192,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1224,7 +1224,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1255,7 +1255,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1286,7 +1286,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1319,7 +1319,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1350,7 +1350,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1381,7 +1381,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1411,7 +1411,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1448,7 +1448,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1485,7 +1485,7 @@ namespace OpenTile.Tests
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
