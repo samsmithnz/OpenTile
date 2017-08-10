@@ -220,19 +220,19 @@ namespace OpenTile
             }
 
             //Get possible tiles, within constraints of map, including only square titles from current position (not diagonally)
-            if (validTiles[currentLocation.X, yMax] == "W")
+            if (validTiles[currentLocation.X, yMax] != "")
             {
                 result.Add(new Point(currentLocation.X, yMax));
             }
-            if (validTiles[xMax, currentLocation.Y] == "W")
+            if (validTiles[xMax, currentLocation.Y] != "")
             {
                 result.Add(new Point(xMax, currentLocation.Y));
             }
-            if (validTiles[currentLocation.X, yMin] == "W")
+            if (validTiles[currentLocation.X, yMin] != "")
             {
                 result.Add(new Point(currentLocation.X, yMin));
             }
-            if (validTiles[xMin, currentLocation.Y] == "W")
+            if (validTiles[xMin, currentLocation.Y] != "")
             {
                 result.Add(new Point(xMin, currentLocation.Y));
             }
