@@ -16,10 +16,11 @@ namespace OpenTile.Win
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPossibleTiles());
+            //Application.Run(new frmPossibleTiles());
             //Application.Run(new frmPathFinding());
             //Application.Run(new frmFOV());
             //Application.Run(new frmDemo());
+            Application.Run(new frmCover());
         }
     }
 }

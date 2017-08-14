@@ -28,22 +28,41 @@ namespace OpenTile.Win
             int width = 7;
 
             // Start with a clear map (don't add any obstacles)
-            InitializeMap(width, height, Point.Empty);
-            //PathFinding pathFinder = new PathFinding(searchParameters);
+            InitializeMap(width, height);
             List<Point> path = new List<Point>();// pathFinder.FindPath();
-            //txtMap.Text += ShowRoute("The algorithm should find a direct path without obstacles:", path);
-            //txtMap.Text += Environment.NewLine;
 
             // Now add an obstacle
-            Point startingLocation = new Point(1, 2);
-            int range = 3;
-            InitializeMap(width, height, startingLocation);
-            AddWallWithGap();
-            path = PossibleTiles.FindTiles(startingLocation, range, this.map);
-            //pathFinder = new PathFinding(searchParameters);
-            //path = pathFinder.FindPath();
+            Point startingLocation = new Point(3, 1);
+            map[3, 2] = "X";
+
+            CoverState cover = Cover.CalculateCover(startingLocation, map, null);
+
             txtMap.Text += ShowRoute("The algorithm should find a possible tiles, ignoring the obstacle:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
+            if (cover.IsInCover == true)
+            {
+                txtMap.Text += "The player is in cover. ";
+                if (cover.InNorthCover == true)
+                {
+                    txtMap.Text += "North cover detected. ";
+                }
+                else if (cover.InEastCover == true)
+                {
+                    txtMap.Text += "East cover detected. ";
+                }
+                else if (cover.InSouthCover == true)
+                {
+                    txtMap.Text += "South cover detected. ";
+                }
+                else if (cover.InWestCover == true)
+                {
+                    txtMap.Text += "West cover detected. ";
+                }
+            }
+            else
+            {
+                txtMap.Text += "The player is NOT in cover. ";
+            }
 
             //// Create a barrier between the start and end points
             //InitializeMap(7, 5, Point.Empty, Point.Empty);
@@ -126,13 +145,14 @@ namespace OpenTile.Win
         /// <summary>
         /// Creates a clear map with a start and end point and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startingLocation)
+        private void InitializeMap(int xMax, int zMax)
         {
-            //  □ □ □ □ □ □ □
-            //  □ □ □ □ □ □ □
-            //  □ S □ □ □ □ □
-            //  □ □ □ □ □ □ □
-            //  □ □ □ □ □ □ □
+            // 4 □ □ □ □ □ □ □
+            // 3 □ □ □ □ □ □ □
+            // 2 □ □ □ □ □ □ □
+            // 1 □ □ □ □ □ □ □
+            // 0 □ □ □ □ □ □ □
+            //   0 1 2 3 4 5 6
 
             this.map = new string[xMax, zMax];
             for (int z = 0; z < zMax; z++)
@@ -143,7 +163,6 @@ namespace OpenTile.Win
                 }
             }
 
-            //this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
 
         /// <summary>
