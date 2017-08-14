@@ -1,8 +1,8 @@
 # [OpenTile](https://github.com/samsmithnz/OpenTile)
 
-An open source solution to build and navigate turn based tile games, similar to [XCOM](https://en.wikipedia.org/wiki/X-COM), [Jagged Alliance](https://en.wikipedia.org/wiki/Jagged_Alliance_(series)#Jagged_Alliance_2) and [Silent Storm](https://en.wikipedia.org/wiki/Silent_Storm). 
+OpenTile is an open source solution to create the building blocks and data structures for a tile based game, similar to [XCOM](https://en.wikipedia.org/wiki/X-COM), [Jagged Alliance](https://en.wikipedia.org/wiki/Jagged_Alliance_(series)#Jagged_Alliance_2) and [Silent Storm](https://en.wikipedia.org/wiki/Silent_Storm).  
 
-These files are meant to be the building blocks for creating the data structures to build a tile based game. This does require a UI, (I'm building mine in Unity3D), but a basic ASCII UI will be provided
+There is no UI, apart from the ASCII files, but it's being built in C#, with a branch for Unity3d.
 
 ## License
 
