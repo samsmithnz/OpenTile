@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using OpenTile;
+using UnityEngine;
 
 namespace OpenTile.Tests
 {
@@ -15,7 +16,7 @@ namespace OpenTile.Tests
 
         private string[,] map;
 
-        private void InitializeMap(int xMax, int zMax, Point startingLocation, List<Point> coverLocations)
+        private void InitializeMap(int xMax, int zMax, Vector3 startingLocation, List<Vector3> coverLocations)
         {
             //  □ □ □ 
             //  □ S □ 
@@ -32,9 +33,9 @@ namespace OpenTile.Tests
 
             if (coverLocations != null && coverLocations.Count > 0)
             {
-                foreach (Point item in coverLocations)
+                foreach (Vector3 item in coverLocations)
                 {
-                    this.map[item.X, item.Y] = "W";
+                    this.map[int.Parse(item.x.ToString()), int.Parse(item.z.ToString())] = "W";
                 }
             }
         }
@@ -50,14 +51,14 @@ namespace OpenTile.Tests
             //  □ □ □ 
             //  □ S □ 
             //  □ □ □ 
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 3;
             int height = 3;
-            List<Point> enemyLocations = null;
+            List<Vector3> enemyLocations = null;
 
             // Act
             InitializeMap(width, height, startingLocation, null);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -72,14 +73,14 @@ namespace OpenTile.Tests
         {
             // Arrange
             //  S 
-            Point startingLocation = new Point(0, 0);
+            Vector3 startingLocation = new Vector3(0, 0, 0);
             int width = 1;
             int height = 1;
-            List<Point> enemyLocations = null;
+            List<Vector3> enemyLocations = null;
 
             // Act
             InitializeMap(width, height, startingLocation, null);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -97,16 +98,16 @@ namespace OpenTile.Tests
             //  □ ■ □ 
             //  □ S □
             //  □ □ □ 
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 3;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = null;
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = null;
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -123,16 +124,16 @@ namespace OpenTile.Tests
             //  □ □ □ 
             //  □ S ■ 
             //  □ □ □ 
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 3;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = null;
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = null;
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -149,16 +150,16 @@ namespace OpenTile.Tests
             //  □ □ □ 
             //  □ S □ 
             //  □ ■ □ 
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 3;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 0));
-            List<Point> enemyLocations = null;
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 0));
+            List<Vector3> enemyLocations = null;
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -175,16 +176,16 @@ namespace OpenTile.Tests
             //  □ □ □ 
             //  ■ S □ 
             //  □ □ □ 
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 3;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(0, 1));
-            List<Point> enemyLocations = null;
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(0, 0, 1));
+            List<Vector3> enemyLocations = null;
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -207,17 +208,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -232,17 +233,17 @@ namespace OpenTile.Tests
             //  □ ■ E □ 
             //  □ S □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -257,17 +258,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S E □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -282,17 +283,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S □ □ 
             //  □ □ E □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -307,17 +308,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S □ □ 
             //  □ E □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -332,17 +333,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S □ □ 
             //  E □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -357,17 +358,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  E S □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -383,17 +384,17 @@ namespace OpenTile.Tests
             //  E ■ □ □ 
             //  □ S □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -408,17 +409,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -433,17 +434,17 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -462,17 +463,17 @@ namespace OpenTile.Tests
             //  □ □ □ E 
             //  □ S ■ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -487,17 +488,17 @@ namespace OpenTile.Tests
             // 1 □ S ■ E 
             // 0 □ □ □ □
             //   0 1 2 3
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -511,17 +512,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ S ■ □ 
             //  □ □ □ E
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -535,17 +536,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ S ■ □ 
             //  □ □ E □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -559,17 +560,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ S ■ □ 
             //  □ E □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -583,17 +584,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ S ■ □ 
             //  E □ □ □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(3, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(3, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -607,17 +608,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  E S ■ □ 
             //  □ □ □ □            
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -632,17 +633,17 @@ namespace OpenTile.Tests
             // 1 □ S ■ □ 
             // 0 □ □ □ □     
             //   0 1 2 3          
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -656,17 +657,17 @@ namespace OpenTile.Tests
             //  □ E □ □ 
             //  □ S ■ □ 
             //  □ □ □ □             
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -681,17 +682,17 @@ namespace OpenTile.Tests
             // 1 □ S ■ □ 
             // 0 □ □ □ □   
             //   0 1 2 3          
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -710,17 +711,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -735,17 +736,17 @@ namespace OpenTile.Tests
             //  □ S E □ 
             //  □ ■ □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -760,17 +761,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ E □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -785,17 +786,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ □ □ 
             //  □ □ E □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -810,17 +811,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ □ □ 
             //  □ E □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -835,17 +836,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ □ □ 
             //  E □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -860,17 +861,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  E ■ □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -886,17 +887,17 @@ namespace OpenTile.Tests
             //  E S □ □ 
             //  □ ■ □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -911,17 +912,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -936,17 +937,17 @@ namespace OpenTile.Tests
             //  □ S □ □ 
             //  □ ■ □ □ 
             //  □ □ □ □
-            Point startingLocation = new Point(1, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -964,17 +965,17 @@ namespace OpenTile.Tests
             //  □ □ □ E 
             //  □ ■ S □ 
             //  □ □ □ □
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -989,17 +990,17 @@ namespace OpenTile.Tests
             // 1 □ ■ S E 
             // 0 □ □ □ □
             //   0 1 2 3
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1013,17 +1014,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ ■ S □ 
             //  □ □ □ E
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1037,17 +1038,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ ■ S □ 
             //  □ □ E □
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1061,17 +1062,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ ■ S □ 
             //  □ E □ □
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1085,17 +1086,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ ■ S □ 
             //  E □ □ □
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1109,17 +1110,17 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  E ■ S □ 
             //  □ □ □ □            
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1133,17 +1134,17 @@ namespace OpenTile.Tests
             //  E □ □ □ 
             //  □ ■ S □ 
             //  □ □ □ □               
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1157,17 +1158,17 @@ namespace OpenTile.Tests
             //  □ E □ □ 
             //  □ ■ S □ 
             //  □ □ □ □             
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1182,17 +1183,17 @@ namespace OpenTile.Tests
             // 1 □ ■ S □ 
             // 0 □ □ □ □   
             //   0 1 2 3          
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1212,19 +1213,19 @@ namespace OpenTile.Tests
             // 1 □ S ■ E 
             // 0 □ □ □ □
             //   0 1 2 3          
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 1));
-            enemyLocations.Add(new Point(1, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 1));
+            enemyLocations.Add(new Vector3(1, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1243,19 +1244,19 @@ namespace OpenTile.Tests
             //  □ ■ □ □ 
             //  □ S ■ □
             //  □ □ □ E             
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(3, 0));
-            enemyLocations.Add(new Point(0, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(3, 0, 0));
+            enemyLocations.Add(new Vector3(0, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1274,19 +1275,19 @@ namespace OpenTile.Tests
             //  E ■ □ □  
             //  □ S ■ □
             //  □ □ E □             
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
-            enemyLocations.Add(new Point(0, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
+            enemyLocations.Add(new Vector3(0, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1307,19 +1308,19 @@ namespace OpenTile.Tests
             // 1 E ■ S □ 
             // 0 □ □ □ □
             //   0 1 2 3          
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            coverLocations.Add(new Point(2, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 1));
-            enemyLocations.Add(new Point(2, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            coverLocations.Add(new Vector3(2, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 1));
+            enemyLocations.Add(new Vector3(2, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1338,19 +1339,19 @@ namespace OpenTile.Tests
             //  □ □ ■ □ 
             //  □ ■ S □
             //  E □ □ □            
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            coverLocations.Add(new Point(2, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(0, 0));
-            enemyLocations.Add(new Point(3, 3));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            coverLocations.Add(new Vector3(2, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(0, 0, 0));
+            enemyLocations.Add(new Vector3(3, 0, 3));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1369,19 +1370,19 @@ namespace OpenTile.Tests
             //  □ □ ■ E 
             //  □ ■ S □
             //  □ E □ □            
-            Point startingLocation = new Point(2, 1);
+            Vector3 startingLocation = new Vector3(2, 0, 1);
             int width = 4;
             int height = 4;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(1, 1));
-            coverLocations.Add(new Point(2, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 0));
-            enemyLocations.Add(new Point(3, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(1, 0, 1));
+            coverLocations.Add(new Vector3(2, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 0));
+            enemyLocations.Add(new Vector3(3, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == false);
@@ -1400,18 +1401,18 @@ namespace OpenTile.Tests
             //  □ □ □ □ 
             //  □ S ■ □ 
             //  □ ■ E □
-            Point startingLocation = new Point(1, 1);
+            Vector3 startingLocation = new Vector3(1, 0, 1);
             int width = 4;
             int height = 3;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 0));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 1));
+            coverLocations.Add(new Vector3(1, 0, 0));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1432,23 +1433,23 @@ namespace OpenTile.Tests
             // 1 □ □ ■ □ □
             // 0 □ □ E □ □ 
             //   0 1 2 3 4            
-            Point startingLocation = new Point(2, 2);
+            Vector3 startingLocation = new Vector3(2, 0, 2);
             int width = 5;
             int height = 5;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 3));
-            coverLocations.Add(new Point(3, 2));
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(2, 0));
-            enemyLocations.Add(new Point(0, 2));
-            enemyLocations.Add(new Point(2, 4));
-            enemyLocations.Add(new Point(4, 2));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 3));
+            coverLocations.Add(new Vector3(3, 0, 2));
+            coverLocations.Add(new Vector3(2, 0, 1));
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(2, 0, 0));
+            enemyLocations.Add(new Vector3(0, 0, 2));
+            enemyLocations.Add(new Vector3(2, 0, 4));
+            enemyLocations.Add(new Vector3(4, 0, 2));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);
@@ -1469,23 +1470,23 @@ namespace OpenTile.Tests
             // 1 □ E ■ E □
             // 0 □ □ □ □ □ 
             //   0 1 2 3 4            
-            Point startingLocation = new Point(2, 2);
+            Vector3 startingLocation = new Vector3(2, 0, 2);
             int width = 5;
             int height = 5;
-            List<Point> coverLocations = new List<Point>();
-            coverLocations.Add(new Point(2, 3));
-            coverLocations.Add(new Point(3, 2));
-            coverLocations.Add(new Point(2, 1));
-            coverLocations.Add(new Point(1, 2));
-            List<Point> enemyLocations = new List<Point>();
-            enemyLocations.Add(new Point(1, 1));
-            enemyLocations.Add(new Point(1, 3));
-            enemyLocations.Add(new Point(3, 3));
-            enemyLocations.Add(new Point(3, 1));
+            List<Vector3> coverLocations = new List<Vector3>();
+            coverLocations.Add(new Vector3(2, 0, 3));
+            coverLocations.Add(new Vector3(3, 0, 2));
+            coverLocations.Add(new Vector3(2, 0, 1));
+            coverLocations.Add(new Vector3(1, 0, 2));
+            List<Vector3> enemyLocations = new List<Vector3>();
+            enemyLocations.Add(new Vector3(1, 0, 1));
+            enemyLocations.Add(new Vector3(1, 0, 3));
+            enemyLocations.Add(new Vector3(3, 0, 3));
+            enemyLocations.Add(new Vector3(3, 0, 1));
 
             // Act
             InitializeMap(width, height, startingLocation, coverLocations);
-            CoverState coverResult = Cover.CalculateCover(startingLocation, width, height, this.map, enemyLocations);
+            CoverState coverResult = Cover.CalculateCover(startingLocation, this.map, enemyLocations);
 
             // Assert
             Assert.IsTrue(coverResult.IsInCover == true);

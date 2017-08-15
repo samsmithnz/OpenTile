@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace OpenTile
 {
@@ -11,7 +10,7 @@ namespace OpenTile
     {
 
         public List<Tile> Tiles;
-        public List<Point> Path;
+        public List<Vector3> Path;
 
         public Tile GetLastTile()
         {
@@ -28,7 +27,7 @@ namespace OpenTile
         public PathFindingResult()
         {
             this.Tiles = new List<Tile>();
-            this.Path = new List<Point>();
+            this.Path = new List<Vector3>();
         }
     }
 }

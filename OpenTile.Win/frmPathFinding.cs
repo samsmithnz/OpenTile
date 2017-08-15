@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTile;
+using UnityEngine;
 
 namespace OpenTile.Win
 {
@@ -26,14 +27,14 @@ namespace OpenTile.Win
             txtMap.Text = "";
 
             // Start with a clear map (don't add any obstacles)
-            InitializeMap(7, 5, Point.Empty, Point.Empty, true);
+            InitializeMap(7, 5, Vector3.zero, Vector3.zero, true);
             PathFinding pathFinder = new PathFinding(searchParameters);
             PathFindingResult pathResult = pathFinder.FindPath();
             //txtMap.Text += ShowRoute("The algorithm should find a direct path without obstacles:", path);
             //txtMap.Text += Environment.NewLine;
 
             //// Now add an obstacle
-            //InitializeMap(7, 5, Point.Empty, Point.Empty);
+            //InitializeMap(7, 5, Vector3.zero, Vector3.zero);
             //AddWallWithGap();
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
@@ -42,7 +43,7 @@ namespace OpenTile.Win
 
 
             //// Create a barrier between the start and end points
-            //InitializeMap(7, 5, Point.Empty, Point.Empty);
+            //InitializeMap(7, 5, Vector3.zero, Vector3.zero);
             //AddWallWithoutGap();
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
@@ -51,7 +52,7 @@ namespace OpenTile.Win
 
 
             //// Create a maze with custom start and end points
-            //InitializeMap(7, 5, new Point(0, 4), new Point(6, 4));
+            //InitializeMap(7, 5, new Vector3(0, 0, 4), new Point(6, 4));
             //AddWallWithMaze();
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
@@ -60,7 +61,7 @@ namespace OpenTile.Win
 
 
             //// Create a maze with custom start and end points
-            //InitializeMap(7, 5, new Point(0, 4), new Point(4, 2));
+            //InitializeMap(7, 5, new Vector3(0, 0, 4), new Point(4, 2));
             //AddWallWithSpinningMaze();
             //pathFinder = new PathFinding(searchParameters);
             //path = pathFinder.FindPath();
@@ -69,7 +70,7 @@ namespace OpenTile.Win
 
 
             // Create a larger maze with custom start and end points
-            InitializeMap(70, 40, new Point(0, 0), new Point(69, 39), false);
+            InitializeMap(70, 40, new Vector3(0, 0, 0), new Vector3(69, 0, 39), false);
             this.map = GenerateMap.GenerateRandomMap(this.map, 70, 40, 40);
             pathFinder = new PathFinding(searchParameters);
             pathResult = pathFinder.FindPath();
@@ -85,7 +86,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowRoute(string title, IEnumerable<Point> path)
+        private string ShowRoute(string title, IEnumerable<Vector3> path)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -108,7 +109,7 @@ namespace OpenTile.Win
                         // Show any barriers
                         route.Append('░');
                     }
-                    else if (path.Where(p => p.X == x && p.Y == y).Any())
+                    else if (path.Where(p => p.x == x && p.z == y).Any())
                     {
                         // Show the path in between
                         route.Append('*');
@@ -125,9 +126,9 @@ namespace OpenTile.Win
         }
 
         /// <summary>
-        /// Creates a clear map with a start and end point and sets up the search parameters
+        /// Creates a clear map with a start and end Vector3 and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startingLocation, Point endLocation, bool locationsNotSet)
+        private void InitializeMap(int xMax, int zMax, Vector3 startingLocation, Vector3 endLocation, bool locationsNotSet)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -146,8 +147,8 @@ namespace OpenTile.Win
 
             if (locationsNotSet == true)
             {
-                startingLocation = new Point(1, 2);
-                endLocation = new Point(5, 2);
+                startingLocation = new Vector3(1, 0, 2);
+                endLocation = new Vector3(5, 0, 2);
             }
             this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }

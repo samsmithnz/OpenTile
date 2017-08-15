@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+using UnityEngine;
 using System.Linq;
 using System.Text;
 
@@ -26,9 +26,9 @@ namespace OpenTile
         {
             this.searchParameters = searchParameters;
             InitializeTiles(searchParameters.Map);
-            this.startTile = this.tiles[searchParameters.startingLocation.X, searchParameters.startingLocation.Y];
+            this.startTile = this.tiles[Convert.ToInt32(searchParameters.startingLocation.x), Convert.ToInt32(searchParameters.startingLocation.z)];
             this.startTile.State = TileState.Open;
-            this.endTile = this.tiles[searchParameters.EndLocation.X, searchParameters.EndLocation.Y];
+            this.endTile = this.tiles[Convert.ToInt32(searchParameters.EndLocation.x), Convert.ToInt32(searchParameters.EndLocation.z)];
         }
 
         /// <summary>
@@ -119,20 +119,20 @@ namespace OpenTile
         private List<Tile> GetAdjacentWalkableTiles(Tile fromTile)
         {
             List<Tile> walkableTiles = new List<Tile>();
-            IEnumerable<Point> nextLocations = GetAdjacentLocations(fromTile.Location);
+            IEnumerable<Vector3> nextLocations = GetAdjacentLocations(fromTile.Location);
 
             foreach (var location in nextLocations)
             {
-                int x = location.X;
-                int y = location.Y;
+                int x = Convert.ToInt32(location.x);
+                int z = Convert.ToInt32(location.z);
 
                 // Stay within the grid's boundaries
-                if (x < 0 || x >= this.width || y < 0 || y >= this.height)
+                if (x < 0 || x >= this.width || z < 0 || z >= this.height)
                 {
                     continue;
                 }
 
-                Tile tile = this.tiles[x, y];
+                Tile tile = this.tiles[x, z];
                 // Ignore non-walkable tiles
                 if (tile.TileType != "")
                 {
@@ -173,18 +173,18 @@ namespace OpenTile
         /// </summary>
         /// <param name="fromLocation">The location from which to return all adjacent points</param>
         /// <returns>The locations as an IEnumerable of Points</returns>
-        private static IEnumerable<Point> GetAdjacentLocations(Point fromLocation)
+        private static IEnumerable<Vector3> GetAdjacentLocations(Vector3 fromLocation)
         {
-            return new Point[]
+            return new Vector3[]
             {
-                new Point(fromLocation.X - 1, fromLocation.Y - 1),
-                new Point(fromLocation.X - 1, fromLocation.Y  ),
-                new Point(fromLocation.X - 1, fromLocation.Y + 1),
-                new Point(fromLocation.X,   fromLocation.Y + 1),
-                new Point(fromLocation.X + 1, fromLocation.Y + 1),
-                new Point(fromLocation.X + 1, fromLocation.Y  ),
-                new Point(fromLocation.X + 1, fromLocation.Y - 1),
-                new Point(fromLocation.X,   fromLocation.Y - 1)
+                new Vector3(fromLocation.x - 1f, 0f, fromLocation.z - 1f),
+                new Vector3(fromLocation.x- 1f, 0f,fromLocation.z),
+                new Vector3(fromLocation.x - 1f, 0f,fromLocation.z + 1f),
+                new Vector3(fromLocation.x, 0f,fromLocation.z + 1f),
+                new Vector3(fromLocation.x + 1f,0f, fromLocation.z + 1f),
+                new Vector3(fromLocation.x + 1f, 0f,fromLocation.z),
+                new Vector3(fromLocation.x + 1f, 0f,fromLocation.z - 1f),
+                new Vector3(fromLocation.x, 0f,fromLocation.z - 1f)
             };
         }
     }

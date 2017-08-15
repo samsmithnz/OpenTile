@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using UnityEngine;
 
 namespace OpenTile
 {
-    public static class Utility
+    public static class Common
     {
 
         /// <summary>
@@ -20,13 +20,13 @@ namespace OpenTile
             return result;
         }
 
-        public static Point FindNearestTile(Point currentLocation, List<Point> possibleTiles)
+        public static Vector3 FindNearestTile(Vector3 currentLocation, List<Vector3> possibleTiles)
         {
-            Point result = Point.Empty;
+            Vector3 result = Vector3.zero;
             double nearestDistance = 1000;
-            foreach (Point item in possibleTiles)
+            foreach (Vector3 item in possibleTiles)
             {
-                double distance = Math.Sqrt(Math.Pow((item.X - currentLocation.X), 2) + Math.Pow((item.Y - currentLocation.Y), 2));
+                double distance = Math.Sqrt(Math.Pow((item.x - currentLocation.x), 2) + Math.Pow((item.y - currentLocation.y), 2));
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
