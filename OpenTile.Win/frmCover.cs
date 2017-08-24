@@ -32,7 +32,7 @@ namespace OpenTile.Win
             List<Point> path = new List<Point>();// pathFinder.FindPath();
 
             // Now add an obstacle
-            Point startingLocation = new Point(3, 1);
+            Point startingLocation = new Point(0, 0);
             map[3, 2] = "X";
 
             CoverState cover = Cover.CalculateCover(startingLocation, map, null);
