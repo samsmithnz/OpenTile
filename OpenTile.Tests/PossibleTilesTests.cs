@@ -7,6 +7,7 @@ using OpenTile;
 
 namespace OpenTile.Tests
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [TestClass]
     public class PossibleTilesTests
     {

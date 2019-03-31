@@ -7,6 +7,7 @@ using OpenTile;
 
 namespace OpenTile.Tests
 {
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [TestClass]
     public class UtilityTests
     {
@@ -31,8 +32,8 @@ namespace OpenTile.Tests
 
             // Assert
             Assert.IsTrue(counterResult > 0);
-            Assert.IsTrue(counterResult > 30);
-            Assert.IsTrue(counterResult < 50);
+            Assert.IsTrue(counterResult > 25);
+            Assert.IsTrue(counterResult < 55);
         }
 
         [TestMethod]
