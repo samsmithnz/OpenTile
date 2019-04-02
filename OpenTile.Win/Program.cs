@@ -19,8 +19,9 @@ namespace OpenTile.Win
             //Application.Run(new frmPossibleTiles());
             //Application.Run(new frmPathFinding());
             //Application.Run(new frmFOV());
-            //Application.Run(new frmDemo());
-            Application.Run(new frmCover());
+            Application.Run(new frmDemo());
+            //Application.Run(new frmDemoNew());
+            //Application.Run(new frmCover());
         }
     }
 }

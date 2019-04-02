@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ASCIIPieces.cs" />
     <Compile Include="Cover.cs" />
     <Compile Include="CoverState.cs" />
     <Compile Include="GenerateMap.cs" />

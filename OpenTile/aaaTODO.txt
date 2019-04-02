@@ -3,9 +3,6 @@ Show movement options, including cover at destination and the path to destinatio
 Allow movement, when at destination location, show cover icons
 Switch between players, using up actions
 Switch between teams when all actions are complete
-
 When moving, calculate any (overwatch?) events
 Create Fire mechanic
 Build levels based on tiles having 4 walls and 3 heights (None, half, full)
-
-Assault game with 3 waves to destination

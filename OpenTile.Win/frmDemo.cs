@@ -85,7 +85,7 @@ namespace OpenTile.Win
                     else if (this.map[x, y] == "W")
                     {
                         // Show any barriers
-                        route.Append('░');
+                        route.Append('□');
                     }
                     else if (path != null && path.Where(p => p.X == x && p.Y == y).Any())
                     {
@@ -97,6 +97,12 @@ namespace OpenTile.Win
                         // Show nodes that aren't part of the path
                         route.Append('·');
                     }
+                    //╔═══╦═ ═╗
+                    //  0 ║ 0 ║ 
+                    //╠═══╬═══╣
+                    //║ 0 ║ 1
+                    //╚═ ═╩═══╝
+
                 }
                 route.Append(Environment.NewLine);
             }
