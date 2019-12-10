@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTile;
+using UnityEngine;
 
 namespace OpenTile.Win
 {
@@ -31,7 +32,7 @@ namespace OpenTile.Win
             int startingHeight = 3;
 
             // Create a larger maze with custom start and end points
-            InitializeMap(width, height, new Point(0, 0), new Point(width - 1, height - 1), false);
+            InitializeMap(width, height, new Vector3(0, 0, 0), new Vector3(width - 1, 0, height - 1), false);
             AddRandomItems(width, height, 40);
             AddStartingLocation(startingWidth, startingHeight);
             //pathFinder = new PathFinding(searchParameters);
@@ -39,7 +40,7 @@ namespace OpenTile.Win
 
             PathFinding pathFinder = new PathFinding(searchParameters);
             PathFindingResult pathResult = pathFinder.FindPath();
-            pathResult.Path.AddRange(PossibleTiles.FindTiles(new Point(0, 0), range, width, height, this.map));
+            pathResult.Path.AddRange(PossibleTiles.FindTiles(new Vector3(0, 0, 0), range, this.map));
             txtMap.Text += ShowRoute("The algorithm should be able to find a long route around the random blocks:", pathResult.Path);
             txtMap.Text += Environment.NewLine;
         }
@@ -64,7 +65,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowRoute(string title, IEnumerable<Point> path)
+        private string ShowRoute(string title, IEnumerable<Vector3> path)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -87,7 +88,7 @@ namespace OpenTile.Win
                         // Show any barriers
                         route.Append('░');
                     }
-                    else if (path != null && path.Where(p => p.X == x && p.Y == y).Any())
+                    else if (path != null && path.Where(p => p.x == x && p.z == y).Any())
                     {
                         // Show the path in between
                         route.Append('*');
@@ -104,9 +105,9 @@ namespace OpenTile.Win
         }
 
         /// <summary>
-        /// Creates a clear map with a start and end point and sets up the search parameters
+        /// Creates a clear map with a start and end Vector3 and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startingLocation, Point endLocation, bool locationsNotSet)
+        private void InitializeMap(int xMax, int zMax, Vector3 startingLocation, Vector3 endLocation, bool locationsNotSet)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -125,8 +126,8 @@ namespace OpenTile.Win
 
             if (locationsNotSet == true)
             {
-                startingLocation = new Point(1, 2);
-                endLocation = new Point(5, 2);
+                startingLocation = new Vector3(1, 0, 2);
+                endLocation = new Vector3(5, 0, 2);
             }
             this.searchParameters = new SearchParameters(startingLocation, endLocation, map);
         }
@@ -230,7 +231,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
+                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Common.GenerateRandomNumber(1, 100))
                     {
                         this.map[x, z] = "W";
                     }

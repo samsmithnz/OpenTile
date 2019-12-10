@@ -12,10 +12,13 @@ namespace OpenTile
         /// Calculate if the player is in cover. 
         /// </summary>
         /// <returns>True if the player is in cover</returns>
-        public static CoverState CalculateCover(Vector3 currentPosition, int width, int height, string[,] validTiles, List<Vector3> enemyLocations)
+        public static CoverState CalculateCover(Vector3 currentPosition, string[,] map, List<Vector3> enemyLocations)
         {
+            int width = map.GetLength(0);
+            int height = map.GetLength(1);
+
             CoverState result = new CoverState();
-            List<Vector3> coverTiles = FindAdjacentCover(currentPosition, width, height, validTiles);
+            List<Vector3> coverTiles = FindAdjacentCover(currentPosition, width, height, map);
             int coverLineNorth = -1;
             int coverLineEast = -1;
             int coverLineSouth = -1;
@@ -217,21 +220,21 @@ namespace OpenTile
             }
 
             //Get possible tiles, within constraints of map, including only square titles from current position (not diagonally)
-            if (validTiles[Convert.ToInt32(currentLocation.x), Convert.ToInt32(zMax)] == "W")
+            if (validTiles[Convert.ToInt32(currentLocation.x), Convert.ToInt32(zMax)] != "")
             {
-                result.Add(new Vector3(currentLocation.x, zMax));
+                result.Add(new Vector3(currentLocation.x, 0f, zMax));
             }
-            if (validTiles[Convert.ToInt32(xMax), Convert.ToInt32(currentLocation.z)] == "W")
+            if (validTiles[Convert.ToInt32(xMax), Convert.ToInt32(currentLocation.z)] != "")
             {
-                result.Add(new Vector3(xMax, currentLocation.z));
+                result.Add(new Vector3(xMax, 0f, currentLocation.z));
             }
-            if (validTiles[Convert.ToInt32(currentLocation.x), Convert.ToInt32(zMin)] == "W")
+            if (validTiles[Convert.ToInt32(currentLocation.x), Convert.ToInt32(zMin)] != "")
             {
-                result.Add(new Vector3(currentLocation.x, zMin));
+                result.Add(new Vector3(currentLocation.x, 0f, zMin));
             }
-            if (validTiles[Convert.ToInt32(xMin), Convert.ToInt32(currentLocation.z)] == "W")
+            if (validTiles[Convert.ToInt32(xMin), Convert.ToInt32(currentLocation.z)] != "")
             {
-                result.Add(new Vector3(xMin, currentLocation.z));
+                result.Add(new Vector3(xMin, 0f, currentLocation.z));
             }
             return result;
         }

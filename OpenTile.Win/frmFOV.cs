@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnityEngine;
 
 namespace OpenTile.Win
 {
@@ -37,7 +38,7 @@ namespace OpenTile.Win
             }
         }
 
-        private string ShowFOV(string title, Point startingLocation, Point endLocation)
+        private string ShowFOV(string title, Vector3 startingLocation, Vector3 endLocation)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -45,12 +46,12 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < this.map.GetLength(0); x++)
                 {
-                    if (startingLocation == new Point(x, y))
+                    if (startingLocation == new Vector3(x,0, y))
                     {
                         // Show the start position
                         route.Append('S');
                     }
-                    else if (endLocation == new Point(x, y))
+                    else if (endLocation == new Vector3(x,0, y))
                     {
                         // Show the end position
                         route.Append('F');
@@ -60,7 +61,7 @@ namespace OpenTile.Win
                         // Show any barriers
                         route.Append('░');
                     }
-                    //else if (path.Where(p => p.X == x && p.Y == y).Any())
+                    //else if (path.Where(p => p.x == x && p.z == y).Any())
                     //{
                     //    // Show the path in between
                     //    route.Append('*');
@@ -78,8 +79,8 @@ namespace OpenTile.Win
 
         private void btnGenerateMap_Click(object sender, EventArgs e)
         {
-            Point startingLocation = new Point(1, 2);
-            Point endLocation = new Point(5, 2);
+            Vector3 startingLocation = new Vector3(1, 0, 2);
+            Vector3 endLocation = new Vector3(5, 0, 2);
 
             InitializeMap(7, 5);
             this.map[3, 1] = "W";

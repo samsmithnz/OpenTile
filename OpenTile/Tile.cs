@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using UnityEngine;
 
 //Initial implementation from: http://blog.two-cats.com/2014/06/a-star-example/
 
@@ -15,7 +15,7 @@ namespace OpenTile
         /// <summary>
         /// The node's location in the grid
         /// </summary>
-        public Point Location { get; private set; }
+        public Vector3 Location { get; private set; }
 
         /// <summary>
         /// True when the node may be traversed, otherwise false
@@ -69,12 +69,12 @@ namespace OpenTile
         /// Creates a new instance of Node.
         /// </summary>
         /// <param name="x">The node's location along the X axis</param>
-        /// <param name="y">The node's location along the Y axis</param>
+        /// <param name="z">The node's location along the Z axis</param>
         /// <param name="isWalkable">True if the node can be traversed, false if the node is a wall</param>
         /// <param name="endLocation">The location of the destination node</param>
-        public Tile(int x, int y, string tileType, Point endLocation)
+        public Tile(int x, int z, string tileType, Vector3 endLocation)
         {
-            this.Location = new Point(x, y);
+            this.Location = new Vector3(x, 0, z);
             this.State = TileState.Untested;
             this.TileType = tileType;
             this.H = GetTraversalCost(this.Location, endLocation);
@@ -83,16 +83,16 @@ namespace OpenTile
 
         public override string ToString()
         {
-            return string.Format("{0}, {1}: {2}", this.Location.X, this.Location.Y, this.State);
+            return string.Format("{0}, {1}: {2}", this.Location.x.ToString("0.00"), this.Location.z.ToString("0.00"), this.State.ToString());
         }
 
         /// <summary>
         /// Gets the distance between two points
         /// </summary>
-        internal static float GetTraversalCost(Point location, Point otherLocation)
+        internal static float GetTraversalCost(Vector3 location, Vector3 otherLocation)
         {
-            float deltaX = otherLocation.X - location.X;
-            float deltaY = otherLocation.Y - location.Y;
+            float deltaX = otherLocation.x - location.x;
+            float deltaY = otherLocation.z - location.z;
             return (float)Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
         }
     }

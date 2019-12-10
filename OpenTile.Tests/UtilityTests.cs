@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using OpenTile;
+using UnityEngine;
 
 namespace OpenTile.Tests
 {
@@ -22,7 +23,7 @@ namespace OpenTile.Tests
             // Act
             for (int i = lowerBound; i < upperBound; i++)
             {
-                int result = Utility.GenerateRandomNumber(lowerBound, upperBound);
+                int result = Common.GenerateRandomNumber(lowerBound, upperBound);
                 if (result <= randomPercent)
                 {
                     counterResult++;
@@ -39,18 +40,18 @@ namespace OpenTile.Tests
         public void FindNearestTileTest()
         {
             // Arrange
-            Point startingLocation = new Point(1, 1);
-            Point enemy1 = new Point(10, 10);
-            Point enemy2 = new Point(20, 20);
-            List<Point> enemyList = new List<Point>();
+            Vector3 startingLocation = new Vector3(1, 0, 1);
+            Vector3 enemy1 = new Vector3(1, 0, 10);
+            Vector3 enemy2 = new Vector3(2, 0, 20);
+            List<Vector3> enemyList = new List<Vector3>();
             enemyList.Add(enemy1);
             enemyList.Add(enemy2);
 
             // Act
-            Point result = Utility.FindNearestTile(startingLocation, enemyList);
+            Vector3 result = Common.FindNearestTile(startingLocation, enemyList);
 
             // Assert
-            Assert.IsTrue(result != Point.Empty);
+            Assert.IsTrue(result != Vector3.zero);
             Assert.IsTrue(result == enemy1);
             Assert.IsTrue(result != enemy2);
         }
@@ -59,18 +60,18 @@ namespace OpenTile.Tests
         public void FindNearestTileTest2()
         {
             // Arrange
-            Point startingLocation = new Point(1, 1);
-            Point enemy1 = new Point(-5, -5);
-            Point enemy2 = new Point(-6 -6);
-            List<Point> enemyList = new List<Point>();
+            Vector3 startingLocation = new Vector3(1, 0, 1);
+            Vector3 enemy1 = new Vector3(-5, 0, -5);
+            Vector3 enemy2 = new Vector3(-6, 0, -6);
+            List<Vector3> enemyList = new List<Vector3>();
             enemyList.Add(enemy1);
             enemyList.Add(enemy2);
 
             // Act
-            Point result = Utility.FindNearestTile(startingLocation, enemyList);
+            Vector3 result = Common.FindNearestTile(startingLocation, enemyList);
 
             // Assert
-            Assert.IsTrue(result != Point.Empty);
+            Assert.IsTrue(result != Vector3.zero);
             Assert.IsTrue(result == enemy1);
             Assert.IsTrue(result != enemy2);
         }

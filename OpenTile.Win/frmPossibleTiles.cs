@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenTile;
+using UnityEngine;
 
 namespace OpenTile.Win
 {
@@ -32,7 +33,7 @@ namespace OpenTile.Win
             }
 
             //CRITERIA
-            // Point startingLocation = new Point(20, 20);
+            // Vector3 startingLocation = new Point(20, 20);
             // int height = 40;
             // int width = 70;
             //// range = 15;
@@ -71,7 +72,7 @@ namespace OpenTile.Win
 
 
 
-            //Point startingLocation = new Point(5, 5);
+            //Point startingLocation = new Vector3(5, 0, 5);
             //int width = 11;
             //int height = 11;
             ////int range = 2;
@@ -135,7 +136,7 @@ namespace OpenTile.Win
             //this.map[6, 10] = "W";
             //this.map[8, 10] = "W";
 
-            Point startingLocation = new Point(0, 1);
+            Vector3 startingLocation = new Vector3(0, 0, 1);
             int height = 9;
             int width = 9;
             InitializeMap(width, height, startingLocation);
@@ -169,7 +170,7 @@ namespace OpenTile.Win
             this.map[8, 2] = "W";
 
 
-            List<Point> path = PossibleTiles.FindTiles(startingLocation, range, width, height, this.map);
+            List<Vector3> path = PossibleTiles.FindTiles(startingLocation, range, this.map);
             txtMap.Text += ShowPossibleTiles("The algorithm should find a possible tiles, ignoring obstacles:", startingLocation, path);
             txtMap.Text += Environment.NewLine;
             txtMap.Text += "Possible tile count is: " + path.Count;
@@ -185,7 +186,7 @@ namespace OpenTile.Win
         /// </summary>
         /// <param name="title">A descriptive title</param>
         /// <param name="path">The points that comprise the path</param>
-        private string ShowPossibleTiles(string title, Point startingLocation, IEnumerable<Point> path)
+        private string ShowPossibleTiles(string title, Vector3 startingLocation, IEnumerable<Vector3> path)
         {
             StringBuilder route = new StringBuilder();
             route.AppendFormat("{0}\r\n", title);
@@ -203,7 +204,7 @@ namespace OpenTile.Win
                         // Show any barriers
                         route.Append('░');
                     }
-                    else if (path.Where(p => p.X == x && p.Y == y).Any())
+                    else if (path.Where(p => p.x == x && p.z == y).Any())
                     {
                         // Show the path in between
                         route.Append('*');
@@ -220,9 +221,9 @@ namespace OpenTile.Win
         }
 
         /// <summary>
-        /// Creates a clear map with a start and end point and sets up the search parameters
+        /// Creates a clear map with a start and end Vector3 and sets up the search parameters
         /// </summary>
-        private void InitializeMap(int xMax, int zMax, Point startingLocation)
+        private void InitializeMap(int xMax, int zMax, Vector3 startingLocation)
         {
             //  □ □ □ □ □ □ □
             //  □ □ □ □ □ □ □
@@ -341,7 +342,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < xMax; x++)
                 {
-                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Utility.GenerateRandomNumber(1, 100))
+                    if (((x != 0 && z != 0) || (x != xMax - 1 && z != zMax - 1)) && probOfMapBeingBlocked > Common.GenerateRandomNumber(1, 100))
                     {
                         this.map[x, z] = "W";
                     }

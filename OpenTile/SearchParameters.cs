@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using UnityEngine;
 
 //Initial implementation from: http://blog.two-cats.com/2014/06/a-star-example/
 
@@ -13,11 +13,11 @@ namespace OpenTile
     /// </summary>
     public class SearchParameters
     {
-        public Point startingLocation { get; set; }
-        public Point EndLocation { get; set; }
+        public Vector3 startingLocation { get; set; }
+        public Vector3 EndLocation { get; set; }
         public string[,] Map { get; set; }
 
-        public SearchParameters(Point startingLocation, Point endLocation, string[,] map)
+        public SearchParameters(Vector3 startingLocation, Vector3 endLocation, string[,] map)
         {
             this.startingLocation = startingLocation;
             this.EndLocation = endLocation;
