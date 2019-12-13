@@ -93,7 +93,7 @@ namespace OpenTile.Win
             {
                 for (int x = 0; x < this.map.GetLength(0); x++)
                 {
-                    if (this.searchParameters.startingLocation.Equals(new Point(x, y)))
+                    if (this.searchParameters.StartingLocation.Equals(new Point(x, y)))
                     {
                         // Show the start position
                         route.Append('S');
