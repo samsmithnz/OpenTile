@@ -13,13 +13,13 @@ namespace OpenTile
     /// </summary>
     public class SearchParameters
     {
-        public Point startingLocation { get; set; }
+        public Point StartingLocation { get; set; }
         public Point EndLocation { get; set; }
         public string[,] Map { get; set; }
 
         public SearchParameters(Point startingLocation, Point endLocation, string[,] map)
         {
-            this.startingLocation = startingLocation;
+            this.StartingLocation = startingLocation;
             this.EndLocation = endLocation;
             this.Map = map;
         }

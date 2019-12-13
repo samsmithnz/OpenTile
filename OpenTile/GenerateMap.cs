@@ -30,11 +30,11 @@ namespace OpenTile
                 {
                     if (z == 5 && x == 5)
                     {
-                        map[x, z] = "HW";
+                        map[x, z] = "HW"; //High wall
                     }
                     else if (z == 5 && x == 3)
                     {
-                        map[x, z] = "LW";
+                        map[x, z] = "LW"; //Low wall
                     }
                 }
             }

@@ -133,6 +133,7 @@ namespace OpenTile.Tests
             Assert.IsTrue(isLowResult == true);
         }
 
+        [TestMethod]
         public void NoCoverProbability()
         {
             // Arrange
@@ -158,6 +159,38 @@ namespace OpenTile.Tests
             // Assert
             Assert.IsTrue(isHighResult == false);
             Assert.IsTrue(isLowResult == false);
+        }
+
+        [TestMethod]
+        public void ASCIIPiecesTests()
+        {
+            //Arrange & Act
+            string northWestCorner = ASCIIPieces.GetNorthWestCorner();
+            string westEastSide = ASCIIPieces.GetWestEastSide();
+            string northEastCorner = ASCIIPieces.GetNorthEastCorner();
+            string northSideWithSouthJoin = ASCIIPieces.GetNorthSideWithSouthJoin();
+            string northSouthSide = ASCIIPieces.GetNorthSouthSide();
+            string northSouthSideWithEastJoin = ASCIIPieces.GetNorthSouthSideWithEastJoin();
+            string northSouthSideWithWestEastJoins = ASCIIPieces.GetNorthSouthSideWithWestEastJoins();
+            string northSouthSideWithWestJoin = ASCIIPieces.GetNorthSouthSideWithWestJoin();
+            string southWestCorner = ASCIIPieces.GetSouthWestCorner();
+            string westEastSideWithNorthJoin = ASCIIPieces.GetWestEastSideWithNorthJoin();
+            string southEastCorner = ASCIIPieces.GetSouthEastCorner();
+            string space = ASCIIPieces.GetSpace();
+
+            //Assert
+            Assert.AreEqual("╔", northWestCorner);
+            Assert.AreEqual("═", westEastSide);
+            Assert.AreEqual("╗", northEastCorner);
+            Assert.AreEqual("╦", northSideWithSouthJoin);
+            Assert.AreEqual("║", northSouthSide);
+            Assert.AreEqual("╠", northSouthSideWithEastJoin);
+            Assert.AreEqual("╬", northSouthSideWithWestEastJoins);
+            Assert.AreEqual("╣", northSouthSideWithWestJoin);
+            Assert.AreEqual("╚", southWestCorner);
+            Assert.AreEqual("╩", westEastSideWithNorthJoin);
+            Assert.AreEqual("╝", southEastCorner);
+            Assert.AreEqual(" ", space);
         }
     }
 }

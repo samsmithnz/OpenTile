@@ -12,9 +12,9 @@ namespace OpenTile
         /// <summary>
         /// Generate a random number (int) within lower and upper bounds
         /// </summary>
-        private static System.Random rnd = new System.Random(Guid.NewGuid().GetHashCode());
         public static int GenerateRandomNumber(int lowerBound, int upperBound)
         {
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
             int result = rnd.Next(lowerBound, upperBound + 1); //+1 because the upperbound is never used
             //Debug.LogWarning("GenerateRandomNumber (range " + lowerBound + "-" + upperBound + "): " + result);
             return result;
