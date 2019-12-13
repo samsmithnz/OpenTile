@@ -14,6 +14,7 @@ namespace OpenTile
         /// <returns>True if the player is in cover</returns>
         public static CoverState CalculateCover(Point currentPosition, string[,] map, List<Point> enemyLocations)
         {
+            //Get the height and width from the map array
             int width = map.GetLength(0);
             int height = map.GetLength(1);
 

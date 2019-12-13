@@ -8,7 +8,6 @@ using System.Text;
 
 namespace OpenTile
 {
-
     public class PathFinding
     {
         private int width;
@@ -26,7 +25,7 @@ namespace OpenTile
         {
             this.searchParameters = searchParameters;
             InitializeTiles(searchParameters.Map);
-            this.startTile = this.tiles[searchParameters.startingLocation.X, searchParameters.startingLocation.Y];
+            this.startTile = this.tiles[searchParameters.StartingLocation.X, searchParameters.StartingLocation.Y];
             this.startTile.State = TileState.Open;
             this.endTile = this.tiles[searchParameters.EndLocation.X, searchParameters.EndLocation.Y];
         }

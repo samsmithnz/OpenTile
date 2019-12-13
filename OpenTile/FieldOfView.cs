@@ -5,7 +5,8 @@ using System.Text;
 
 namespace OpenTile
 {
-    class FieldOfView
+    //TODO: Add field of view
+    public class FieldOfView
     {
     }
 }

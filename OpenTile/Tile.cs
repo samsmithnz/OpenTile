@@ -46,6 +46,9 @@ namespace OpenTile
             get { return this.G + this.H; }
         }
 
+        /// <summary>
+        /// Cost to move over tile
+        /// </summary>
         public int TraversalCost
         {
             get { return Convert.ToInt32(F); }
