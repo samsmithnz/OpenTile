@@ -1,5 +1,9 @@
 # [OpenTile](https://github.com/samsmithnz/OpenTile)
 
+**This repo is dead and has been superceded by "[battle](https://github.com/samsmithnz/BattleSimulator)"**
+
+
+
 An open source solution to build and navigate turn based tile games, similar to [XCOM](https://en.wikipedia.org/wiki/X-COM), [Jagged Alliance](https://en.wikipedia.org/wiki/Jagged_Alliance_(series)#Jagged_Alliance_2) and [Silent Storm](https://en.wikipedia.org/wiki/Silent_Storm). 
 
 There is currently functionality for basic path finding, possible available tiles (for movement), cover, as well as a number of utility functions. 
